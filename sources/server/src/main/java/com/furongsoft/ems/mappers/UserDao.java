@@ -3,6 +3,7 @@ package com.furongsoft.ems.mappers;
 import com.furongsoft.ems.entities.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Alex
  */
 @Mapper
+@Component
 public interface UserDao {
     @Select("SELECT * FROM t_sys_user")
     List<User> find();
