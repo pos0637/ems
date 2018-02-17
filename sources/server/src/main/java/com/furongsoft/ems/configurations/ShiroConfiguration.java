@@ -43,7 +43,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/ui/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/home/**", "anon");
-        filterChainDefinitionMap.put("/api/**", "jwt");
+        filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
         filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/security/logout", "logout");
 

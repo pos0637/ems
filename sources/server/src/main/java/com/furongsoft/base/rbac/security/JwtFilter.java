@@ -57,8 +57,8 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
-        // 禁止创建回话
-        request.setAttribute(DefaultSubjectContext.SESSION_CREATION_ENABLED, Boolean.FALSE);
+        // 禁止创建会话
+        // request.setAttribute(DefaultSubjectContext.SESSION_CREATION_ENABLED, Boolean.FALSE);
 
         // 对跨域提供支持
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
