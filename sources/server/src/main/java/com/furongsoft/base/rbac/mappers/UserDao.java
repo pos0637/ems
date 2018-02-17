@@ -1,6 +1,6 @@
-package com.furongsoft.ems.mappers;
+package com.furongsoft.base.rbac.mappers;
 
-import com.furongsoft.ems.entities.User;
+import com.furongsoft.base.rbac.entities.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;

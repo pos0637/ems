@@ -1,9 +1,10 @@
 package com.furongsoft.ems.controllers;
 
 import com.alibaba.fastjson.JSON;
-import com.furongsoft.ems.entities.User;
-import com.furongsoft.ems.mappers.UserDao;
-import com.furongsoft.ems.repositories.UserRepository;
+import com.furongsoft.base.rbac.entities.User;
+import com.furongsoft.base.rbac.mappers.UserDao;
+import com.furongsoft.base.rbac.repositories.UserRepository;
+import com.furongsoft.base.rbac.security.PasswordHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,12 +45,11 @@ public class HomeController {
         User user = new User();
         user.setUserName("a");
         user.setPassword("b");
-        user.setSalt("s");
         user.setName("");
         user.setCreateUser(0L);
         user.setCreateTime(new Date());
         user.setLastModifyUser(0L);
-        user = mUserRepository.save(user);
+        user = mUserRepository.save(PasswordHelper.encryptPassword(user));
 
         return "id: " + user.getId();
     }

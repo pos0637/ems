@@ -1,12 +1,15 @@
 package com.furongsoft.ems.configurations;
 
-import com.furongsoft.ems.security.MyRealm;
+import com.furongsoft.base.rbac.security.JwtFilter;
+import com.furongsoft.base.rbac.security.MyRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,11 +33,17 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
-        // 拦截器
+        // 设置过滤器
+        Map<String, Filter> filters = new HashMap<>(1);
+        filters.put("jwt", new JwtFilter());
+        shiroFilterFactoryBean.setFilters(filters);
+
+        // 过滤器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/ui/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/home/**", "anon");
+        filterChainDefinitionMap.put("/api/**", "jwt");
         filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/security/logout", "logout");
 

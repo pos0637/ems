@@ -1,6 +1,6 @@
-package com.furongsoft.ems.repositories;
+package com.furongsoft.base.rbac.repositories;
 
-import com.furongsoft.ems.entities.User;
+import com.furongsoft.base.rbac.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

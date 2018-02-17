@@ -1,4 +1,4 @@
-package com.furongsoft.ems.entities;
+package com.furongsoft.base.rbac.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
