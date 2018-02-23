@@ -36,19 +36,4 @@ public class UserController {
             return new RestResponse(HttpStatus.OK, "You are guest", null);
         }
     }
-
-    @PostMapping("/login")
-    public RestResponse login(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password) {
-        Subject subject = SecurityUtils.getSubject();
-        subject.login(new UsernamePasswordToken(username, password));
-
-        User user = mUserRepository.findByUserName(username);
-        if (user == null) {
-            throw new UnknownAccountException();
-        }
-
-        return new RestResponse(HttpStatus.OK, null, null, JwtUtils.getToken(username, user.getPassword()));
-    }
 }
