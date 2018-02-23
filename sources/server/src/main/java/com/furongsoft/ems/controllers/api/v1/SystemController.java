@@ -1,6 +1,7 @@
 package com.furongsoft.ems.controllers.api.v1;
 
-import com.furongsoft.base.entities.Page;
+import com.furongsoft.base.entities.PageRequest;
+import com.furongsoft.base.entities.PageResponse;
 import com.furongsoft.base.rbac.entities.Resource;
 import com.furongsoft.base.rbac.entities.User;
 import com.furongsoft.base.rbac.mappers.ResourceDao;
@@ -36,9 +37,9 @@ public class SystemController {
     }
 
     @GetMapping("/resources")
-    public Page getResources() {
-        List<Resource> resources = mResourceDao.find();
-        return new Page(0, resources, 1, 1, 1, resources.size());
+    public PageResponse getResources(PageRequest pageRequest) {
+        List<Resource> resources = mResourceDao.selectList(null);
+        return new PageResponse(0, resources, 1, 1, 1, resources.size());
     }
 
     @PostMapping("/login")

@@ -1,5 +1,6 @@
 package com.furongsoft.base.rbac.mappers;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.furongsoft.base.rbac.entities.Resource;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Mapper
 @Component
-public interface ResourceDao {
+public interface ResourceDao extends BaseMapper<Resource> {
     @Select("SELECT * FROM t_sys_resource")
     List<Resource> find();
 }

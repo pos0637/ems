@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Alex
  */
-public class Page<T> {
+public class PageResponse<T> {
     /**
      * 结果
      */
@@ -106,7 +106,7 @@ public class Page<T> {
      */
     private Results results;
 
-    public Page(int errorNo, List<T> results, int pageNum, int pageSize, int pages, int total) {
+    public PageResponse(int errorNo, List<T> results, int pageNum, int pageSize, int pages, int total) {
         this.errorNo = errorNo;
         this.results = new Results(results, pageNum, pageSize, pages, total);
     }

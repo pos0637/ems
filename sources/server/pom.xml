@@ -107,7 +107,20 @@
             <version>3.3.0</version>
         </dependency>
 
-    </dependencies>
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>2.1.9</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>2.1.9</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
