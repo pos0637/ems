@@ -41,8 +41,8 @@ public class User extends BaseEntity implements Serializable {
     /**
      * 状态
      */
-    @Column(columnDefinition = "INT(10) COMMENT '状态'")
-    private Integer status;
+    @Column(columnDefinition = "INT(10) COMMENT '状态:0 启用, 1 禁用'")
+    private Integer state;
 
     /**
      * 姓名
@@ -310,12 +310,12 @@ public class User extends BaseEntity implements Serializable {
         this.salt = salt;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getState() {
+        return state;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public String getName() {

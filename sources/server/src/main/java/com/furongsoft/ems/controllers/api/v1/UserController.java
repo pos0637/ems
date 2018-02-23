@@ -1,16 +1,14 @@
 package com.furongsoft.ems.controllers.api.v1;
 
-import com.furongsoft.base.rbac.entities.User;
 import com.furongsoft.base.rbac.repositories.UserRepository;
-import com.furongsoft.base.rbac.security.JwtUtils;
 import com.furongsoft.base.restful.entities.RestResponse;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 用户控制器

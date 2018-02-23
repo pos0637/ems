@@ -1,8 +1,11 @@
 package com.furongsoft.ems.controllers;
 
 import com.alibaba.fastjson.JSON;
+import com.furongsoft.base.rbac.entities.Resource;
 import com.furongsoft.base.rbac.entities.User;
+import com.furongsoft.base.rbac.mappers.ResourceDao;
 import com.furongsoft.base.rbac.mappers.UserDao;
+import com.furongsoft.base.rbac.repositories.ResourceRepository;
 import com.furongsoft.base.rbac.repositories.UserRepository;
 import com.furongsoft.base.rbac.security.PasswordHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +29,13 @@ import java.util.List;
 public class HomeController {
     private final UserRepository mUserRepository;
     private final UserDao mUserDao;
+    private final ResourceRepository mResourceRepository;
 
     @Autowired
-    public HomeController(UserRepository userRepository, UserDao userDao) {
+    public HomeController(UserRepository userRepository, UserDao userDao, ResourceRepository resourceRepository) {
         mUserRepository = userRepository;
         mUserDao = userDao;
+        mResourceRepository = resourceRepository;
     }
 
     @RequestMapping("/index")
@@ -38,6 +43,17 @@ public class HomeController {
         List<User> list = mUserDao.find();
 
         return "Hello, world! " + JSON.toJSONString(list);
+    }
+
+    @RequestMapping("/init")
+    public String Initialize() {
+        Resource resource = new Resource("系统管理", 0, "/system", 0, null);
+        resource.setCreateUser(0L);
+        resource.setCreateTime(new Date());
+        resource.setLastModifyUser(0L);
+        mResourceRepository.save(resource);
+
+        return "Successful";
     }
 
     @RequestMapping("/create")
