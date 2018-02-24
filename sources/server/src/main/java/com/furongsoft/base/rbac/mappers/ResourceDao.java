@@ -1,6 +1,7 @@
 package com.furongsoft.base.rbac.mappers;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.furongsoft.base.rbac.entities.Resource;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -17,5 +18,5 @@ import java.util.List;
 @Component
 public interface ResourceDao extends BaseMapper<Resource> {
     @Select("SELECT * FROM t_sys_resource")
-    List<Resource> find();
+    List<Resource> find(Pagination page);
 }

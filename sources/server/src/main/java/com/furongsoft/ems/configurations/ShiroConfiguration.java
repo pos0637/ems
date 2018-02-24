@@ -1,6 +1,7 @@
 package com.furongsoft.ems.configurations;
 
-import com.furongsoft.base.rbac.security.JwtFilter;
+import com.furongsoft.base.rbac.filters.CorsFilter;
+import com.furongsoft.base.rbac.filters.JwtFilter;
 import com.furongsoft.base.rbac.security.MyRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -37,7 +38,8 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         // 设置过滤器
-        Map<String, Filter> filters = new HashMap<>(1);
+        Map<String, Filter> filters = new HashMap<>(2);
+        filters.put("cors", new CorsFilter());
         filters.put("jwt", new JwtFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
@@ -46,6 +48,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/ui/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/home/**", "anon");
+        filterChainDefinitionMap.put("/file/**", "cors, anon"); // TODO: change to authc
         filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
         filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/security/logout", "logout");
@@ -58,7 +61,7 @@ public class ShiroConfiguration {
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;

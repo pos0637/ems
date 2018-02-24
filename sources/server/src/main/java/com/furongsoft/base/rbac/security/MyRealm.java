@@ -1,7 +1,7 @@
 package com.furongsoft.base.rbac.security;
 
 import com.furongsoft.base.rbac.entities.User;
-import com.furongsoft.base.rbac.repositories.UserRepository;
+import com.furongsoft.base.rbac.mappers.UserDao;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MyRealm extends AuthorizingRealm {
-    private final UserRepository mUserRepository;
+    private final UserDao mUserDao;
 
     @Autowired
-    public MyRealm(UserRepository userRepository) {
+    public MyRealm(UserDao userDao) {
         super(new RetryLimitHashedCredentialsMatcher(null));
-        mUserRepository = userRepository;
+        this.mUserDao = userDao;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new AuthenticationException();
         }
 
-        User user = mUserRepository.findByUserName(username);
+        User user = this.mUserDao.findByUserName(username);
         if (user == null) {
             throw new UnknownAccountException();
         }

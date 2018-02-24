@@ -6,8 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
  * 用户表操作对象
  *
@@ -16,6 +14,6 @@ import java.util.List;
 @Mapper
 @Component
 public interface UserDao extends BaseMapper<User> {
-    @Select("SELECT * FROM t_sys_user")
-    List<User> find();
+    @Select("SELECT * FROM t_sys_user WHERE username=#{username}")
+    User findByUserName(String username);
 }

@@ -1,5 +1,9 @@
 package com.furongsoft.base.entities;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.furongsoft.base.restful.entities.RestResponse;
+import org.springframework.http.HttpStatus;
+
 import java.util.List;
 
 /**
@@ -7,33 +11,11 @@ import java.util.List;
  *
  * @author Alex
  */
-public class PageResponse<T> {
-    /**
-     * 结果
-     */
-    public class Results {
-        /**
-         * 数据
-         */
-        private Data data;
-
-        public Results(List<T> data, int pageNum, int pageSize, int pages, int total) {
-            this.data = new Data(data, pageNum, pageSize, pages, total);
-        }
-
-        public Data getData() {
-            return data;
-        }
-
-        public void setData(Data data) {
-            this.data = data;
-        }
-    }
-
+public class PageResponse<T> extends RestResponse {
     /**
      * 数据
      */
-    public class Data {
+    class Data {
         /**
          * 列表
          */
@@ -47,7 +29,7 @@ public class PageResponse<T> {
 
         private int total;
 
-        public Data(List<T> list, int pageNum, int pageSize, int pages, int total) {
+        Data(List<T> list, int pageNum, int pageSize, int pages, int total) {
             this.list = list;
             this.pageNum = pageNum;
             this.pageSize = pageSize;
@@ -96,34 +78,8 @@ public class PageResponse<T> {
         }
     }
 
-    /**
-     * 错误码
-     */
-    private int errorNo;
-
-    /**
-     * 结果
-     */
-    private Results results;
-
-    public PageResponse(int errorNo, List<T> results, int pageNum, int pageSize, int pages, int total) {
-        this.errorNo = errorNo;
-        this.results = new Results(results, pageNum, pageSize, pages, total);
-    }
-
-    public int getErrorNo() {
-        return errorNo;
-    }
-
-    public void setErrorNo(int errorNo) {
-        this.errorNo = errorNo;
-    }
-
-    public Results getResults() {
-        return results;
-    }
-
-    public void setResults(Results results) {
-        this.results = results;
+    public PageResponse(HttpStatus status, Page<T> page) {
+        super(status);
+        setData(new Data(page.getRecords(), page.getCurrent(), page.getSize(), page.getPages(), page.getTotal()));
     }
 }

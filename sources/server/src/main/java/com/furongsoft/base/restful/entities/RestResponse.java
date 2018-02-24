@@ -14,6 +14,11 @@ public class RestResponse {
     private int code;
 
     /**
+     * 错误码
+     */
+    private int errno;
+
+    /**
      * 返回消息
      */
     private String message;
@@ -28,6 +33,10 @@ public class RestResponse {
      */
     private String newToken;
 
+    public RestResponse(HttpStatus status) {
+        this(status.value(), null, null);
+    }
+
     public RestResponse(HttpStatus status, String message, Object data) {
         this(status.value(), message, data);
     }
@@ -38,12 +47,14 @@ public class RestResponse {
 
     public RestResponse(int code, String message, Object data) {
         this.code = code;
+        this.errno = (HttpStatus.OK.value() == code) ? 0 : -1;
         this.message = message;
         this.data = data;
     }
 
     public RestResponse(int code, String message, Object data, String newToken) {
         this.code = code;
+        this.errno = (HttpStatus.OK.value() == code) ? 0 : -1;
         this.message = message;
         this.data = data;
         this.newToken = newToken;
@@ -55,6 +66,14 @@ public class RestResponse {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public int getErrno() {
+        return errno;
+    }
+
+    public void setErrno(int errno) {
+        this.errno = errno;
     }
 
     public String getMessage() {

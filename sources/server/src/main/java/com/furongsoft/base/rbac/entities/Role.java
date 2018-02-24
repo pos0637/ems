@@ -1,5 +1,8 @@
 package com.furongsoft.base.rbac.entities;
 
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.furongsoft.base.entities.BaseEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,14 +13,15 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "t_sys_role")
+@TableName("t_sys_role")
 public class Role extends BaseEntity implements Serializable {
     /**
      * 索引
      */
     @Id
     @GeneratedValue
-    @Column(unique = true, nullable = false)
-    private Long id;
+    @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(32) COMMENT 'UUID'")
+    private String id;
 
     /**
      * 名称
@@ -28,7 +32,7 @@ public class Role extends BaseEntity implements Serializable {
     /**
      * 状态
      */
-    @Column(columnDefinition = "INT(10) COMMENT '状态:0 启用, 1 禁用'")
+    @Column(columnDefinition = "INT(1) COMMENT '状态:0 启用, 1 禁用'")
     private Integer state;
 
     /**
@@ -37,11 +41,11 @@ public class Role extends BaseEntity implements Serializable {
     @Column(columnDefinition = "VARCHAR(255) COMMENT '备注'")
     private String remark;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

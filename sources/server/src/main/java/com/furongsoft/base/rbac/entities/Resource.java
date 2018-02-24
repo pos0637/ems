@@ -1,5 +1,9 @@
 package com.furongsoft.base.rbac.entities;
 
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.furongsoft.base.entities.BaseEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,14 +14,15 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "t_sys_resource")
+@TableName("t_sys_resource")
 public class Resource extends BaseEntity implements Serializable {
     /**
      * 索引
      */
     @Id
     @GeneratedValue
-    @Column(unique = true, nullable = false)
-    private Long id;
+    @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(32) COMMENT 'UUID'")
+    private String id;
 
     /**
      * 名称
@@ -28,7 +33,7 @@ public class Resource extends BaseEntity implements Serializable {
     /**
      * 类型
      */
-    @Column(nullable = false, columnDefinition = "INT(10) COMMENT '类型:0 模块, 1 数据'")
+    @Column(nullable = false, columnDefinition = "INT(1) COMMENT '类型:0 模块, 1 数据'")
     private Integer type;
 
     /**
@@ -40,8 +45,21 @@ public class Resource extends BaseEntity implements Serializable {
     /**
      * 状态
      */
-    @Column(nullable = false, columnDefinition = "INT(10) COMMENT '状态:0 启用, 1 禁用'")
+    @Column(nullable = false, columnDefinition = "INT(1) COMMENT '状态:0 启用, 1 禁用'")
     private Integer state;
+
+    /**
+     * 图标路径
+     */
+    @Transient
+    private String iconPath;
+
+    /**
+     * 图标
+     */
+    @JsonIgnore
+    @Column(columnDefinition = "BIGINT(20) COMMENT '图标'")
+    private Long icon;
 
     /**
      * 备注
@@ -60,11 +78,11 @@ public class Resource extends BaseEntity implements Serializable {
         this.remark = remark;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -98,6 +116,22 @@ public class Resource extends BaseEntity implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
+
+    public Long getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Long icon) {
+        this.icon = icon;
     }
 
     public String getRemark() {

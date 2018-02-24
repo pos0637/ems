@@ -34,10 +34,21 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl.auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
   devtools:
     restart:
       enabled: true
+
+  servlet:
+    multipart:
+      # 最大上传文件大小
+      max-file-size: 10MB
+      # 最大提交请求大小
+      max-request-size: 10MB
 
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
@@ -49,7 +60,7 @@ mybatis-plus:
     # 主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
     id-type: 3
     # 字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
-    field-strategy: 2
+    field-strategy: 1
     # 驼峰下划线转换
     db-column-underline: true
     # 刷新mapper 调试神器
@@ -57,11 +68,16 @@ mybatis-plus:
     # 逻辑删除配置（下面3个配置）
     logic-delete-value: 1
     logic-not-delete-value: 0
+    meta-object-handler: com.furongsoft.base.misc.MyMetaObjectHandler
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
     # 配置JdbcTypeForNull
     jdbc-type-for-null: 'null'
+
+
+upload:
+  path: /upload
 
 logging:
   path: ./logs

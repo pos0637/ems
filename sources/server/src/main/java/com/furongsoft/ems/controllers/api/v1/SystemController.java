@@ -1,13 +1,14 @@
 package com.furongsoft.ems.controllers.api.v1;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.furongsoft.base.entities.PageRequest;
 import com.furongsoft.base.entities.PageResponse;
 import com.furongsoft.base.rbac.entities.Resource;
 import com.furongsoft.base.rbac.entities.User;
-import com.furongsoft.base.rbac.mappers.ResourceDao;
-import com.furongsoft.base.rbac.repositories.UserRepository;
+import com.furongsoft.base.rbac.mappers.UserDao;
 import com.furongsoft.base.rbac.security.JwtUtils;
 import com.furongsoft.base.restful.entities.RestResponse;
+import com.furongsoft.base.rbac.services.SystemService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -17,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * 系统控制器
  *
@@ -27,19 +26,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/system")
 public class SystemController {
-    private final UserRepository mUserRepository;
-    private final ResourceDao mResourceDao;
+    private final UserDao mUserDao;
+    private final SystemService mSystemService;
 
     @Autowired
-    public SystemController(UserRepository userRepository, ResourceDao resourceDao) {
-        mUserRepository = userRepository;
-        mResourceDao = resourceDao;
+    public SystemController(UserDao userDao, SystemService systemService) {
+        this.mUserDao = userDao;
+        this.mSystemService = systemService;
     }
 
     @GetMapping("/resources")
     public PageResponse getResources(PageRequest pageRequest) {
-        List<Resource> resources = mResourceDao.selectList(null);
-        return new PageResponse(0, resources, 1, 1, 1, resources.size());
+        Page<Resource> page = mSystemService.getResources(pageRequest.getPage());
+        return new PageResponse<>(HttpStatus.OK, page);
+    }
+
+    @PostMapping("/resources")
+    public RestResponse addResource(Resource resource) {
+        return new RestResponse(HttpStatus.OK);
     }
 
     @PostMapping("/login")
@@ -49,7 +53,7 @@ public class SystemController {
         Subject subject = SecurityUtils.getSubject();
         subject.login(new UsernamePasswordToken(username, password));
 
-        User user = mUserRepository.findByUserName(username);
+        User user = this.mUserDao.findByUserName(username);
         if (user == null) {
             throw new UnknownAccountException();
         }

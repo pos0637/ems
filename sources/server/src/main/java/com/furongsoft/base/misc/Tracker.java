@@ -12,7 +12,7 @@ import java.io.StringWriter;
  * @author Alex
  */
 public class Tracker {
-    protected static Logger logger = LoggerFactory.getLogger(Tracker.class);
+    private static Logger logger = LoggerFactory.getLogger(Tracker.class);
 
     /**
      * 输出debug信息
@@ -48,6 +48,15 @@ public class Tracker {
      */
     public static void error(Throwable e) {
         logger.error(makeLog(getStackTrace(e)));
+    }
+
+    /**
+     * 输出文件读写相关信息
+     *
+     * @param content 信息
+     */
+    public static void file(String content) {
+        logger.info(makeLog(content));
     }
 
     /**

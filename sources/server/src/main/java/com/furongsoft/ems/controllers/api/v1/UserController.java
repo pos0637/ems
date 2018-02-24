@@ -1,6 +1,6 @@
 package com.furongsoft.ems.controllers.api.v1;
 
-import com.furongsoft.base.rbac.repositories.UserRepository;
+import com.furongsoft.base.rbac.mappers.UserDao;
 import com.furongsoft.base.restful.entities.RestResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
-    private final UserRepository mUserRepository;
+    private final UserDao mUserDao;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        mUserRepository = userRepository;
+    public UserController(UserDao userDao) {
+        this.mUserDao = userDao;
     }
 
     @GetMapping("/users")
