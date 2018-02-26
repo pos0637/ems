@@ -12,6 +12,12 @@ public class BaseException extends RuntimeException {
     public static class UploadFileFailException extends BaseException {
     }
 
+    /**
+     * 错误的提交参数异常
+     */
+    public static class IllegalArgumentException extends BaseException {
+    }
+
     public BaseException() {
     }
 

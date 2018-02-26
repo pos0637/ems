@@ -44,6 +44,15 @@ public class Tracker {
     /**
      * 输出错误信息
      *
+     * @param content 信息
+     */
+    public static void error(String content) {
+        logger.error(makeLog(content));
+    }
+
+    /**
+     * 输出错误信息
+     *
      * @param e 异常
      */
     public static void error(Throwable e) {

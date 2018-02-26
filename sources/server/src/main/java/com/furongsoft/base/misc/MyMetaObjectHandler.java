@@ -16,13 +16,13 @@ public class MyMetaObjectHandler extends MetaObjectHandler {
         Object createUser = getFieldValByName("createUser", metaObject);
         if (createUser == null) {
             // TODO: get user from shiro
-            setFieldValByName("createUser", 0L, metaObject);
+            setFieldValByName("createUser", "0", metaObject);
         }
 
         Object lastModifyUser = getFieldValByName("lastModifyUser", metaObject);
         if (lastModifyUser == null) {
             // TODO: get user from shiro
-            setFieldValByName("lastModifyUser", 0L, metaObject);
+            setFieldValByName("lastModifyUser", "0", metaObject);
         }
 
         Object createTime = getFieldValByName("createTime", metaObject);
@@ -34,6 +34,6 @@ public class MyMetaObjectHandler extends MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         // TODO: get user from shiro
-        setFieldValByName("lastModifyUser", 0L, metaObject);
+        setFieldValByName("lastModifyUser", "0", metaObject);
     }
 }

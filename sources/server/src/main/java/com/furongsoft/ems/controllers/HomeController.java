@@ -41,7 +41,7 @@ public class HomeController {
     }
 
     @RequestMapping("/init")
-    public String Initialize() {
+    public String initialize() {
         User user = new User();
         user.setUserName("a");
         user.setPassword("b");

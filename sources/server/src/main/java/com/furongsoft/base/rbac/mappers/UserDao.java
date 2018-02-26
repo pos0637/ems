@@ -14,6 +14,12 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface UserDao extends BaseMapper<User> {
+    /**
+     * 根据用户名查找用户
+     *
+     * @param username 用户名
+     * @return 用户
+     */
     @Select("SELECT * FROM t_sys_user WHERE username=#{username}")
     User findByUserName(String username);
 }

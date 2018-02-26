@@ -7,15 +7,20 @@ import com.furongsoft.base.misc.Tracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 文件存储服务
+ *
+ * @author Alex
+ */
 @Service
-@Transactional
+@Transactional(rollbackFor = Throwable.class)
 public class StorageService {
     private final AttachmentDao mAttachmentDao;
 
@@ -36,33 +41,34 @@ public class StorageService {
      */
     public String uploadFile(MultipartFile file) throws BaseException {
         Attachment attachment = new Attachment("", "", "", 0, "", 0);
-        this.mAttachmentDao.insert(attachment);
+        mAttachmentDao.insert(attachment);
 
         String fileName = file.getOriginalFilename();
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        String newName = attachment.getId() + suffixName;
 
         // 文件名规则: 父路径 + UUID + 扩展名
         try {
-            String parentPath = ResourceUtils.getURL("classpath:").getPath();
-            File dest = new File(parentPath + mUploadPath + "/" + attachment.getId() + "." + suffixName);
-            if (!dest.getParentFile().exists()) {
-                if (!dest.getParentFile().mkdirs()) {
+            File parent = new File(ResourceUtils.getURL("classpath:").getPath());
+            File target = new File(String.format("%s%s/%s", parent.getParentFile().getAbsolutePath(), mUploadPath, newName));
+            if (!target.getParentFile().exists()) {
+                if (!target.getParentFile().mkdirs()) {
                     throw new BaseException.UploadFileFailException();
                 }
             }
 
-            file.transferTo(dest);
+            file.transferTo(target);
         } catch (IllegalStateException | IOException e) {
             Tracker.error(e);
             throw new BaseException.UploadFileFailException();
         }
 
-        attachment.setName(attachment.getId());
+        attachment.setName(newName);
         attachment.setType(suffixName);
         attachment.setSize(file.getSize());
         attachment.setHash("");
-        this.mAttachmentDao.updateById(attachment);
+        mAttachmentDao.updateById(attachment);
 
-        return attachment.getId();
+        return newName;
     }
 }

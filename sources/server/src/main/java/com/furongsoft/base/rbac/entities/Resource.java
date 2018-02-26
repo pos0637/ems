@@ -1,5 +1,6 @@
 package com.furongsoft.base.rbac.entities;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.furongsoft.base.entities.BaseEntity;
@@ -52,6 +53,7 @@ public class Resource extends BaseEntity implements Serializable {
      * 图标路径
      */
     @Transient
+    @TableField(exist = false)
     private String iconPath;
 
     /**
