@@ -28,7 +28,7 @@ public class Attachment extends BaseEntity implements Serializable {
     /**
      * 文件名称
      */
-    @Column(nullable = false, columnDefinition = "VARCHAR(255) COMMENT '文件名称'")
+    @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(255) COMMENT '文件名称'")
     private String name;
 
     /**
@@ -47,7 +47,7 @@ public class Attachment extends BaseEntity implements Serializable {
      * 文件大小
      */
     @Column(columnDefinition = "BIGINT(20) COMMENT '文件大小'")
-    private long size;
+    private Long size;
 
     /**
      * 文件哈希
@@ -62,6 +62,10 @@ public class Attachment extends BaseEntity implements Serializable {
     private Integer state;
 
     public Attachment() {
+    }
+
+    public Attachment(String name) {
+        this.name = name;
     }
 
     public Attachment(String name, String type, String url, long size, String hash, Integer state) {
@@ -105,11 +109,11 @@ public class Attachment extends BaseEntity implements Serializable {
         this.url = url;
     }
 
-    public long getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(long size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 

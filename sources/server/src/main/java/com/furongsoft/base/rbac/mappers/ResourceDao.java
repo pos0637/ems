@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -30,15 +31,35 @@ public interface ResourceDao extends BaseMapper<Resource> {
         public String selectResourceListWhitParam(final Map<String, Object> param) {
             return new SQL() {
                 {
-                    SELECT("*");
-                    FROM("t_sys_resource");
+                    SELECT("t1.*, t2.name AS iconPath");
+                    FROM("t_sys_resource T1");
+                    LEFT_OUTER_JOIN("t_sys_attachment t2 ON t1.icon = t2.id");
                     if (param.get("name") != null) {
-                        WHERE("name LIKE CONCAT('%', #{name},'%')");
+                        WHERE("T1.name LIKE CONCAT('%', #{name},'%')");
                     }
                     if (param.get("path") != null) {
-                        WHERE("path LIKE CONCAT('%', #{path},'%')");
+                        WHERE("T1.path LIKE CONCAT('%', #{path},'%')");
                     }
-                    ORDER_BY("last_modify_time DESC");
+                    ORDER_BY("T1.last_modify_time DESC");
+                }
+            }.toString();
+        }
+
+        /**
+         * 根据索引获取资源
+         *
+         * @param param 参数列表
+         * @return SQL语句
+         */
+        public String selectResourceById(final Map<String, Object> param) {
+            return new SQL() {
+                {
+                    SELECT("t1.*, t2.name AS iconPath");
+                    FROM("t_sys_resource T1");
+                    LEFT_OUTER_JOIN("t_sys_attachment t2 ON t1.icon = t2.id");
+                    if (param.get("id") != null) {
+                        WHERE("T1.id = #{id}");
+                    }
                 }
             }.toString();
         }
@@ -54,4 +75,13 @@ public interface ResourceDao extends BaseMapper<Resource> {
      */
     @SelectProvider(type = ResourceDaoProvider.class, method = "selectResourceListWhitParam")
     List<Resource> selectResourceList(Pagination page, @Param("name") String name, @Param("path") String path);
+
+    /**
+     * 根据索引获取资源
+     *
+     * @param id 索引
+     * @return 资源
+     */
+    @SelectProvider(type = ResourceDaoProvider.class, method = "selectResourceById")
+    Resource selectResource(@Param("id") Serializable id);
 }

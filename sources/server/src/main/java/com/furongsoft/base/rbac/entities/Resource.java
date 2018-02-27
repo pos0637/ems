@@ -60,8 +60,8 @@ public class Resource extends BaseEntity implements Serializable {
      * 图标
      */
     @JsonIgnore
-    @Column(columnDefinition = "BIGINT(20) COMMENT '图标'")
-    private Long icon;
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '图标'")
+    private String icon;
 
     /**
      * 备注
@@ -128,11 +128,11 @@ public class Resource extends BaseEntity implements Serializable {
         this.iconPath = iconPath;
     }
 
-    public Long getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(Long icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 

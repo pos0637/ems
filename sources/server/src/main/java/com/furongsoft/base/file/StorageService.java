@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * 文件存储服务
@@ -70,5 +71,25 @@ public class StorageService {
         mAttachmentDao.updateById(attachment);
 
         return newName;
+    }
+
+    /**
+     * 根据文件名称获取索引
+     *
+     * @param name 文件名称
+     * @return 索引
+     * @throws BaseException 异常
+     */
+    public Serializable getFileId(String name) throws BaseException {
+        if (name == null) {
+            return null;
+        }
+
+        Attachment attachment = mAttachmentDao.selectOne(new Attachment(name));
+        if (attachment == null) {
+            throw new BaseException.IllegalArgumentException();
+        }
+
+        return attachment.getId();
     }
 }

@@ -2,6 +2,7 @@ package com.furongsoft.base.rbac.services;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.furongsoft.base.exceptions.BaseException;
+import com.furongsoft.base.file.StorageService;
 import com.furongsoft.base.rbac.entities.Resource;
 import com.furongsoft.base.rbac.mappers.ResourceDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,12 @@ import java.util.Arrays;
 @Transactional(rollbackFor = Throwable.class)
 public class SystemService {
     private final ResourceDao mResourceDao;
+    private final StorageService mStorageService;
 
     @Autowired
-    public SystemService(ResourceDao resourceDao) {
+    public SystemService(ResourceDao resourceDao, StorageService mStorageService) {
         this.mResourceDao = resourceDao;
+        this.mStorageService = mStorageService;
     }
 
     /**
@@ -54,7 +57,7 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public Resource getResource(Serializable id) throws BaseException {
-        return mResourceDao.selectById(id);
+        return mResourceDao.selectResource(id);
     }
 
     /**
@@ -64,6 +67,7 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public void addResource(Resource resource) throws BaseException {
+        resource.setIcon((String) mStorageService.getFileId(resource.getIconPath()));
         mResourceDao.insert(resource);
     }
 
@@ -74,6 +78,7 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public void editResource(Resource resource) throws BaseException {
+        resource.setIcon((String) mStorageService.getFileId(resource.getIconPath()));
         mResourceDao.updateById(resource);
     }
 
