@@ -2,6 +2,7 @@ package com.furongsoft.base.rbac.mappers;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.furongsoft.base.misc.StringUtils;
 import com.furongsoft.base.rbac.entities.Resource;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -40,7 +41,12 @@ public interface ResourceDao extends BaseMapper<Resource> {
                     if (param.get("path") != null) {
                         WHERE("T1.path LIKE CONCAT('%', #{path},'%')");
                     }
-                    ORDER_BY("T1.last_modify_time DESC");
+                    if (!StringUtils.isNullOrEmpty(param.get("sortField"))
+                            && !StringUtils.isNullOrEmpty(param.get("sortType"))) {
+                        ORDER_BY("T1." + param.get("sortField") + " " + param.get("sortType"));
+                    } else {
+                        ORDER_BY("T1.last_modify_time DESC");
+                    }
                 }
             }.toString();
         }
@@ -68,13 +74,15 @@ public interface ResourceDao extends BaseMapper<Resource> {
     /**
      * 获取所有资源
      *
-     * @param page 分页对象
-     * @param name 资源名称
-     * @param path 资源路径
+     * @param page      分页对象
+     * @param name      资源名称
+     * @param path      资源路径
+     * @param sortField 排序字段
+     * @param sortType  排序类型
      * @return 资源列表
      */
     @SelectProvider(type = ResourceDaoProvider.class, method = "selectResourceListWhitParam")
-    List<Resource> selectResourceList(Pagination page, @Param("name") String name, @Param("path") String path);
+    List<Resource> selectResourceList(Pagination page, @Param("name") String name, @Param("path") String path, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**
      * 根据索引获取资源

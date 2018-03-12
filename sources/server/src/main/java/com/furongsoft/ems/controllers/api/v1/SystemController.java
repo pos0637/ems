@@ -44,8 +44,10 @@ public class SystemController {
     public PageResponse getResources(
             PageRequest pageRequest,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String path) {
-        Page<Resource> page = mSystemService.getResources(pageRequest.getPage(), name, path);
+            @RequestParam(required = false) String path,
+            @RequestParam(required = false) String sortField,
+            @RequestParam(required = false) String sortType) {
+        Page<Resource> page = mSystemService.getResources(pageRequest.getPage(), name, path, sortField, sortType);
         return new PageResponse<>(HttpStatus.OK, page);
     }
 

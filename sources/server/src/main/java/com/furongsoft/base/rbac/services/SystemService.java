@@ -32,13 +32,15 @@ public class SystemService {
     /**
      * 获取资源
      *
-     * @param page 页面
-     * @param name 资源名称
-     * @param path 资源路径
+     * @param page      页面
+     * @param name      资源名称
+     * @param path      资源路径
+     * @param sortField 排序字段
+     * @param sortType  排序类型
      * @return 资源
      */
-    public Page<Resource> getResources(Page<Resource> page, String name, String path) {
-        return page.setRecords(mResourceDao.selectResourceList(page, name, path));
+    public Page<Resource> getResources(Page<Resource> page, String name, String path, String sortField, String sortType) {
+        return page.setRecords(mResourceDao.selectResourceList(page, name, path, sortField, sortType));
     }
 
     /**
