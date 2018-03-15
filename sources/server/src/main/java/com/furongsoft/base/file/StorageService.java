@@ -3,6 +3,7 @@ package com.furongsoft.base.file;
 import com.furongsoft.base.exceptions.BaseException;
 import com.furongsoft.base.file.entities.Attachment;
 import com.furongsoft.base.file.mappers.AttachmentDao;
+import com.furongsoft.base.misc.StringUtils;
 import com.furongsoft.base.misc.Tracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -81,7 +82,7 @@ public class StorageService {
      * @throws BaseException 异常
      */
     public Serializable getFileId(String name) throws BaseException {
-        if (name == null) {
+        if (StringUtils.isNullOrEmpty(name)) {
             return null;
         }
 

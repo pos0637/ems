@@ -9,30 +9,8 @@ import org.springframework.http.HttpStatus;
  * @author Alex
  */
 public class UploadFileResponse extends RestResponse {
-    /**
-     * 数据
-     */
-    class Data {
-        /**
-         * 文件路径
-         */
-        private String filePath;
-
-        Data(String filePath) {
-            this.filePath = filePath;
-        }
-
-        public String getFilePath() {
-            return filePath;
-        }
-
-        public void setFilePath(String filePath) {
-            this.filePath = filePath;
-        }
-    }
-
     public UploadFileResponse(HttpStatus status, String uuid) {
         super(status);
-        setData(new Data(uuid));
+        setData(uuid);
     }
 }

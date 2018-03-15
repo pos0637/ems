@@ -69,7 +69,11 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public void addResource(Resource resource) throws BaseException {
-        resource.setIcon((String) mStorageService.getFileId(resource.getIconPath()));
+        Serializable id = mStorageService.getFileId(resource.getIconPath());
+        if (id != null) {
+            resource.setIcon((String) id);
+        }
+
         mResourceDao.insert(resource);
     }
 
