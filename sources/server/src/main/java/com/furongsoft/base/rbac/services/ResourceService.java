@@ -13,20 +13,20 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 系统服务
+ * 资源服务
  *
  * @author Alex
  */
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class SystemService {
-    private final ResourceDao mResourceDao;
-    private final StorageService mStorageService;
+public class ResourceService {
+    private final ResourceDao resourceDao;
+    private final StorageService storageService;
 
     @Autowired
-    public SystemService(ResourceDao resourceDao, StorageService mStorageService) {
-        this.mResourceDao = resourceDao;
-        this.mStorageService = mStorageService;
+    public ResourceService(ResourceDao resourceDao, StorageService storageService) {
+        this.resourceDao = resourceDao;
+        this.storageService = storageService;
     }
 
     /**
@@ -40,7 +40,7 @@ public class SystemService {
      * @return 资源
      */
     public Page<Resource> getResources(Page<Resource> page, String name, String path, String sortField, String sortType) {
-        return page.setRecords(mResourceDao.selectResourceList(page, name, path, sortField, sortType));
+        return page.setRecords(resourceDao.selectResourceList(page, name, path, sortField, sortType));
     }
 
     /**
@@ -49,7 +49,7 @@ public class SystemService {
      * @param ids 索引列表
      */
     public void delResources(List<Serializable> ids) {
-        mResourceDao.deleteBatchIds(ids);
+        resourceDao.deleteBatchIds(ids);
     }
 
     /**
@@ -59,7 +59,7 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public Resource getResource(Serializable id) throws BaseException {
-        return mResourceDao.selectResource(id);
+        return resourceDao.selectResource(id);
     }
 
     /**
@@ -69,12 +69,12 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public void addResource(Resource resource) throws BaseException {
-        Serializable id = mStorageService.getFileId(resource.getIconPath());
+        Serializable id = storageService.getFileId(resource.getIconPath());
         if (id != null) {
             resource.setIcon((String) id);
         }
 
-        mResourceDao.insert(resource);
+        resourceDao.insert(resource);
     }
 
     /**
@@ -84,8 +84,8 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public void editResource(Resource resource) throws BaseException {
-        resource.setIcon((String) mStorageService.getFileId(resource.getIconPath()));
-        mResourceDao.updateById(resource);
+        resource.setIcon((String) storageService.getFileId(resource.getIconPath()));
+        resourceDao.updateById(resource);
     }
 
     /**
@@ -95,6 +95,6 @@ public class SystemService {
      * @throws BaseException 异常
      */
     public void delResource(Serializable id) throws BaseException {
-        mResourceDao.deleteById(id);
+        resourceDao.deleteById(id);
     }
 }

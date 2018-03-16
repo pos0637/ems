@@ -20,11 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/file")
 public class FileController {
-    private final StorageService mStorageService;
+    private final StorageService storageService;
 
     @Autowired
     public FileController(StorageService storageService) {
-        this.mStorageService = storageService;
+        this.storageService = storageService;
     }
 
     @RequestMapping(value = "/upload")
@@ -34,7 +34,7 @@ public class FileController {
             return new RestResponse(HttpStatus.BAD_REQUEST);
         }
 
-        String uuid = mStorageService.uploadFile(file);
+        String uuid = storageService.uploadFile(file);
         Tracker.file("upload: " + uuid);
 
         return new UploadFileResponse(HttpStatus.OK, uuid);

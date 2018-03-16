@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MyRealm extends AuthorizingRealm {
-    private final UserDao mUserDao;
+    private final UserDao userDao;
 
     @Autowired
     public MyRealm(UserDao userDao) {
         super(new RetryLimitHashedCredentialsMatcher(null));
-        this.mUserDao = userDao;
+        this.userDao = userDao;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new AuthenticationException();
         }
 
-        User user = this.mUserDao.findByUserName(username);
+        User user = this.userDao.findByUserName(username);
         if (user == null) {
             throw new UnknownAccountException();
         }

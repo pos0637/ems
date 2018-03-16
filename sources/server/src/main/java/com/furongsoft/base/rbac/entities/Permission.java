@@ -9,14 +9,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * 资源
+ * 权限
  *
  * @author Alex
  */
 @Entity
-@Table(name = "t_sys_resource")
-@TableName("t_sys_resource")
-public class Resource extends BaseEntity implements Serializable {
+@Table(name = "t_sys_permission")
+@TableName("t_sys_permission")
+public class Permission extends BaseEntity implements Serializable {
     /**
      * 索引
      */
@@ -24,6 +24,12 @@ public class Resource extends BaseEntity implements Serializable {
     @GeneratedValue
     @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(32) COMMENT 'UUID'")
     private String id;
+
+    /**
+     * 父索引
+     */
+    @Column(columnDefinition = "VARCHAR(32) default null COMMENT '父索引'")
+    private String parentId;
 
     /**
      * 名称
@@ -34,7 +40,7 @@ public class Resource extends BaseEntity implements Serializable {
     /**
      * 类型
      */
-    @Column(nullable = false, columnDefinition = "INT(4) COMMENT '类型:0 图片, 1 文件'")
+    @Column(nullable = false, columnDefinition = "INT(1) COMMENT '类型:0 模块, 1 数据'")
     private Integer type;
 
     /**
@@ -44,10 +50,10 @@ public class Resource extends BaseEntity implements Serializable {
     private String path;
 
     /**
-     * 状态
+     * 优先级
      */
-    @Column(nullable = false, columnDefinition = "INT(1) COMMENT '状态:0 启用, 1 禁用'")
-    private Integer state;
+    @Column(columnDefinition = "INT(4) default 0 COMMENT '优先级'")
+    private Integer priority;
 
     /**
      * 图标路径
@@ -69,23 +75,20 @@ public class Resource extends BaseEntity implements Serializable {
     @Column(columnDefinition = "VARCHAR(255) COMMENT '备注'")
     private String remark;
 
-    public Resource() {
-    }
-
-    public Resource(String name, Integer type, String path, Integer state, String remark) {
-        this.name = name;
-        this.type = type;
-        this.path = path;
-        this.state = state;
-        this.remark = remark;
-    }
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     public String getName() {
@@ -112,12 +115,12 @@ public class Resource extends BaseEntity implements Serializable {
         this.path = path;
     }
 
-    public Integer getState() {
-        return state;
+    public Integer getPriority() {
+        return priority;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 
     public String getIconPath() {

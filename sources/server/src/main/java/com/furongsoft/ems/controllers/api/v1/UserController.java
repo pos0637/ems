@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
-    private final UserDao mUserDao;
+    private final UserDao userDao;
 
     @Autowired
     public UserController(UserDao userDao) {
-        this.mUserDao = userDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/users")

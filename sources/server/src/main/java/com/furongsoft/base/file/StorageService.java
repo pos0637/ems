@@ -24,14 +24,14 @@ import java.io.Serializable;
 @Service
 @Transactional(rollbackFor = Throwable.class)
 public class StorageService {
-    private final AttachmentDao mAttachmentDao;
+    private final AttachmentDao attachmentDao;
 
     @Value("${upload.path}")
     private String mUploadPath;
 
     @Autowired
     public StorageService(AttachmentDao attachmentDao) {
-        this.mAttachmentDao = attachmentDao;
+        this.attachmentDao = attachmentDao;
     }
 
     /**
@@ -43,7 +43,7 @@ public class StorageService {
      */
     public String uploadFile(MultipartFile file) throws BaseException {
         Attachment attachment = new Attachment("", "", "", 0, "", 0);
-        mAttachmentDao.insert(attachment);
+        attachmentDao.insert(attachment);
 
         String fileName = file.getOriginalFilename();
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
@@ -69,7 +69,7 @@ public class StorageService {
         attachment.setType(suffixName);
         attachment.setSize(file.getSize());
         attachment.setHash("");
-        mAttachmentDao.updateById(attachment);
+        attachmentDao.updateById(attachment);
 
         return newName;
     }
@@ -86,7 +86,7 @@ public class StorageService {
             return null;
         }
 
-        Attachment attachment = mAttachmentDao.selectOne(new Attachment(name));
+        Attachment attachment = attachmentDao.selectOne(new Attachment(name));
         if (attachment == null) {
             throw new BaseException.IllegalArgumentException();
         }
