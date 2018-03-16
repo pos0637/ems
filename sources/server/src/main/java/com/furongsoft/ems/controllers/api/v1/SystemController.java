@@ -1,5 +1,6 @@
 package com.furongsoft.ems.controllers.api.v1;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.furongsoft.base.entities.PageRequest;
 import com.furongsoft.base.entities.PageResponse;
@@ -20,8 +21,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.List;
 
 /**
  * 系统控制器
@@ -57,13 +60,13 @@ public class SystemController {
     }
 
     @PostMapping("/resources")
-    public RestResponse addResource(@NonNull Resource resource) {
+    public RestResponse addResource(@NonNull @RequestParam Resource resource) {
         mSystemService.addResource(resource);
         return new RestResponse(HttpStatus.OK);
     }
 
     @PutMapping("/resources/{id}")
-    public RestResponse editResource(@NonNull @PathVariable String id, @NonNull Resource resource) {
+    public RestResponse editResource(@NonNull @PathVariable String id, @NonNull @RequestParam Resource resource) {
         resource.setId(id);
         mSystemService.editResource(resource);
         return new RestResponse(HttpStatus.OK);
@@ -79,7 +82,7 @@ public class SystemController {
     public RestResponse delResources(@NonNull @RequestParam String delete) {
         try {
             delete = URLDecoder.decode(delete, "UTF-8");
-            String[] ids = delete.split(",");
+            List<Serializable> ids = JSON.parseArray(delete, Serializable.class);
             mSystemService.delResources(ids);
         } catch (UnsupportedEncodingException e) {
             throw new BaseException.IllegalArgumentException();

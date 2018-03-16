@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * 系统服务
@@ -48,8 +48,8 @@ public class SystemService {
      *
      * @param ids 索引列表
      */
-    public void delResources(Serializable[] ids) {
-        mResourceDao.deleteBatchIds(Arrays.asList(ids));
+    public void delResources(List<Serializable> ids) {
+        mResourceDao.deleteBatchIds(ids);
     }
 
     /**
