@@ -61,25 +61,25 @@ public class SystemController {
 
     @GetMapping("/resources/{id}")
     public RestResponse getResource(@NonNull @PathVariable String id) {
-        return new RestResponse(HttpStatus.OK, null, resourceService.getResource(id));
+        return new RestResponse(HttpStatus.OK, null, resourceService.get(id));
     }
 
     @PostMapping("/resources")
     public RestResponse addResource(@NonNull @RequestParam Resource resource) {
-        resourceService.addResource(resource);
+        resourceService.add(resource);
         return new RestResponse(HttpStatus.OK);
     }
 
     @PutMapping("/resources/{id}")
     public RestResponse editResource(@NonNull @PathVariable String id, @NonNull @RequestParam Resource resource) {
         resource.setId(id);
-        resourceService.editResource(resource);
+        resourceService.edit(resource);
         return new RestResponse(HttpStatus.OK);
     }
 
     @DeleteMapping("/resources/{id}")
     public RestResponse delResource(@NonNull @PathVariable String id) {
-        resourceService.delResource(id);
+        resourceService.del(id);
         return new RestResponse(HttpStatus.OK);
     }
 

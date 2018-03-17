@@ -1,9 +1,9 @@
 package com.furongsoft.base.rbac.services;
 
 import com.furongsoft.base.entities.TreeNode;
-import com.furongsoft.base.exceptions.BaseException;
 import com.furongsoft.base.rbac.entities.Permission;
 import com.furongsoft.base.rbac.mappers.PermissionDao;
+import com.furongsoft.base.services.BaseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +19,12 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class PermissionService {
+public class PermissionService extends BaseServices<Permission> {
     private final PermissionDao permissionDao;
 
     @Autowired
     public PermissionService(PermissionDao permissionDao) {
+        super(permissionDao);
         this.permissionDao = permissionDao;
     }
 
@@ -34,46 +35,6 @@ public class PermissionService {
      */
     public List<Permission> getPermissions() {
         return permissionDao.selectPermissionList();
-    }
-
-    /**
-     * 获取权限
-     *
-     * @param id 权限索引
-     * @throws BaseException 异常
-     */
-    public Permission getPermission(Serializable id) throws BaseException {
-        return permissionDao.selectById(id);
-    }
-
-    /**
-     * 新增权限
-     *
-     * @param permission 权限
-     * @throws BaseException 异常
-     */
-    public void addPermission(Permission permission) throws BaseException {
-        permissionDao.insert(permission);
-    }
-
-    /**
-     * 更新权限
-     *
-     * @param permission 权限
-     * @throws BaseException 异常
-     */
-    public void editPermission(Permission permission) throws BaseException {
-        permissionDao.updateById(permission);
-    }
-
-    /**
-     * 删除权限
-     *
-     * @param id 权限索引
-     * @throws BaseException 异常
-     */
-    public void delPermission(Serializable id) throws BaseException {
-        permissionDao.deleteById(id);
     }
 
     /**

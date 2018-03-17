@@ -5,6 +5,7 @@ import com.furongsoft.base.exceptions.BaseException;
 import com.furongsoft.base.file.StorageService;
 import com.furongsoft.base.rbac.entities.Resource;
 import com.furongsoft.base.rbac.mappers.ResourceDao;
+import com.furongsoft.base.services.BaseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,12 +20,13 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class ResourceService {
+public class ResourceService extends BaseServices<Resource> {
     private final ResourceDao resourceDao;
     private final StorageService storageService;
 
     @Autowired
     public ResourceService(ResourceDao resourceDao, StorageService storageService) {
+        super(resourceDao);
         this.resourceDao = resourceDao;
         this.storageService = storageService;
     }
@@ -58,7 +60,7 @@ public class ResourceService {
      * @param id 资源索引
      * @throws BaseException 异常
      */
-    public Resource getResource(Serializable id) throws BaseException {
+    public Resource get(Serializable id) throws BaseException {
         return resourceDao.selectResource(id);
     }
 
@@ -68,7 +70,7 @@ public class ResourceService {
      * @param resource 资源
      * @throws BaseException 异常
      */
-    public void addResource(Resource resource) throws BaseException {
+    public void add(Resource resource) throws BaseException {
         Serializable id = storageService.getFileId(resource.getIconPath());
         if (id != null) {
             resource.setIcon((String) id);
@@ -83,18 +85,8 @@ public class ResourceService {
      * @param resource 资源
      * @throws BaseException 异常
      */
-    public void editResource(Resource resource) throws BaseException {
+    public void edit(Resource resource) throws BaseException {
         resource.setIcon((String) storageService.getFileId(resource.getIconPath()));
         resourceDao.updateById(resource);
-    }
-
-    /**
-     * 删除资源
-     *
-     * @param id 资源索引
-     * @throws BaseException 异常
-     */
-    public void delResource(Serializable id) throws BaseException {
-        resourceDao.deleteById(id);
     }
 }
