@@ -1,4 +1,4 @@
-package com.furongsoft.base.rbac.entities;
+package com.furongsoft.ems.entities.cms;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -9,14 +9,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * 资源
+ * 产品分类
  *
  * @author Alex
  */
 @Entity
-@Table(name = "t_sys_resource")
-@TableName("t_sys_resource")
-public class Resource extends BaseEntity implements Serializable {
+@Table(name = "t_cms_product_category")
+@TableName("t_cms_product_category")
+public class ProductCategory extends BaseEntity implements Serializable {
     /**
      * 索引
      */
@@ -26,28 +26,28 @@ public class Resource extends BaseEntity implements Serializable {
     private String id;
 
     /**
+     * 父索引
+     */
+    @Column(columnDefinition = "VARCHAR(32) default null COMMENT '父索引'")
+    private String parentId;
+
+    /**
      * 名称
      */
     @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(64) COMMENT '名称'")
     private String name;
 
     /**
-     * 类型
-     */
-    @Column(nullable = false, columnDefinition = "INT(4) COMMENT '类型:0 图片, 1 文件'")
-    private Integer type;
-
-    /**
-     * 路径
-     */
-    @Column(nullable = false, columnDefinition = "VARCHAR(255) COMMENT '路径'")
-    private String path;
-
-    /**
      * 状态
      */
     @Column(nullable = false, columnDefinition = "INT(1) default 0 COMMENT '状态:0 启用, 1 禁用'")
     private Integer state;
+
+    /**
+     * 优先级
+     */
+    @Column(columnDefinition = "INT(4) default 0 COMMENT '优先级'")
+    private Integer priority;
 
     /**
      * 图标路径
@@ -69,23 +69,20 @@ public class Resource extends BaseEntity implements Serializable {
     @Column(columnDefinition = "VARCHAR(255) COMMENT '备注'")
     private String remark;
 
-    public Resource() {
-    }
-
-    public Resource(String name, Integer type, String path, Integer state, String remark) {
-        this.name = name;
-        this.type = type;
-        this.path = path;
-        this.state = state;
-        this.remark = remark;
-    }
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     public String getName() {
@@ -96,28 +93,20 @@ public class Resource extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     public Integer getState() {
         return state;
     }
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 
     public String getIconPath() {

@@ -88,7 +88,7 @@ public class SystemController {
      * @return 响应内容
      */
     @PostMapping("/resources")
-    public RestResponse addResource(@NonNull @RequestParam Resource resource) {
+    public RestResponse addResource(@NonNull Resource resource) {
         resourceService.add(resource);
         return new RestResponse(HttpStatus.OK);
     }
@@ -101,7 +101,7 @@ public class SystemController {
      * @return 响应内容
      */
     @PutMapping("/resources/{id}")
-    public RestResponse editResource(@NonNull @PathVariable String id, @NonNull @RequestParam Resource resource) {
+    public RestResponse editResource(@NonNull @PathVariable String id, @NonNull Resource resource) {
         resource.setId(id);
         resourceService.edit(resource);
         return new RestResponse(HttpStatus.OK);
@@ -150,6 +150,55 @@ public class SystemController {
     }
 
     /**
+     * 获取权限
+     *
+     * @param id 权限索引
+     * @return 响应内容
+     */
+    @GetMapping("/permissions/{id}")
+    public RestResponse getPermission(@NonNull @PathVariable String id) {
+        return new RestResponse(HttpStatus.OK, null, permissionService.get(id));
+    }
+
+    /**
+     * 添加权限
+     *
+     * @param permission 权限
+     * @return 响应内容
+     */
+    @PostMapping("/permissions")
+    public RestResponse addPermission(@NonNull Permission permission) {
+        permissionService.add(permission);
+        return new RestResponse(HttpStatus.OK);
+    }
+
+    /**
+     * 更新权限
+     *
+     * @param id         权限索引
+     * @param permission 权限
+     * @return 响应内容
+     */
+    @PutMapping("/permissions/{id}")
+    public RestResponse editPermission(@NonNull @PathVariable String id, @NonNull Permission permission) {
+        permission.setId(id);
+        permissionService.edit(permission);
+        return new RestResponse(HttpStatus.OK);
+    }
+
+    /**
+     * 删除权限
+     *
+     * @param id 权限索引
+     * @return 响应内容
+     */
+    @DeleteMapping("/permissions/{id}")
+    public RestResponse delPermission(@NonNull @PathVariable String id) {
+        permissionService.del(id);
+        return new RestResponse(HttpStatus.OK);
+    }
+
+    /**
      * 获取菜单列表
      *
      * @return 菜单列表
@@ -177,7 +226,7 @@ public class SystemController {
         return new RestResponse(HttpStatus.OK, null, null, JwtUtils.getToken(username, user.getPassword()));
     }
 
-    @GetMapping("/logout")
+
     @RequiresAuthentication
     public RestResponse logout() {
         return new RestResponse(HttpStatus.OK, null, null);

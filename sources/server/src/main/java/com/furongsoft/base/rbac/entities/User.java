@@ -45,7 +45,7 @@ public class User extends BaseEntity implements Serializable {
     /**
      * 状态
      */
-    @Column(columnDefinition = "INT(1) COMMENT '状态:0 启用, 1 禁用'")
+    @Column(columnDefinition = "INT(1) default 0 COMMENT '状态:0 启用, 1 禁用'")
     private Integer state;
 
     /**

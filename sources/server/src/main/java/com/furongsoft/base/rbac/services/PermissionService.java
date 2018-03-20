@@ -1,9 +1,10 @@
 package com.furongsoft.base.rbac.services;
 
 import com.furongsoft.base.entities.TreeNode;
+import com.furongsoft.base.exceptions.BaseException;
 import com.furongsoft.base.rbac.entities.Permission;
 import com.furongsoft.base.rbac.mappers.PermissionDao;
-import com.furongsoft.base.services.BaseServices;
+import com.furongsoft.base.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class PermissionService extends BaseServices<Permission> {
+public class PermissionService extends BaseService<Permission> {
     private final PermissionDao permissionDao;
 
     @Autowired
@@ -35,6 +36,11 @@ public class PermissionService extends BaseServices<Permission> {
      */
     public List<Permission> getPermissions() {
         return permissionDao.selectPermissionList();
+    }
+
+    @Override
+    public void del(Serializable id) throws BaseException {
+        permissionDao.deletePermission(id);
     }
 
     /**

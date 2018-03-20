@@ -11,10 +11,10 @@ import java.io.Serializable;
  * @param <T> 类型
  * @author Alex
  */
-public abstract class BaseServices<T> {
+public abstract class BaseService<T> {
     private final BaseMapper<T> baseMapper;
 
-    protected BaseServices(BaseMapper<T> baseMapper) {
+    protected BaseService(BaseMapper<T> baseMapper) {
         this.baseMapper = baseMapper;
     }
 

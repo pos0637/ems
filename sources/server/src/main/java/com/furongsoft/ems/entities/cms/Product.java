@@ -1,4 +1,4 @@
-package com.furongsoft.base.rbac.entities;
+package com.furongsoft.ems.entities.cms;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -9,14 +9,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * 资源
+ * 产品
  *
  * @author Alex
  */
 @Entity
-@Table(name = "t_sys_resource")
-@TableName("t_sys_resource")
-public class Resource extends BaseEntity implements Serializable {
+@Table(name = "t_cms_product")
+@TableName("t_cms_product")
+public class Product extends BaseEntity implements Serializable {
     /**
      * 索引
      */
@@ -25,6 +25,9 @@ public class Resource extends BaseEntity implements Serializable {
     @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(32) COMMENT 'UUID'")
     private String id;
 
+    @Column(columnDefinition = "VARCHAR(32) default null COMMENT '产品分类索引'")
+    private String categoryId;
+
     /**
      * 名称
      */
@@ -32,22 +35,34 @@ public class Resource extends BaseEntity implements Serializable {
     private String name;
 
     /**
-     * 类型
-     */
-    @Column(nullable = false, columnDefinition = "INT(4) COMMENT '类型:0 图片, 1 文件'")
-    private Integer type;
-
-    /**
-     * 路径
-     */
-    @Column(nullable = false, columnDefinition = "VARCHAR(255) COMMENT '路径'")
-    private String path;
-
-    /**
      * 状态
      */
     @Column(nullable = false, columnDefinition = "INT(1) default 0 COMMENT '状态:0 启用, 1 禁用'")
     private Integer state;
+
+    /**
+     * 简述
+     */
+    @Column(columnDefinition = "TEXT COMMENT '简述'")
+    private String description;
+
+    /**
+     * 信息
+     */
+    @Column(columnDefinition = "TEXT COMMENT '信息'")
+    private String information;
+
+    /**
+     * 详情
+     */
+    @Column(columnDefinition = "TEXT COMMENT '信息'")
+    private String detail;
+
+    /**
+     * 展示价格
+     */
+    @Column(columnDefinition = "TEXT COMMENT '展示价格'")
+    private Double price;
 
     /**
      * 图标路径
@@ -69,23 +84,20 @@ public class Resource extends BaseEntity implements Serializable {
     @Column(columnDefinition = "VARCHAR(255) COMMENT '备注'")
     private String remark;
 
-    public Resource() {
-    }
-
-    public Resource(String name, Integer type, String path, Integer state, String remark) {
-        this.name = name;
-        this.type = type;
-        this.path = path;
-        this.state = state;
-        this.remark = remark;
-    }
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -96,28 +108,44 @@ public class Resource extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
     public Integer getState() {
         return state;
     }
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getIconPath() {

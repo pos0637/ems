@@ -40,7 +40,7 @@ public class Permission extends BaseEntity implements Serializable {
     /**
      * 类型
      */
-    @Column(nullable = false, columnDefinition = "INT(1) COMMENT '类型:0 模块, 1 数据'")
+    @Column(nullable = false, columnDefinition = "INT(1) default 0 COMMENT '类型:0 模块, 1 数据'")
     private Integer type;
 
     /**
@@ -48,6 +48,12 @@ public class Permission extends BaseEntity implements Serializable {
      */
     @Column(nullable = false, columnDefinition = "VARCHAR(255) COMMENT '路径'")
     private String path;
+
+    /**
+     * 状态
+     */
+    @Column(nullable = false, columnDefinition = "INT(1) COMMENT '状态:0 启用, 1 禁用'")
+    private Integer state;
 
     /**
      * 优先级
@@ -113,6 +119,14 @@ public class Permission extends BaseEntity implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Integer getPriority() {
