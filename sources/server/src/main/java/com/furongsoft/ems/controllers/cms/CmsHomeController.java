@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/cms/home")
-public class HomeController {
+public class CmsHomeController {
     @RequestMapping("/index")
     public String index() {
         return "cms/templates/template1/views/homepage/index.html";

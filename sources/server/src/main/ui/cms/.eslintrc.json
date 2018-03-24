@@ -1,0 +1,61 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+        "eslint:recommended"
+    ],    
+    "parserOptions": {
+        "ecmaFeatures": {
+            "arrowFunctions": true,            
+            "destructuring": true,            
+            "classes": true,
+            "defaultParams": true,
+            "blockBindings": true,
+            "modules": true,
+            "objectLiteralComputedProperties": true,
+            "objectLiteralShorthandMethods": true,
+            "objectLiteralShorthandProperties": true,
+            "restParams": true,
+            "spread": true,
+            "forOf": false,
+            "generators": true,
+            "templateStrings": true,
+            "superInFunctions": true,
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-undef": "warn",
+        "no-console": "warn",
+        "no-unused-vars": "warn"
+    },
+    "globals": {
+        "$": true,
+        "layui": true
+    }
+}

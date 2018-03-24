@@ -48,6 +48,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/ui/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/home/**", "anon");
+        filterChainDefinitionMap.put("/cms/**", "anon");
         // TODO: change to authc
         filterChainDefinitionMap.put("/file/**", "cors, anon");
         filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
