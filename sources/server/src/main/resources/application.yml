@@ -50,6 +50,17 @@ spring:
       # 最大提交请求大小
       max-request-size: 10MB
 
+  thymeleaf:
+    cache: true
+    check-template: true
+    check-template-location: true
+    enabled: true
+    encoding: utf-8
+    perfix: classpath:templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
 
