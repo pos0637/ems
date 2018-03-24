@@ -1,0 +1,213 @@
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.row-center {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* 头部栏 */
+
+.top-bar {
+    background-color: #1c4587;
+    min-height: 10px;
+    height: 40px;
+}
+
+.top-bar div {
+    top: 10px;
+    text-align: right;
+    position: relative;
+}
+
+.top-bar div span {
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: 40px;
+}
+
+
+/* 底部栏 */
+
+.bottom-bar {
+    background-color: #1c4587;
+    width: 100%;
+    min-height: 10px;
+    height: 200px;
+    position: relative;
+}
+
+.bottom-bar div {
+    width: 100%;
+    text-align: center;
+}
+
+.bottom-bar div span.company-name {
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 30px;
+}
+
+.bottom-bar div span {
+    color: #cccccc;
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: 20px;
+}
+
+.bottom-bar div.barcode {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: 20px;
+    top: 40px;
+}
+
+
+/* LOGO */
+
+.logo {
+    width: 320px;
+    height: 64px;
+    margin: 10px 10px 10px 10px
+}
+
+
+/* 导航条 */
+
+.header-nav {
+    display: table;
+    height: 40px;
+    border-collapse: collapse;
+    margin: 20px 0 10px 0
+}
+
+.header-nav li {
+    border: 0;
+    background-color: #ffffff;
+    text-align: center;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    display: table-cell;
+}
+
+.header-nav li.active {
+    background-color: #2f5d9b;
+    color: #ffffff;
+}
+
+.header-nav li.active a:hover,
+.header-nav li.active a {
+    color: #ffffff;
+    background-color: #2f5d9b;
+}
+
+.header-nav li:first-child {
+    width: 130px;
+}
+
+.header-nav li .list {
+    width: 100%;
+    display: inline-block;
+    color: #1D1D1D;
+}
+
+.header-nav li .list:hover {
+    color: #ffffff;
+    background-color: #2f5d9b;
+}
+
+
+/* 欢迎栏 */
+
+.welcome {
+    width: 100%;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.welcome div {
+    width: 100%;
+    text-align: center;
+}
+
+.welcome div span.big {
+    color: #ffffff;
+    font-size: 40px;
+    line-height: 50px;
+}
+
+.welcome div span {
+    color: #ffffff;
+    font-size: 22px;
+    line-height: 30px;
+}
+
+.welcome div button span {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+
+/* 章节 */
+
+.chapter {
+    background-color: #ffffff;
+    padding: 10px 10px 10px 10px;
+}
+
+.chapter-dark {
+    background-color: #f7f7f7;
+}
+
+.chapter div.logo {
+    width: 100%;
+    text-align: center;
+}
+
+.chapter span.text {
+    font-size: 16px;
+    line-height: 32px;
+    color: #434343;
+    background-color: #FFFFFF;
+}
+
+.chapter div.pic {
+    width: 100%;
+    text-align: center;
+    padding: 20px 20px 20px 20px;
+}
+
+
+/* 跑马灯 */
+
+.marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.marquee ul {
+    list-style: none;
+}
+
+.marquee ul li {
+    float: left;
+    padding: 10px 20px;
+}
+
+.marquee ul li img {
+    display: block;
+}
