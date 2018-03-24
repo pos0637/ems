@@ -56,13 +56,13 @@ spring:
     check-template-location: true
     enabled: true
     encoding: utf-8
-    perfix: classpath:templates/
+    prefix: classpath:/static/
     suffix: .html
     servlet:
       content-type: text/html
 
 mybatis:
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  mapper-locations: classpath:/mybatis/mapper/*.xml
 
 mybatis-plus:
   # 实体扫描，多个package用逗号或者分号分隔

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+
 /**
  * 首页控制器
  *
@@ -13,7 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/cms/home")
 public class CmsHomeController {
     @RequestMapping("/index")
-    public String index() {
-        return "cms/templates/template1/views/homepage/index.html";
+    public String index(Map<String, Object> map) {
+        map.put("hello", "from TemplateController.helloHtml");
+        return "resources/cms/templates/template1/views/homepage/index.html";
     }
 }

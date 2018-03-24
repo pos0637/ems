@@ -45,7 +45,7 @@ public class ShiroConfiguration {
 
         // 过滤器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/ui/**", "anon");
+        filterChainDefinitionMap.put("/resources/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/home/**", "anon");
         filterChainDefinitionMap.put("/cms/**", "anon");

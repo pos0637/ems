@@ -1,16 +1,15 @@
 var path = require('path');
 var params = require('./package.json');
 var copyWebpackPlugin = require('copy-webpack-plugin');
-var outputPath = '../../resources/templates/cms/';
+var outputPath = '../../resources/static/resources/cms/';
 
 module.exports = {
     entry: {
         main: './src/scripts/main.js'
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].bundle.js',
-        publicPath: '../../resources/templates/cms/'
+        path: path.resolve(__dirname, outputPath),
+        filename: 'js/[name].bundle.js'
     },
     module: {
         loaders: [
