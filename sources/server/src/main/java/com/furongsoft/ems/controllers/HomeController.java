@@ -60,15 +60,15 @@ public class HomeController {
 
         Permission pTest1 = new Permission();
         pTest1.setName("首页");
-        pTest1.setPath("xxx");
+        pTest1.setPath("");
         pTest1.setType(0);
         pTest1.setState(0);
         permissionDao.insert(pTest1);
 
         Permission pTest3 = new Permission();
         pTest3.setParentId(pTest1.getId());
-        pTest3.setName("test3");
-        pTest3.setPath("xxx");
+        pTest3.setName("公司信息");
+        pTest3.setPath("dist/admin/cms/companyInfo/index.html");
         pTest3.setType(0);
         pTest3.setState(0);
         permissionDao.insert(pTest3);
@@ -83,7 +83,7 @@ public class HomeController {
 
         Permission pTest2 = new Permission();
         pTest2.setName("系统管理");
-        pTest2.setPath("dist/admin/system/permission/index.html");
+        pTest2.setPath("");
         pTest2.setType(0);
         pTest2.setState(0);
         permissionDao.insert(pTest2);
@@ -91,7 +91,7 @@ public class HomeController {
         Permission pTest5 = new Permission();
         pTest5.setParentId(pTest2.getId());
         pTest5.setName("权限管理");
-        pTest5.setPath("http://localhost:8000/dist/admin/system/permission/index.html");
+        pTest5.setPath("dist/admin/system/permission/index.html");
         pTest5.setType(0);
         pTest5.setState(0);
         permissionDao.insert(pTest5);

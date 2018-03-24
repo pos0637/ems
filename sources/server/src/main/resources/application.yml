@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ems
+    url: jdbc:mysql://localhost:3306/ems?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -85,7 +85,6 @@ mybatis-plus:
     cache-enabled: false
     # 配置JdbcTypeForNull
     jdbc-type-for-null: 'null'
-
 
 upload:
   path: /upload
