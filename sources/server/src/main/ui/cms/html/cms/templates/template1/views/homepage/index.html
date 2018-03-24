@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="text/html;charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -24,8 +24,8 @@
     <!-- 头部栏 -->
     <div class="layui-row top-bar">
         <div>
-            <span>服务热线：400-000-000</span>
-            <span>Email：xx@xx.com</span>
+            <span th:utext="'服务热线：' + ${company.getPhone()}"></span>
+            <span th:utext="'Email：' + ${company.getEmail()}"></span>
         </div>
     </div>
 
@@ -41,23 +41,23 @@
             <div style="height: 60px">
                 <!-- 选项卡 -->
                 <ul class="header-nav">
-                    <li class="active ">
-                        <a href="http://www.changfangce.com/ " class="list " title="网站首页 ">网站首页</a>
+                    <li class="active">
+                        <a href="http://www.changfangce.com/" class="list" title="网站首页">网站首页</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/ " class="list " title="关于我们 ">关于我们</a>
+                        <a href="http://www.changfangce.com/" class="list" title="关于我们">关于我们</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/ " class="list " title="新闻动态 ">新闻动态</a>
+                        <a href="http://www.changfangce.com/" class="list" title="新闻动态">新闻动态</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/ " class="list " title="产品中心 ">产品中心</a>
+                        <a href="http://www.changfangce.com/" class="list" title="产品中心">产品中心</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/ " class="list " title="招贤纳士 ">招贤纳士</a>
+                        <a href="http://www.changfangce.com/" class="list" title="招贤纳士">招贤纳士</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/ " class="list " title="招贤纳士 ">联系我们</a>
+                        <a href="http://www.changfangce.com/" class="list" title="招贤纳士">联系我们</a>
                     </li>
                 </ul>
             </div>
@@ -87,7 +87,7 @@
             <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709774.png" border="0">
         </div>
         <div class="layui-row">
-            <span th:text="${companyInfo}"></span>
+            <span th:utext="${company.getInformation()}"></span>
         </div>
     </div>
 
@@ -178,21 +178,20 @@
 
     <!-- 底部栏 -->
     <div class="layui-row bottom-bar">
-        <div class="barcode ">
-            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500710925.png" border="0 " width="100% ">
+        <div class="barcode">
+            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500710925.png" border="0" width="100%">
         </div>
         <div style="position: relative; padding-top: 60px">
-            <span class="company-name ">国化智能有限公司</span>
+            <span class="company-name" th:utext="${company.getName()}">XXXX有限公司</span>
         </div>
         <div style="position: relative; padding-top: 20px">
-            <span>服务热线：400-000-000</span>
-            <span>Email：xx@xx.com</span>
-            <span>地址：xx街xx号</span>
+            <span th:utext="'服务热线：' + ${company.getPhone()}"></span>
+            <span th:utext="'Email：' + ${company.getEmail()}"></span>
+            <span th:utext="'地址：' + ${company.getAddress()}"></span>
         </div>
         <div style="position: relative;">
-            <span>copyright @xxx.com</span>
-            <span>京CP证xxxxxx号</span>
-            <span>京公安网备xxxxxxxxxx号</span>
+            <span th:utext="'copyright ' + ${company.getCopyright()}"></span>
+            <span th:utext="${company.getCredential()}"></span>
         </div>
     </div>
 

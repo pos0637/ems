@@ -2,7 +2,9 @@ package com.furongsoft.base.rbac.services;
 
 import com.furongsoft.base.entities.TreeNode;
 import com.furongsoft.base.exceptions.BaseException;
+import com.furongsoft.base.file.StorageService;
 import com.furongsoft.base.rbac.entities.Permission;
+import com.furongsoft.base.rbac.entities.Resource;
 import com.furongsoft.base.rbac.mappers.PermissionDao;
 import com.furongsoft.base.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,13 @@ import java.util.List;
 @Transactional(rollbackFor = Throwable.class)
 public class PermissionService extends BaseService<Permission> {
     private final PermissionDao permissionDao;
+    private final StorageService storageService;
 
     @Autowired
-    public PermissionService(PermissionDao permissionDao) {
+    public PermissionService(PermissionDao permissionDao, StorageService storageService) {
         super(permissionDao);
         this.permissionDao = permissionDao;
+        this.storageService = storageService;
     }
 
     /**
@@ -36,6 +40,27 @@ public class PermissionService extends BaseService<Permission> {
      */
     public List<Permission> getPermissions() {
         return permissionDao.selectPermissionList();
+    }
+
+    @Override
+    public Permission get(Serializable id) throws BaseException {
+        return permissionDao.selectPermission(id);
+    }
+
+    @Override
+    public void add(Permission permission) throws BaseException {
+        Serializable id = storageService.getFileId(permission.getIconPath());
+        if (id != null) {
+            permission.setIcon((String) id);
+        }
+
+        permissionDao.insert(permission);
+    }
+
+    @Override
+    public void edit(Permission permission) throws BaseException {
+        permission.setIcon((String) storageService.getFileId(permission.getIconPath()));
+        permissionDao.updateById(permission);
     }
 
     @Override

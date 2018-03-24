@@ -54,23 +54,11 @@ public class ResourceService extends BaseService<Resource> {
         resourceDao.deleteBatchIds(ids);
     }
 
-    /**
-     * 获取资源
-     *
-     * @param id 资源索引
-     * @throws BaseException 异常
-     */
     @Override
     public Resource get(Serializable id) throws BaseException {
         return resourceDao.selectResource(id);
     }
 
-    /**
-     * 新增资源
-     *
-     * @param resource 资源
-     * @throws BaseException 异常
-     */
     @Override
     public void add(Resource resource) throws BaseException {
         Serializable id = storageService.getFileId(resource.getIconPath());
@@ -81,12 +69,6 @@ public class ResourceService extends BaseService<Resource> {
         resourceDao.insert(resource);
     }
 
-    /**
-     * 更新资源
-     *
-     * @param resource 资源
-     * @throws BaseException 异常
-     */
     @Override
     public void edit(Resource resource) throws BaseException {
         resource.setIcon((String) storageService.getFileId(resource.getIconPath()));

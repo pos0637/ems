@@ -38,16 +38,16 @@ public interface ProductDao extends BaseMapper<Product> {
 
             return new SQL() {{
                 SELECT("t1.*, t2.name AS iconPath");
-                FROM(productTableName + " T1");
+                FROM(productTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
                 if (param.get("name") != null) {
-                    WHERE("T1.name LIKE CONCAT('%', #{name},'%')");
+                    WHERE("t1.name LIKE CONCAT('%', #{name},'%')");
                 }
                 if (!StringUtils.isNullOrEmpty(param.get("sortField"))
                         && !StringUtils.isNullOrEmpty(param.get("sortType"))) {
-                    ORDER_BY("T1." + param.get("sortField") + " " + param.get("sortType"));
+                    ORDER_BY("t1." + param.get("sortField") + " " + param.get("sortType"));
                 } else {
-                    ORDER_BY("T1.last_modify_time DESC");
+                    ORDER_BY("t1.last_modify_time DESC");
                 }
             }}.toString();
         }
@@ -64,10 +64,10 @@ public interface ProductDao extends BaseMapper<Product> {
 
             return new SQL() {{
                 SELECT("t1.*, t2.name AS iconPath");
-                FROM(productTableName + " T1");
+                FROM(productTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
                 if (param.get("id") != null) {
-                    WHERE("T1.id = #{id}");
+                    WHERE("t1.id = #{id}");
                 }
             }}.toString();
         }

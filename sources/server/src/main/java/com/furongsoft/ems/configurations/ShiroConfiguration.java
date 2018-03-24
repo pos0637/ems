@@ -45,12 +45,17 @@ public class ShiroConfiguration {
 
         // 过滤器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+        // 静态资源 src/main/resources/static/resources/**
         filterChainDefinitionMap.put("/resources/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/home/**", "anon");
         filterChainDefinitionMap.put("/cms/**", "anon");
+
         // TODO: change to authc
         filterChainDefinitionMap.put("/file/**", "cors, anon");
+        // 附件资源 src/main/resources/static/attachment/**
+        filterChainDefinitionMap.put("/attachment/**", "anon");
+
         filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
         filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/security/logout", "logout");

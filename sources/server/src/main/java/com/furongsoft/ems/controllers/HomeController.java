@@ -68,7 +68,7 @@ public class HomeController {
         Permission pTest3 = new Permission();
         pTest3.setParentId(pTest1.getId());
         pTest3.setName("公司信息");
-        pTest3.setPath("dist/admin/cms/companyInfo/index.html");
+        pTest3.setPath("dist/admin/cms/company/index.html");
         pTest3.setType(0);
         pTest3.setState(0);
         permissionDao.insert(pTest3);

@@ -27,7 +27,7 @@ public class StorageService {
     private final AttachmentDao attachmentDao;
 
     @Value("${upload.path}")
-    private String mUploadPath;
+    private String uploadPath;
 
     @Autowired
     public StorageService(AttachmentDao attachmentDao) {
@@ -52,7 +52,7 @@ public class StorageService {
         // 文件名规则: 父路径 + UUID + 扩展名
         try {
             File parent = new File(ResourceUtils.getURL("classpath:").getPath());
-            File target = new File(String.format("%s%s/%s", parent.getParentFile().getAbsolutePath(), mUploadPath, newName));
+            File target = new File(String.format("%s%s/%s", parent.getAbsolutePath(), uploadPath, newName));
             if (!target.getParentFile().exists()) {
                 if (!target.getParentFile().mkdirs()) {
                     throw new BaseException.UploadFileFailException();

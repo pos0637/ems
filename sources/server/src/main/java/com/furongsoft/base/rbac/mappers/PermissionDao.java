@@ -1,6 +1,7 @@
 package com.furongsoft.base.rbac.mappers;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.furongsoft.base.file.entities.Attachment;
 import com.furongsoft.base.rbac.entities.Permission;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,7 +32,34 @@ public interface PermissionDao extends BaseMapper<Permission> {
          */
         public String selectPermissionList(final Map<String, Object> param) {
             String permissionTableName = Permission.class.getAnnotation(Table.class).name();
-            return String.format("SELECT * FROM %s ORDER BY priority", permissionTableName);
+            String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
+
+            return new SQL() {{
+                SELECT("t1.*, t2.name AS iconPath");
+                FROM(permissionTableName + " T1");
+                LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
+                ORDER_BY("T1.priority");
+            }}.toString();
+        }
+
+        /**
+         * 根据索引获取权限
+         *
+         * @param param 参数列表
+         * @return SQL语句
+         */
+        public String selectPermissionById(final Map<String, Object> param) {
+            String permissionTableName = Permission.class.getAnnotation(Table.class).name();
+            String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
+
+            return new SQL() {{
+                SELECT("t1.*, t2.name AS iconPath");
+                FROM(permissionTableName + " t1");
+                LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
+                if (param.get("id") != null) {
+                    WHERE("t1.id = #{id}");
+                }
+            }}.toString();
         }
 
         /**
@@ -59,6 +87,15 @@ public interface PermissionDao extends BaseMapper<Permission> {
      */
     @SelectProvider(type = DaoProvider.class, method = "selectPermissionList")
     List<Permission> selectPermissionList();
+
+    /**
+     * 根据索引获取权限
+     *
+     * @param id 索引
+     * @return 资源
+     */
+    @SelectProvider(type = DaoProvider.class, method = "selectPermissionById")
+    Permission selectPermission(@Param("id") Serializable id);
 
     /**
      * 删除权限
