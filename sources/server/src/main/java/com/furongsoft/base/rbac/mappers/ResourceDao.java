@@ -31,7 +31,7 @@ public interface ResourceDao extends BaseMapper<Resource> {
          * @param param 参数列表
          * @return SQL语句
          */
-        public String selectResourceListWithParam(final Map<String, Object> param) {
+        public String selectResourceListWithParams(final Map<String, Object> param) {
             String resourceTableName = Resource.class.getAnnotation(Table.class).name();
             String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
 
@@ -85,7 +85,7 @@ public interface ResourceDao extends BaseMapper<Resource> {
      * @param sortType  排序类型
      * @return 资源列表
      */
-    @SelectProvider(type = DaoProvider.class, method = "selectResourceListWithParam")
+    @SelectProvider(type = DaoProvider.class, method = "selectResourceListWithParams")
     List<Resource> selectResourceList(Pagination page, @Param("name") String name, @Param("path") String path, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**

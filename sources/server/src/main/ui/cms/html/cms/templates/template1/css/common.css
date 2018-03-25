@@ -211,3 +211,13 @@ body {
 .marquee ul li img {
     display: block;
 }
+
+/* 栏目 */
+
+.tabhost {
+    text-align: center!important;
+}
+
+.tabhost span {
+    font-size: 20px;
+}

@@ -25,7 +25,10 @@ public class News extends BaseEntity implements Serializable {
     @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(32) COMMENT 'UUID'")
     private String id;
 
-    @Column(columnDefinition = "VARCHAR(32) default null COMMENT '新闻分类索引'")
+    /**
+     * 新闻分类索引
+     */
+    @Column(nullable = false, columnDefinition = "VARCHAR(32) default null COMMENT '新闻分类索引'")
     private String categoryId;
 
     /**
@@ -39,6 +42,12 @@ public class News extends BaseEntity implements Serializable {
      */
     @Column(nullable = false, columnDefinition = "INT(1) default 0 COMMENT '状态:0 启用, 1 禁用'")
     private Integer state;
+
+    /**
+     * 简述
+     */
+    @Column(columnDefinition = "TEXT COMMENT '简述'")
+    private String description;
 
     /**
      * 信息
@@ -90,6 +99,14 @@ public class News extends BaseEntity implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getInformation() {

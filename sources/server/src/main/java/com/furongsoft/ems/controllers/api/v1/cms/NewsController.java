@@ -42,6 +42,7 @@ public class NewsController {
      * 获取全部新闻
      *
      * @param pageRequest 页面
+     * @param categoryId  分类索引
      * @param name        名称
      * @param sortField   排序字段
      * @param sortType    排序方式
@@ -50,10 +51,11 @@ public class NewsController {
     @GetMapping("/news")
     public PageResponse getNews(
             PageRequest pageRequest,
+            @RequestParam(required = false) String categoryId,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String sortField,
             @RequestParam(required = false) String sortType) {
-        Page<News> page = newsService.getNews(pageRequest.getPage(), name, sortField, sortType);
+        Page<News> page = newsService.getNews(pageRequest.getPage(), categoryId, name, sortField, sortType);
         return new PageResponse<>(HttpStatus.OK, page);
     }
 

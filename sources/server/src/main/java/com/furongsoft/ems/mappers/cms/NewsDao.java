@@ -32,7 +32,7 @@ public interface NewsDao extends BaseMapper<News> {
          * @param param 参数列表
          * @return SQL语句
          */
-        public String selectNewsListWithParam(final Map<String, Object> param) {
+        public String selectNewsListWithParams(final Map<String, Object> param) {
             String newsTableName = News.class.getAnnotation(Table.class).name();
             String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
 
@@ -40,6 +40,9 @@ public interface NewsDao extends BaseMapper<News> {
                 SELECT("t1.*, t2.name AS iconPath");
                 FROM(newsTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
+                if (!StringUtils.isNullOrEmpty(param.get("categoryId"))) {
+                    WHERE("t1.category_id = #{categoryId}");
+                }
                 if (!StringUtils.isNullOrEmpty(param.get("name"))) {
                     WHERE("t1.name LIKE CONCAT('%', #{name},'%')");
                 }
@@ -91,14 +94,27 @@ public interface NewsDao extends BaseMapper<News> {
     /**
      * 获取所有新闻
      *
-     * @param page      分页对象
-     * @param name      资源名称
-     * @param sortField 排序字段
-     * @param sortType  排序类型
+     * @param page       分页对象
+     * @param categoryId 分类索引
+     * @param name       资源名称
+     * @param sortField  排序字段
+     * @param sortType   排序类型
      * @return 新闻列表
      */
-    @SelectProvider(type = DaoProvider.class, method = "selectNewsListWithParam")
-    List<News> selectNewsList(Pagination page, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+    @SelectProvider(type = DaoProvider.class, method = "selectNewsListWithParams")
+    List<News> selectNewsListWithParams(Pagination page, @Param("categoryId") String categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+
+    /**
+     * 获取所有新闻
+     *
+     * @param categoryId 分类索引
+     * @param name       资源名称
+     * @param sortField  排序字段
+     * @param sortType   排序类型
+     * @return 新闻列表
+     */
+    @SelectProvider(type = DaoProvider.class, method = "selectNewsListWithParams")
+    List<News> selectNewsList(@Param("categoryId") String categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**
      * 根据索引获取新闻

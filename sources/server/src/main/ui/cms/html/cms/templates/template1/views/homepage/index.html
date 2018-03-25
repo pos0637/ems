@@ -42,13 +42,13 @@
                 <!-- 选项卡 -->
                 <ul class="header-nav">
                     <li class="active">
-                        <a href="http://www.changfangce.com/" class="list" title="网站首页">网站首页</a>
+                        <a href="/cms/home/index" class="list" title="网站首页">网站首页</a>
                     </li>
                     <li>
                         <a href="http://www.changfangce.com/" class="list" title="关于我们">关于我们</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/" class="list" title="新闻动态">新闻动态</a>
+                        <a href="/cms/home/news" class="list" title="新闻动态">新闻动态</a>
                     </li>
                     <li>
                         <a href="http://www.changfangce.com/" class="list" title="产品中心">产品中心</a>
@@ -158,8 +158,8 @@
         </div>
         <div class="layui-row">
             <div id="marquee1" class="marquee" style="height: 230px">
-                <ul th:each="profile, iterStat: ${profiles}">
-                    <li>
+                <ul>
+                    <li th:each="profile, iterStat: ${profiles}">
                         <img th:src="${@storageService.getUrl(#request, profile.getPicturePath())}" border="0" width="260px" height="230px" />
                     </li>
                 </ul>

@@ -25,6 +25,9 @@ public class Product extends BaseEntity implements Serializable {
     @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(32) COMMENT 'UUID'")
     private String id;
 
+    /**
+     * 产品分类索引
+     */
     @Column(columnDefinition = "VARCHAR(32) default null COMMENT '产品分类索引'")
     private String categoryId;
 

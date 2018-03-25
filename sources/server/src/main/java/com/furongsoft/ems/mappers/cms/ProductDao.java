@@ -32,7 +32,7 @@ public interface ProductDao extends BaseMapper<Product> {
          * @param param 参数列表
          * @return SQL语句
          */
-        public String selectProductListWithParam(final Map<String, Object> param) {
+        public String selectProductListWithParams(final Map<String, Object> param) {
             String productTableName = Product.class.getAnnotation(Table.class).name();
             String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
 
@@ -97,7 +97,7 @@ public interface ProductDao extends BaseMapper<Product> {
      * @param sortType  排序类型
      * @return 产品列表
      */
-    @SelectProvider(type = DaoProvider.class, method = "selectProductListWithParam")
+    @SelectProvider(type = DaoProvider.class, method = "selectProductListWithParams")
     List<Product> selectProductList(Pagination page, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**
