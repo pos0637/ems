@@ -11,7 +11,6 @@ body {
     margin-right: auto;
 }
 
-
 /* 头部栏 */
 
 .top-bar {
@@ -32,7 +31,6 @@ body {
     line-height: 18px;
     margin-right: 40px;
 }
-
 
 /* 底部栏 */
 
@@ -70,7 +68,6 @@ body {
     top: 40px;
 }
 
-
 /* LOGO */
 
 .logo {
@@ -78,7 +75,6 @@ body {
     height: 64px;
     margin: 10px 10px 10px 10px
 }
-
 
 /* 导航条 */
 
@@ -126,7 +122,6 @@ body {
     background-color: #2f5d9b;
 }
 
-
 /* 欢迎栏 */
 
 .welcome {
@@ -160,7 +155,6 @@ body {
     line-height: 32px;
 }
 
-
 /* 章节 */
 
 .chapter {
@@ -190,7 +184,6 @@ body {
     padding: 20px 20px 20px 20px;
 }
 
-
 /* 跑马灯 */
 
 .marquee {
@@ -215,9 +208,33 @@ body {
 /* 栏目 */
 
 .tabhost {
-    text-align: center!important;
+    text-align: center !important;
 }
 
 .tabhost span {
+    font-size: 18px;
+}
+
+/* 招聘文本 */
+
+.job {
+    background-color: #ffffff;
+}
+
+.job p {
+    font-size: 15px;
+    line-height: 27px;
+    color: #434343;
+}
+
+.job span.title {
     font-size: 20px;
+    line-height: 60px;
+    color: #434343;
+}
+
+.job span {
+    font-size: 15px;
+    line-height: 27px;
+    color: #434343;
 }

@@ -36,9 +36,9 @@ public interface PermissionDao extends BaseMapper<Permission> {
 
             return new SQL() {{
                 SELECT("t1.*, t2.name AS iconPath");
-                FROM(permissionTableName + " T1");
+                FROM(permissionTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
-                ORDER_BY("T1.priority");
+                ORDER_BY("t1.priority");
             }}.toString();
         }
 

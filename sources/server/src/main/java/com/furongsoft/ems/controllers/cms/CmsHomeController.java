@@ -1,6 +1,7 @@
 package com.furongsoft.ems.controllers.cms;
 
 import com.furongsoft.ems.services.cms.CompanyService;
+import com.furongsoft.ems.services.cms.JobService;
 import com.furongsoft.ems.services.cms.NewsCategoryService;
 import com.furongsoft.ems.services.cms.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,14 @@ public class CmsHomeController {
     private final CompanyService companyService;
     private final ProfileService profileService;
     private final NewsCategoryService newsCategoryService;
+    private final JobService jobService;
 
     @Autowired
-    public CmsHomeController(CompanyService companyService, ProfileService profileService, NewsCategoryService newsCategoryService) {
+    public CmsHomeController(CompanyService companyService, ProfileService profileService, NewsCategoryService newsCategoryService, JobService jobService) {
         this.companyService = companyService;
         this.profileService = profileService;
         this.newsCategoryService = newsCategoryService;
+        this.jobService = jobService;
     }
 
     /**
@@ -51,5 +54,18 @@ public class CmsHomeController {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("newsCategories", newsCategoryService.getNewsCategories());
         return "resources/cms/templates/template1/views/news/index.html";
+    }
+
+    /**
+     * 企业招聘
+     *
+     * @param model 模型
+     * @return 地址
+     */
+    @RequestMapping("/job")
+    public String job(Model model) {
+        model.addAttribute("company", companyService.get(null));
+        model.addAttribute("jobs", jobService.getJobs());
+        return "resources/cms/templates/template1/views/job/index.html";
     }
 }

@@ -7,8 +7,10 @@ import com.furongsoft.base.entities.PageResponse;
 import com.furongsoft.base.exceptions.BaseException;
 import com.furongsoft.base.restful.entities.RestResponse;
 import com.furongsoft.ems.entities.cms.Company;
+import com.furongsoft.ems.entities.cms.Job;
 import com.furongsoft.ems.entities.cms.Profile;
 import com.furongsoft.ems.services.cms.CompanyService;
+import com.furongsoft.ems.services.cms.JobService;
 import com.furongsoft.ems.services.cms.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,11 +32,13 @@ import java.util.List;
 public class CompanyController {
     private final CompanyService companyService;
     private final ProfileService profileService;
+    private final JobService jobService;
 
     @Autowired
-    public CompanyController(CompanyService companyService, ProfileService profileService) {
+    public CompanyController(CompanyService companyService, ProfileService profileService, JobService jobService) {
         this.companyService = companyService;
         this.profileService = profileService;
+        this.jobService = jobService;
     }
 
     /**
@@ -139,6 +143,93 @@ public class CompanyController {
             delete = URLDecoder.decode(delete, "UTF-8");
             List<Serializable> ids = JSON.parseArray(delete, Serializable.class);
             profileService.delProfiles(ids);
+        } catch (UnsupportedEncodingException e) {
+            throw new BaseException.IllegalArgumentException();
+        }
+
+        return new RestResponse(HttpStatus.OK);
+    }
+
+    /**
+     * 获取全部工作
+     *
+     * @param pageRequest 页面
+     * @param name        名称
+     * @param sortField   排序字段
+     * @param sortType    排序方式
+     * @return 全部工作
+     */
+    @GetMapping("/jobs")
+    public PageResponse getJobs(
+            PageRequest pageRequest,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String sortField,
+            @RequestParam(required = false) String sortType) {
+        Page<Job> page = jobService.getJobs(pageRequest.getPage(), name, sortField, sortType);
+        return new PageResponse<>(HttpStatus.OK, page);
+    }
+
+    /**
+     * 获取工作
+     *
+     * @param id 工作索引
+     * @return 响应内容
+     */
+    @GetMapping("/jobs/{id}")
+    public RestResponse getJob(@NonNull @PathVariable String id) {
+        return new RestResponse(HttpStatus.OK, null, jobService.get(id));
+    }
+
+    /**
+     * 添加工作
+     *
+     * @param job 工作
+     * @return 响应内容
+     */
+    @PostMapping("/jobs")
+    public RestResponse addJob(@NonNull Job job) {
+        jobService.add(job);
+        return new RestResponse(HttpStatus.OK);
+    }
+
+    /**
+     * 更新工作
+     *
+     * @param id  工作索引
+     * @param job 工作
+     * @return 响应内容
+     */
+    @PutMapping("/jobs/{id}")
+    public RestResponse editJob(@NonNull @PathVariable String id, @NonNull Job job) {
+        job.setId(id);
+        jobService.edit(job);
+        return new RestResponse(HttpStatus.OK);
+    }
+
+    /**
+     * 删除工作
+     *
+     * @param id 工作索引
+     * @return 响应内容
+     */
+    @DeleteMapping("/jobs/{id}")
+    public RestResponse delJob(@NonNull @PathVariable String id) {
+        jobService.del(id);
+        return new RestResponse(HttpStatus.OK);
+    }
+
+    /**
+     * 批量删除工作
+     *
+     * @param delete 工作索引列表
+     * @return 响应内容
+     */
+    @PostMapping("/jobs/batch")
+    public RestResponse delJobs(@NonNull @RequestParam String delete) {
+        try {
+            delete = URLDecoder.decode(delete, "UTF-8");
+            List<Serializable> ids = JSON.parseArray(delete, Serializable.class);
+            jobService.delJobs(ids);
         } catch (UnsupportedEncodingException e) {
             throw new BaseException.IllegalArgumentException();
         }

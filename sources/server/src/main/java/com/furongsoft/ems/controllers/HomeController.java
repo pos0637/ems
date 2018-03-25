@@ -45,12 +45,14 @@ public class HomeController {
 
     @RequestMapping("/init")
     public String initialize() {
+        /*
         User user = new User();
         user.setUserName("a");
         user.setPassword("b");
         user.setName("");
         user.setSalt("");
         userDao.insert(user);
+        */
 
         Permission pTest1 = new Permission();
         pTest1.setName("公司管理");
@@ -90,6 +92,14 @@ public class HomeController {
         pTest7.setType(0);
         pTest7.setState(0);
         permissionDao.insert(pTest7);
+
+        Permission pTest8 = new Permission();
+        pTest8.setParentId(pTest1.getId());
+        pTest8.setName("招聘信息");
+        pTest8.setPath("dist/admin/cms/job/index.html");
+        pTest8.setType(0);
+        pTest8.setState(0);
+        permissionDao.insert(pTest8);
 
         Permission pTest2 = new Permission();
         pTest2.setName("系统管理");
