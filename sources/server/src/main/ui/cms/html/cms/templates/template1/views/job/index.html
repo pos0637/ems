@@ -44,19 +44,19 @@
                         <a href="/cms/home/index" class="list" title="网站首页">网站首页</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/" class="list" title="关于我们">关于我们</a>
+                        <a href="/cms/home/about" class="list" title="关于我们">关于我们</a>
                     </li>
                     <li>
                         <a href="/cms/home/news" class="list" title="新闻动态">新闻动态</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/" class="list" title="产品中心">产品中心</a>
+                        <a href="/cms/home/product" class="list" title="产品中心">产品中心</a>
                     </li>
                     <li class="active">
                         <a href="/cms/home/job" class="list" title="招贤纳士">招贤纳士</a>
                     </li>
                     <li>
-                        <a href="http://www.changfangce.com/" class="list" title="招贤纳士">联系我们</a>
+                        <a href="/cms/home/contact" class="list" title="联系我们">联系我们</a>
                     </li>
                 </ul>
             </div>
@@ -67,10 +67,10 @@
     <div class="layui-row">
         <div class="welcome" style="background-image:url(http://y.hy755.cn/7344/diy/pics/20170722/1500708981.jpg)">
             <div style="position: relative; padding-top: 80px">
-                <span class="big">科技铸造未来</span>
+                <span class="big" th:utext="${company.getSlogan1()}"></span>
             </div>
             <div style="position: relative; padding-top: 10px">
-                <span>Technology to create the future, let us work together</span>
+                <span th:utext="${company.getSlogan2()}"></span>
             </div>
             <div style="position: relative; padding-top: 100px">
                 <button class="layui-btn layui-btn-lg layui-btn-radius">
@@ -82,6 +82,8 @@
 
     <!-- 新闻中心 -->
     <div class="layui-row row-center chapter">
+        <div class="layui-row" style="height: 20px">
+        </div>
         <div class="layui-row">
             <div>
                 <p style="text-align:center;">

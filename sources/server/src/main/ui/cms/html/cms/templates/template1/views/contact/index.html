@@ -46,7 +46,7 @@
                     <li>
                         <a href="/cms/home/about" class="list" title="关于我们">关于我们</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="/cms/home/news" class="list" title="新闻动态">新闻动态</a>
                     </li>
                     <li>
@@ -55,7 +55,7 @@
                     <li>
                         <a href="/cms/home/job" class="list" title="招贤纳士">招贤纳士</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/cms/home/contact" class="list" title="联系我们">联系我们</a>
                     </li>
                 </ul>
@@ -87,41 +87,15 @@
         <div class="layui-row">
             <div>
                 <p style="text-align:center;">
-                    <span style="color:#073763;"><span style="font-size:24px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;"><strong>新闻中心</strong></span></span>
+                    <span style="color:#073763;"><span style="font-size:24px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;"><strong>联系我们</strong></span></span>
                 </p>
                 <p style="text-align:center;">
-                    <strong style="color:#073763; font-size:16px; letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">—————— &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;News center<strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong><strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong></strong><span style="line-height:1.5;"></span>
+                    <strong style="color:#073763; font-size:16px; letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">—————— &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Contact us<strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong><strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong></strong><span style="line-height:1.5;"></span>
                 </p>
             </div>
         </div>
         <div class="layui-row">
-            <div class="layui-tab layui-tab-brief tabhost" lay-filter="tabhost1">
-                <ul class="layui-tab-title">
-                    <li th:each="newsCategory, iterStat: ${newsCategories}" th:attr="class=${iterStat.first? 'layui-this': null}">
-                        <span th:text="${newsCategory.getName()}"></span>
-                    </li>
-                </ul>
-                <div class="layui-tab-content">
-                    <div class="layui-tab-item" th:each="newsCategory, iterStat: ${newsCategories}" th:classappend="${iterStat.first? 'layui-show': null}">
-                        <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNews(newsCategory.getId())}">
-                            <div class="layui-col-md3">
-                                <img th:src="${@storageService.getUrl(#request, news.getIconPath())}" width="140" height="130" />
-                            </div>
-                            <div class="layui-col-md9" style="text-align: left">
-                                <div class="layui-row">
-                                    <a style="font-size: 20px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
-                                </div>
-                                <div class="layui-row" style="padding-top: 10px">
-                                    <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM-dd HH:mm')}"></span>
-                                </div>
-                                <div class="layui-row" style="padding-top: 10px">
-                                    <span th:text="${news.getDescription()}"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <span th:utext="${company.getContact()}"></span>
         </div>
     </div>
 

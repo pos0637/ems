@@ -34,10 +34,11 @@ public interface CompanyDao extends BaseMapper<Company> {
             String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
 
             return new SQL() {{
-                SELECT("t1.*, t2.name AS logoPath, t3.name AS barcodePath");
+                SELECT("t1.*, t2.name AS logoPath, t3.name AS barcodePath, t4.name AS welcomePicturePath");
                 FROM(companyTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.logo = t2.id");
                 LEFT_OUTER_JOIN(attachmentTableName + " t3 ON t1.barcode = t3.id");
+                LEFT_OUTER_JOIN(attachmentTableName + " t4 ON t1.welcome_picture = t4.id");
             }}.toString();
         }
 
@@ -52,10 +53,11 @@ public interface CompanyDao extends BaseMapper<Company> {
             String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
 
             return new SQL() {{
-                SELECT("t1.*, t2.name AS logoPath, t3.name AS barcodePath");
+                SELECT("t1.*, t2.name AS logoPath, t3.name AS barcodePath, t4.name AS welcomePicturePath");
                 FROM(companyTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.logo = t2.id");
                 LEFT_OUTER_JOIN(attachmentTableName + " t3 ON t1.barcode = t3.id");
+                LEFT_OUTER_JOIN(attachmentTableName + " t4 ON t1.welcome_picture = t4.id");
                 if (param.get("id") != null) {
                     WHERE("t1.id = #{id}");
                 }

@@ -68,4 +68,28 @@ public class CmsHomeController {
         model.addAttribute("jobs", jobService.getJobs());
         return "resources/cms/templates/template1/views/job/index.html";
     }
+
+    /**
+     * 联系我们
+     *
+     * @param model 模型
+     * @return 地址
+     */
+    @RequestMapping("/contact")
+    public String contact(Model model) {
+        model.addAttribute("company", companyService.get(null));
+        return "resources/cms/templates/template1/views/contact/index.html";
+    }
+
+    /**
+     * 关于我们
+     *
+     * @param model 模型
+     * @return 地址
+     */
+    @RequestMapping("/about")
+    public String about(Model model) {
+        model.addAttribute("company", companyService.get(null));
+        return "resources/cms/templates/template1/views/about/index.html";
+    }
 }

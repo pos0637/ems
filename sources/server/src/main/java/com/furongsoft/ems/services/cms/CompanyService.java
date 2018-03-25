@@ -52,6 +52,11 @@ public class CompanyService extends BaseService<Company> {
             object.setBarcode((String) id);
         }
 
+        id = storageService.getFileId(object.getWelcomePicturePath());
+        if (id != null) {
+            object.setWelcomePicture((String) id);
+        }
+
         Integer count = companyDao.selectCount(null);
         if ((count == null) || (count == 0)) {
             super.add(object);

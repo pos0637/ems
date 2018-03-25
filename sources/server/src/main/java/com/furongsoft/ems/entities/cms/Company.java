@@ -38,6 +38,12 @@ public class Company extends BaseEntity implements Serializable {
     private String information;
 
     /**
+     * 联系方式
+     */
+    @Column(columnDefinition = "TEXT COMMENT '联系方式'")
+    private String contact;
+
+    /**
      * 电子邮箱
      */
     @Column(columnDefinition = "TEXT COMMENT '电子邮箱'")
@@ -68,6 +74,18 @@ public class Company extends BaseEntity implements Serializable {
     private String credential;
 
     /**
+     * 标语1
+     */
+    @Column(columnDefinition = "TEXT COMMENT '标语1'")
+    private String slogan1;
+
+    /**
+     * 标语2
+     */
+    @Column(columnDefinition = "TEXT COMMENT '标语2'")
+    private String slogan2;
+
+    /**
      * 公司标识
      */
     @Transient
@@ -95,6 +113,20 @@ public class Company extends BaseEntity implements Serializable {
     @Column(columnDefinition = "VARCHAR(32) COMMENT '公司网站二维码'")
     private String barcode;
 
+    /**
+     * 欢迎图片
+     */
+    @Transient
+    @TableField(exist = false)
+    private String welcomePicturePath;
+
+    /**
+     * 欢迎图片
+     */
+    @JsonIgnore
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '欢迎图片'")
+    private String welcomePicture;
+
     public String getId() {
         return id;
     }
@@ -117,6 +149,14 @@ public class Company extends BaseEntity implements Serializable {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public String getEmail() {
@@ -159,6 +199,22 @@ public class Company extends BaseEntity implements Serializable {
         this.credential = credential;
     }
 
+    public String getSlogan1() {
+        return slogan1;
+    }
+
+    public void setSlogan1(String slogan1) {
+        this.slogan1 = slogan1;
+    }
+
+    public String getSlogan2() {
+        return slogan2;
+    }
+
+    public void setSlogan2(String slogan2) {
+        this.slogan2 = slogan2;
+    }
+
     public String getLogoPath() {
         return logoPath;
     }
@@ -189,5 +245,21 @@ public class Company extends BaseEntity implements Serializable {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public String getWelcomePicturePath() {
+        return welcomePicturePath;
+    }
+
+    public void setWelcomePicturePath(String welcomePicturePath) {
+        this.welcomePicturePath = welcomePicturePath;
+    }
+
+    public String getWelcomePicture() {
+        return welcomePicture;
+    }
+
+    public void setWelcomePicture(String welcomePicture) {
+        this.welcomePicture = welcomePicture;
     }
 }
