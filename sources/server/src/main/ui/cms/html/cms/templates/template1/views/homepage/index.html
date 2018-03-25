@@ -34,7 +34,7 @@
         <div class="layui-col-md4" style="overflow: hidden">
             <!-- LOGO -->
             <div class="logo">
-                <img th:src="${@storageService.getUrl(#request, company.getLogoPath())}" border="0" width="100%">
+                <img th:src="${@storageService.getUrl(#request, company.getLogoPath())}" border="0" width="100%" />
             </div>
         </div>
         <div class="layui-col-md8">
@@ -84,7 +84,7 @@
     <!-- 公司简介 -->
     <div class="layui-row row-center chapter">
         <div class="layui-row logo">
-            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709774.png" border="0">
+            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709774.png" border="0" />
         </div>
         <div class="layui-row">
             <span th:utext="${company.getInformation()}"></span>
@@ -94,7 +94,7 @@
     <!-- 产品中心 -->
     <div class="layui-row row-center chapter chapter-dark">
         <div class="layui-row logo">
-            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709954.png" border="0">
+            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709954.png" border="0" />
         </div>
         <div class="layui-row">
             <div class="layui-col-md8">
@@ -158,18 +158,9 @@
         </div>
         <div class="layui-row">
             <div id="marquee1" class="marquee" style="height: 230px">
-                <ul>
+                <ul th:each="profile, iterStat: ${profiles}">
                     <li>
-                        <img src="http://y.hy755.cn/7344/product/pics/20170722/1500710684.jpg" border="0" width="260px" height="230px">
-                    </li>
-                    <li>
-                        <img src="http://y.hy755.cn/7344/product/pics/20170722/1500710674.jpg" border="0" width="260px" height="230px">
-                    </li>
-                    <li>
-                        <img src="http://y.hy755.cn/7344/product/pics/20170722/1500710715.jpg" border="0" width="260px" height="230px">
-                    </li>
-                    <li>
-                        <img src="http://y.hy755.cn/7344/product/pics/20170722/1500710653.jpg" border="0" width="260px" height="230px">
+                        <img th:src="${@storageService.getUrl(#request, profile.getPicturePath())}" border="0" width="260px" height="230px" />
                     </li>
                 </ul>
             </div>
@@ -179,7 +170,7 @@
     <!-- 底部栏 -->
     <div class="layui-row bottom-bar">
         <div class="barcode">
-            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500710925.png" border="0" width="100%">
+            <img th:src="${@storageService.getUrl(#request, company.getBarcodePath())}" border="0" width="100%" />
         </div>
         <div style="position: relative; padding-top: 60px">
             <span class="company-name" th:utext="${company.getName()}">XXXX有限公司</span>

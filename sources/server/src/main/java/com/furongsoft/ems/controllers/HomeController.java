@@ -3,7 +3,6 @@ package com.furongsoft.ems.controllers;
 import com.alibaba.fastjson.JSON;
 import com.furongsoft.base.file.mappers.AttachmentDao;
 import com.furongsoft.base.rbac.entities.Permission;
-import com.furongsoft.base.rbac.entities.Resource;
 import com.furongsoft.base.rbac.entities.User;
 import com.furongsoft.base.rbac.mappers.PermissionDao;
 import com.furongsoft.base.rbac.mappers.ResourceDao;
@@ -76,6 +75,22 @@ public class HomeController {
         pTest4.setState(0);
         permissionDao.insert(pTest4);
 
+        Permission pTest6 = new Permission();
+        pTest6.setParentId(pTest1.getId());
+        pTest6.setName("新闻分类");
+        pTest6.setPath("dist/admin/cms/news/category/index.html");
+        pTest6.setType(0);
+        pTest6.setState(0);
+        permissionDao.insert(pTest6);
+
+        Permission pTest7 = new Permission();
+        pTest7.setParentId(pTest1.getId());
+        pTest7.setName("新闻");
+        pTest7.setPath("dist/admin/cms/news/index.html");
+        pTest7.setType(0);
+        pTest7.setState(0);
+        permissionDao.insert(pTest7);
+
         Permission pTest2 = new Permission();
         pTest2.setName("系统管理");
         pTest2.setPath("");
@@ -90,14 +105,6 @@ public class HomeController {
         pTest5.setType(0);
         pTest5.setState(0);
         permissionDao.insert(pTest5);
-
-        Permission pTest6 = new Permission();
-        pTest6.setParentId(pTest2.getId());
-        pTest6.setName("test6");
-        pTest6.setPath("xxx");
-        pTest6.setType(0);
-        pTest6.setState(0);
-        permissionDao.insert(pTest6);
 
         return "Successful";
     }

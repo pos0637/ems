@@ -41,7 +41,7 @@ public class ProfileService extends BaseService<Profile> {
      * @return 公司描述
      */
     public Page<Profile> getProfiles(Page<Profile> page, String name, String sortField, String sortType) {
-        return page.setRecords(profileDao.selectProfileList(page, name, sortField, sortType));
+        return page.setRecords(profileDao.selectProfileListWithParams(page, name, sortField, sortType));
     }
 
     /**
@@ -50,7 +50,7 @@ public class ProfileService extends BaseService<Profile> {
      * @return 公司描述
      */
     public List<Profile> getProfiles() {
-        return profileDao.selectList(null);
+        return profileDao.selectProfileList(null, null, null);
     }
 
     /**

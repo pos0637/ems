@@ -82,7 +82,18 @@ public interface ProfileDao extends BaseMapper<Profile> {
      * @return 公司描述列表
      */
     @SelectProvider(type = DaoProvider.class, method = "selectProfileList")
-    List<Profile> selectProfileList(Pagination page, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+    List<Profile> selectProfileListWithParams(Pagination page, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+
+    /**
+     * 获取所有公司描述
+     *
+     * @param name      公司描述名称
+     * @param sortField 排序字段
+     * @param sortType  排序类型
+     * @return 公司描述列表
+     */
+    @SelectProvider(type = DaoProvider.class, method = "selectProfileList")
+    List<Profile> selectProfileList(@Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**
      * 根据索引获取公司描述
