@@ -40,7 +40,7 @@ public interface ProductDao extends BaseMapper<Product> {
                 SELECT("t1.*, t2.name AS iconPath");
                 FROM(productTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
-                if (param.get("name") != null) {
+                if (!StringUtils.isNullOrEmpty(param.get("name"))) {
                     WHERE("t1.name LIKE CONCAT('%', #{name},'%')");
                 }
                 if (!StringUtils.isNullOrEmpty(param.get("sortField"))

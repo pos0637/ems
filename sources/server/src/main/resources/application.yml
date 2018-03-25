@@ -87,7 +87,7 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
 
 upload:
-  path: /static/attachment
+  path: /attachment
 
 logging:
   path: ./logs

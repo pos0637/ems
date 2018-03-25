@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -52,7 +53,7 @@ public class StorageService {
         // 文件名规则: 父路径 + UUID + 扩展名
         try {
             File parent = new File(ResourceUtils.getURL("classpath:").getPath());
-            File target = new File(String.format("%s%s/%s", parent.getAbsolutePath(), uploadPath, newName));
+            File target = new File(String.format("%s/static%s/%s", parent.getAbsolutePath(), uploadPath, newName));
             if (!target.getParentFile().exists()) {
                 if (!target.getParentFile().mkdirs()) {
                     throw new BaseException.UploadFileFailException();
@@ -92,5 +93,20 @@ public class StorageService {
         }
 
         return attachment.getId();
+    }
+
+    /**
+     * 获取文件URL地址
+     *
+     * @param request 请求
+     * @param name    文件名
+     * @return 文件URL地址
+     */
+    public String getUrl(HttpServletRequest request, String name) {
+        if (StringUtils.isNullOrEmpty(name)) {
+            return "";
+        }
+
+        return String.format("%s://%s:%s%s/%s", request.getScheme(), request.getServerName(), request.getServerPort(), uploadPath, name);
     }
 }

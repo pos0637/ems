@@ -53,13 +53,8 @@ public class HomeController {
         user.setSalt("");
         userDao.insert(user);
 
-        for (int i = 0; i < 30; ++i) {
-            Resource resource = new Resource("系统管理" + i, 0, "/system", 0, null);
-            resourceDao.insert(resource);
-        }
-
         Permission pTest1 = new Permission();
-        pTest1.setName("首页");
+        pTest1.setName("公司管理");
         pTest1.setPath("");
         pTest1.setType(0);
         pTest1.setState(0);
@@ -75,8 +70,8 @@ public class HomeController {
 
         Permission pTest4 = new Permission();
         pTest4.setParentId(pTest1.getId());
-        pTest4.setName("test4");
-        pTest4.setPath("xxx");
+        pTest4.setName("公司描述");
+        pTest4.setPath("dist/admin/cms/profile/index.html");
         pTest4.setType(0);
         pTest4.setState(0);
         permissionDao.insert(pTest4);

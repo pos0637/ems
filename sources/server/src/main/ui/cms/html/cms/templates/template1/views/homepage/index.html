@@ -34,7 +34,7 @@
         <div class="layui-col-md4" style="overflow: hidden">
             <!-- LOGO -->
             <div class="logo">
-                <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500708808.png" border="0" width="100%">
+                <img th:src="${@storageService.getUrl(#request, company.getLogoPath())}" border="0" width="100%">
             </div>
         </div>
         <div class="layui-col-md8">
