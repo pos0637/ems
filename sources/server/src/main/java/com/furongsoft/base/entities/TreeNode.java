@@ -11,7 +11,6 @@ import java.util.List;
  * @author Alex
  */
 public class TreeNode<T> {
-
     /**
      * 对象
      */
@@ -28,5 +27,21 @@ public class TreeNode<T> {
 
     public TreeNode(T object) {
         this.object = object;
+    }
+
+    public T getObject() {
+        return object;
+    }
+
+    public void setObject(T object) {
+        this.object = object;
+    }
+
+    public List<TreeNode<T>> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<TreeNode<T>> children) {
+        this.children = children;
     }
 }

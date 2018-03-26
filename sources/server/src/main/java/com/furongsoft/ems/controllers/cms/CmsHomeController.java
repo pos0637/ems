@@ -1,13 +1,14 @@
 package com.furongsoft.ems.controllers.cms;
 
-import com.furongsoft.ems.services.cms.CompanyService;
-import com.furongsoft.ems.services.cms.JobService;
-import com.furongsoft.ems.services.cms.NewsCategoryService;
-import com.furongsoft.ems.services.cms.ProfileService;
+import com.furongsoft.ems.entities.cms.Product;
+import com.furongsoft.ems.services.cms.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 首页控制器
@@ -18,15 +19,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/cms/home")
 public class CmsHomeController {
     private final CompanyService companyService;
+    private final ProductCategoryService productCategoryService;
+    private final ProductService productService;
     private final ProfileService profileService;
     private final NewsCategoryService newsCategoryService;
+    private final NewsService newsService;
     private final JobService jobService;
 
     @Autowired
-    public CmsHomeController(CompanyService companyService, ProfileService profileService, NewsCategoryService newsCategoryService, JobService jobService) {
+    public CmsHomeController(CompanyService companyService, ProductService productService, ProductCategoryService productCategoryService, ProductService productService1, ProfileService profileService, NewsCategoryService newsCategoryService, NewsService newsService, JobService jobService) {
         this.companyService = companyService;
+        this.productCategoryService = productCategoryService;
+        this.productService = productService1;
         this.profileService = profileService;
         this.newsCategoryService = newsCategoryService;
+        this.newsService = newsService;
         this.jobService = jobService;
     }
 
@@ -40,7 +47,34 @@ public class CmsHomeController {
     public String index(Model model) {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("profiles", profileService.getProfiles());
-        return "resources/cms/templates/template1/views/homepage/index.html";
+        model.addAttribute("productCategories", productCategoryService.getProductCategoriesTree(productCategoryService.getProductCategories()));
+        return "resources/cms/templates/template1/views/home/index.html";
+    }
+
+    /**
+     * 产品中心
+     *
+     * @param model 模型
+     * @return 地址
+     */
+    @RequestMapping("/product")
+    public String product(Model model) {
+        model.addAttribute("company", companyService.get(null));
+        model.addAttribute("productCategories", productCategoryService.getProductCategoriesTree(productCategoryService.getProductCategories()));
+        return "resources/cms/templates/template1/views/product/index.html";
+    }
+
+    /**
+     * 产品详情
+     *
+     * @param model 模型
+     * @return 地址
+     */
+    @RequestMapping("/product/detail")
+    public String productDetail(@NonNull @RequestParam String id, Model model) {
+        model.addAttribute("company", companyService.get(null));
+        model.addAttribute("product", productService.get(id));
+        return "resources/cms/templates/template1/views/product/detail.html";
     }
 
     /**
@@ -54,6 +88,19 @@ public class CmsHomeController {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("newsCategories", newsCategoryService.getNewsCategories());
         return "resources/cms/templates/template1/views/news/index.html";
+    }
+
+    /**
+     * 新闻详情
+     *
+     * @param model 模型
+     * @return 地址
+     */
+    @RequestMapping("/news/detail")
+    public String newsDetail(@NonNull @RequestParam String id, Model model) {
+        model.addAttribute("company", companyService.get(null));
+        model.addAttribute("news", newsService.get(id));
+        return "resources/cms/templates/template1/views/news/detail.html";
     }
 
     /**

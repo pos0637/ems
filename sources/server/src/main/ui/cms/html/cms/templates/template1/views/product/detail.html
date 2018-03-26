@@ -49,13 +49,13 @@
                     <li>
                         <a href="/cms/home/news" class="list" title="新闻动态">新闻动态</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/cms/home/product" class="list" title="产品中心">产品中心</a>
                     </li>
                     <li>
                         <a href="/cms/home/job" class="list" title="招贤纳士">招贤纳士</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="/cms/home/contact" class="list" title="联系我们">联系我们</a>
                     </li>
                 </ul>
@@ -80,22 +80,27 @@
         </div>
     </div>
 
-    <!-- 新闻中心 -->
+    <!-- 产品中心 -->
     <div class="layui-row row-center chapter">
         <div class="layui-row" style="height: 20px">
         </div>
         <div class="layui-row">
             <div>
                 <p style="text-align:center;">
-                    <span style="color:#073763;"><span style="font-size:24px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;"><strong>联系我们</strong></span></span>
+                    <span style="color:#073763;"><span style="font-size:24px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;"><strong>产品中心</strong></span></span>
                 </p>
                 <p style="text-align:center;">
-                    <strong style="color:#073763; font-size:16px; letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">—————— &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Contact us<strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong><strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong></strong><span style="line-height:1.5;"></span>
+                    <strong style="color:#073763; font-size:16px; letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">—————— &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Products center<strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong><strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong></strong><span style="line-height:1.5;"></span>
                 </p>
             </div>
         </div>
-        <div class="layui-row">
-            <span th:utext="${company.getContact()}"></span>
+        <div class="layui-row detail">
+            <div class="layui-row title">
+                <span th:text="'产品名称：' + ${product.getName()}"></span>
+            </div>
+            <div class="layui-row">
+                <span th:utext="${product.getInformation()}"></span>
+            </div>
         </div>
     </div>
 

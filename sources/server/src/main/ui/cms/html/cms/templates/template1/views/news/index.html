@@ -73,7 +73,7 @@
                 <span th:utext="${company.getSlogan2()}"></span>
             </div>
             <div style="position: relative; padding-top: 100px">
-                <button class="layui-btn layui-btn-lg layui-btn-radius">
+                <button class="layui-btn layui-btn-lg layui-btn-radius" onclick="window.location.href='/cms/home/product'">
                     <span>产品中心</span>
                 </button>
             </div>
@@ -97,7 +97,7 @@
         <div class="layui-row">
             <div class="layui-tab layui-tab-brief tabhost" lay-filter="tabhost1">
                 <ul class="layui-tab-title">
-                    <li th:each="newsCategory, iterStat: ${newsCategories}" th:attr="class=${iterStat.first? 'layui-this': null}">
+                    <li th:each="newsCategory, iterStat: ${newsCategories}" th:attr="class=${iterStat.first? 'layui-this': null}, lay-id=${newsCategory.getId()}">
                         <span th:text="${newsCategory.getName()}"></span>
                     </li>
                 </ul>
@@ -105,7 +105,9 @@
                     <div class="layui-tab-item" th:each="newsCategory, iterStat: ${newsCategories}" th:classappend="${iterStat.first? 'layui-show': null}">
                         <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNews(newsCategory.getId())}">
                             <div class="layui-col-md3">
-                                <img th:src="${@storageService.getUrl(#request, news.getIconPath())}" width="140" height="130" />
+                                <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
+                                    <img th:src="${@storageService.getUrl(#request, news.getIconPath())}" width="140" height="130" />
+                                </a>
                             </div>
                             <div class="layui-col-md9" style="text-align: left">
                                 <div class="layui-row">
@@ -115,7 +117,9 @@
                                     <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM-dd HH:mm')}"></span>
                                 </div>
                                 <div class="layui-row" style="padding-top: 10px">
-                                    <span th:text="${news.getDescription()}"></span>
+                                    <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
+                                        <span th:text="${news.getDescription()}"></span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -147,6 +151,21 @@
     <!-- 脚本 -->
     <script type="text/javascript">
         layui.use(['element'], function () {
+            var hash = {};
+            try { hash = JSON.parse(decodeURI(location.hash.replace(/^#link=/, ''))); } catch (e) {}
+
+            layui.use(['element'], function () {
+                $('.layui-tab').each(function () {
+                    var filter = $(this).attr('lay-filter');
+                    layui.element.on('tab(' + filter + ')', function () {
+                        hash = {filter: filter, layid: this.getAttribute('lay-id')};
+                        location.hash = 'link=' + JSON.stringify(hash);
+                    });
+                });
+
+                if (hash.filter)
+                    layui.element.tabChange(hash.filter, hash.layid);
+            });
         });
     </script>
 </body>

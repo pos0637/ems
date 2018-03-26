@@ -49,13 +49,13 @@
                     <li>
                         <a href="/cms/home/news" class="list" title="新闻动态">新闻动态</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="/cms/home/product" class="list" title="产品中心">产品中心</a>
                     </li>
                     <li>
                         <a href="/cms/home/job" class="list" title="招贤纳士">招贤纳士</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="/cms/home/contact" class="list" title="联系我们">联系我们</a>
                     </li>
                 </ul>
@@ -87,15 +87,50 @@
         <div class="layui-row">
             <div>
                 <p style="text-align:center;">
-                    <span style="color:#073763;"><span style="font-size:24px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;"><strong>联系我们</strong></span></span>
+                    <span style="color:#073763;"><span style="font-size:24px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;"><strong>产品中心</strong></span></span>
                 </p>
                 <p style="text-align:center;">
-                    <strong style="color:#073763; font-size:16px; letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">—————— &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Contact us<strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong><strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong></strong><span style="line-height:1.5;"></span>
+                    <strong style="color:#073763; font-size:16px; letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">—————— &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Products center<strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong><strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong></strong><span style="line-height:1.5;"></span>
                 </p>
             </div>
         </div>
         <div class="layui-row">
-            <span th:utext="${company.getContact()}"></span>
+            <div class="layui-tab layui-tab-brief tabhost" lay-filter="tabhost1">
+                <ul class="layui-tab-title">
+                    <li th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:attr="class=${iterStat.first? 'layui-this': null}, lay-id=${productCategory1.getObject().getId()}, level=1">
+                        <span th:text="${productCategory1.getObject().getName()}"></span>
+                    </li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item" th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:classappend="${iterStat.first? 'layui-show': null}">
+                        <div class="layui-row" style="padding-top: 10px">
+                            <div class="layui-tab layui-tab-brief tabhost" th:attr="lay-filter='tabhost2' + ${iterStat.index}">
+                                <ul class="layui-tab-title">
+                                    <li th:each="productCategory2, iterStat: ${productCategory1.getChildren()}" th:attr="class=${iterStat.first? 'layui-this': null}, lay-id=${productCategory2.getObject().getId()}, level=2">
+                                        <span th:text="${productCategory2.getObject().getName()}"></span>
+                                    </li>
+                                </ul>
+                                <div class="layui-tab-content">
+                                    <div class="layui-tab-item" th:each="productCategory2, iterStat: ${productCategory1.getChildren()}" th:classappend="${iterStat.first? 'layui-show': null}">
+                                        <div class="layui-row" style="padding-top: 10px">
+                                            <ul style="text-align: left">
+                                                <li class="product" th:each="product, iterStat: ${@productService.getProducts(productCategory2.getObject().getId())}">
+                                                    <div class="icon">
+                                                        <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
+                                                            <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
+                                                        </a>
+                                                    </div>
+                                                    <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -120,7 +155,27 @@
 
     <!-- 脚本 -->
     <script type="text/javascript">
+        var hash = {};
+        try { hash = JSON.parse(decodeURI(location.hash.replace(/^#link=/, ''))); } catch (e) {}
+
         layui.use(['element'], function () {
+            $('.layui-tab').each(function() {
+                var filter = $(this).attr('lay-filter');
+                layui.element.on('tab(' + filter + ')', function () {
+                    var level = this.getAttribute('level');
+                    if (level === "1")
+                        hash.level1 = { filter: filter, layid: this.getAttribute('lay-id') };
+                    else
+                        hash.level2 = { filter: filter, layid: this.getAttribute('lay-id') };
+
+                    location.hash = 'link=' + JSON.stringify(hash);
+                });
+            });
+
+            if (hash.level1)
+                layui.element.tabChange(hash.level1.filter, hash.level1.layid);
+            if (hash.level2)
+                layui.element.tabChange(hash.level2.filter, hash.level2.layid);
         });
     </script>
 </body>

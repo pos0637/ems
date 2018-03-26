@@ -30,26 +30,36 @@ public class NewsService extends BaseService<News> {
     }
 
     /**
-     * 获取新闻
+     * 获取新闻列表
      *
      * @param page       页面
      * @param categoryId 分类索引
      * @param name       新闻名称
      * @param sortField  排序字段
      * @param sortType   排序类型
-     * @return 新闻
+     * @return 新闻列表
      */
     public Page<News> getNews(Page<News> page, Serializable categoryId, String name, String sortField, String sortType) {
         return page.setRecords(newsDao.selectNewsListWithParams(page, categoryId, name, sortField, sortType));
     }
 
     /**
-     * 获取新闻
+     * 获取新闻列表
+     *
+     * @param size 新闻数量
+     * @return 新闻列表
+     */
+    public List<News> getNews(int size) {
+        return newsDao.selectNewsListWithParams(new Page<News>(0, size), null, null, null, null);
+    }
+
+    /**
+     * 获取新闻列表
      *
      * @param categoryId 分类索引
-     * @return 新闻
+     * @return 新闻列表
      */
-    public List<News> getNews(Serializable categoryId) {
+    public List<News> getNewsById(Serializable categoryId) {
         return newsDao.selectNewsList(categoryId, null, null, null);
     }
 

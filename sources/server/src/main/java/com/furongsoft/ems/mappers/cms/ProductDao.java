@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.furongsoft.base.file.entities.Attachment;
 import com.furongsoft.base.misc.StringUtils;
-import com.furongsoft.ems.entities.cms.News;
 import com.furongsoft.ems.entities.cms.Product;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Mapper;
@@ -77,6 +76,24 @@ public interface ProductDao extends BaseMapper<Product> {
         }
 
         /**
+         * 获取推荐产品列表
+         *
+         * @param param 参数列表
+         * @return SQL语句
+         */
+        public String selectRecommendProductList(final Map<String, Object> param) {
+            String productTableName = Product.class.getAnnotation(Table.class).name();
+            String attachmentTableName = Attachment.class.getAnnotation(Table.class).name();
+
+            return new SQL() {{
+                SELECT("t1.*, t2.name AS iconPath");
+                FROM(productTableName + " t1");
+                LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
+                WHERE("t1.recommend = 1");
+            }}.toString();
+        }
+
+        /**
          * 删除指定产品分类的产品
          *
          * @param param 参数列表
@@ -114,8 +131,17 @@ public interface ProductDao extends BaseMapper<Product> {
      * @param sortType   排序类型
      * @return 产品列表
      */
-    @SelectProvider(type = NewsDao.DaoProvider.class, method = "selectNewsListWithParams")
-    List<News> selectProductList(@Param("categoryId") Serializable categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+    @SelectProvider(type = DaoProvider.class, method = "selectProductListWithParams")
+    List<Product> selectProductList(@Param("categoryId") Serializable categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+
+    /**
+     * 获取推荐产品列表
+     *
+     * @param page 分页对象
+     * @return 产品列表
+     */
+    @SelectProvider(type = DaoProvider.class, method = "selectRecommendProductList")
+    List<Product> selectRecommendProductList(Pagination page);
 
     /**
      * 根据索引获取产品

@@ -74,11 +74,25 @@
                 <span th:utext="${company.getSlogan2()}"></span>
             </div>
             <div style="position: relative; padding-top: 100px">
-                <button class="layui-btn layui-btn-lg layui-btn-radius">
+                <button class="layui-btn layui-btn-lg layui-btn-radius" onclick="window.location.href='/cms/home/product'">
                     <span>产品中心</span>
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- 产品分类 -->
+    <div class="layui-row row-center chapter">
+        <ul style="text-align: center">
+            <li class="product" th:each="product, iterStat: ${productCategories.getChildren()}">
+                <div class="icon">
+                    <a th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}">
+                        <img th:src="${@storageService.getUrl(#request, product.getObject().getIconPath())}" border="0">
+                    </a>
+                </div>
+                <a style="font-size: 20px" th:text="${product.getObject().getName()}" th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}"></a>
+            </li>
+        </ul>
     </div>
 
     <!-- 公司简介 -->
@@ -97,59 +111,41 @@
             <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709954.png" border="0" />
         </div>
         <div class="layui-row">
-            <div class="layui-col-md8">
-                <div>
-                    <p>
-                        <span class="text">&nbsp;&nbsp; 某某机械有限公司，成立于2008年，我公司为各行各业提供专业的it技术服务，经过3年多的努力与发展，已具一定的规模及实力，现拥有一支技术精湛的it服务团队，以卓越的服务品质、专业安全的技术服务实力，为不同群体的用户提供更高更优质的it服务。</span>
-                    </p>
-                    <p>
-                        <span class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们的服务项目:企业电脑外包维护，电脑维修上门维修，电脑组装配件销售，网络工程综合布线，监控安装及维修，专业数据恢复，服务器局域网组建，打印机传真机维修，中小企业网站建设等多种it服务一体化公司。</span>
-                    </p>
-                    <p>
-                        <span class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24小时服务:为了支持客户的工作及日常运用，瑞宝电脑运用最先进的技术24小时为用户服务，并免费提供远程协助，电话支持。</span>
-                    </p>
-                    <p>
-                        <span class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们的理念:“诚信为本、实力为先，全心全意为客户”，我们公司秉承客户至上、服务至上的经营理念，以卓越的it服务品质、专业的技术服务实力、技术精湛的客户服务团队，保障客户在信息时代的高速路上驰骋，又以稳固、发展、忠诚、高效、团结与创新的精神，尊重人才注重技术，使客户在享受信息科技发展最新成果的同时不断获得最大的收益。</span>
-                    </p>
-                </div>
-            </div>
-            <div class="layui-col-md4">
-                <div class="pic">
-                    <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709847.jpg" border="0" width="100%">
-                </div>
-            </div>
+            <ul>
+                <li class="product" th:each="product, iterStat: ${@productService.getRecommendProducts(15)}">
+                    <div class="icon">
+                        <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
+                            <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
+                        </a>
+                    </div>
+                    <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
+                </li>
+            </ul>
         </div>
     </div>
 
     <!-- 新闻中心 -->
+    <!--
     <div class="layui-row row-center chapter">
-        <div class="layui-row logo">
-            <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709954.png" border="0">
-        </div>
         <div class="layui-row">
-            <div class="layui-col-md8">
-                <div>
-                    <p>
-                        <span class="text">&nbsp;&nbsp; 某某机械有限公司，成立于2008年，我公司为各行各业提供专业的it技术服务，经过3年多的努力与发展，已具一定的规模及实力，现拥有一支技术精湛的it服务团队，以卓越的服务品质、专业安全的技术服务实力，为不同群体的用户提供更高更优质的it服务。</span>
-                    </p>
-                    <p>
-                        <span class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们的服务项目:企业电脑外包维护，电脑维修上门维修，电脑组装配件销售，网络工程综合布线，监控安装及维修，专业数据恢复，服务器局域网组建，打印机传真机维修，中小企业网站建设等多种it服务一体化公司。</span>
-                    </p>
-                    <p>
-                        <span class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24小时服务:为了支持客户的工作及日常运用，瑞宝电脑运用最先进的技术24小时为用户服务，并免费提供远程协助，电话支持。</span>
-                    </p>
-                    <p>
-                        <span class="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们的理念:“诚信为本、实力为先，全心全意为客户”，我们公司秉承客户至上、服务至上的经营理念，以卓越的it服务品质、专业的技术服务实力、技术精湛的客户服务团队，保障客户在信息时代的高速路上驰骋，又以稳固、发展、忠诚、高效、团结与创新的精神，尊重人才注重技术，使客户在享受信息科技发展最新成果的同时不断获得最大的收益。</span>
-                    </p>
+            <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNews(6)}">
+                <div class="layui-col-md3">
+                    <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM-dd HH:mm')}"></span>
                 </div>
-            </div>
-            <div class="layui-col-md4">
-                <div class="pic">
-                    <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709847.jpg" border="0" width="100%">
+                <div class="layui-col-md9" style="text-align: left">
+                    <div class="layui-row">
+                        <a style="font-size: 20px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
+                    </div>                    
+                    <div class="layui-row" style="padding-top: 10px">
+                        <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
+                            <span th:text="${news.getDescription()}"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    -->
 
     <!-- 荣誉资质 -->
     <div class="layui-row row-center chapter">
