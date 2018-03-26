@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.furongsoft.base.exceptions.BaseException;
 import com.furongsoft.base.file.StorageService;
 import com.furongsoft.base.services.BaseService;
+import com.furongsoft.ems.entities.cms.News;
 import com.furongsoft.ems.entities.cms.Product;
 import com.furongsoft.ems.mappers.cms.ProductDao;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,25 @@ public class ProductService extends BaseService<Product> {
     /**
      * 获取产品
      *
-     * @param page      页面
-     * @param name      产品名称
-     * @param sortField 排序字段
-     * @param sortType  排序类型
+     * @param page       页面
+     * @param categoryId 分类索引
+     * @param name       产品名称
+     * @param sortField  排序字段
+     * @param sortType   排序类型
      * @return 产品
      */
-    public Page<Product> getProducts(Page<Product> page, String name, String sortField, String sortType) {
-        return page.setRecords(productDao.selectProductList(page, name, sortField, sortType));
+    public Page<Product> getProducts(Page<Product> page, Serializable categoryId, String name, String sortField, String sortType) {
+        return page.setRecords(productDao.selectProductListWithParams(page, categoryId, name, sortField, sortType));
+    }
+
+    /**
+     * 获取产品
+     *
+     * @param categoryId 分类索引
+     * @return 产品
+     */
+    public List<News> getNews(Serializable categoryId) {
+        return productDao.selectProductList(categoryId, null, null, null);
     }
 
     /**

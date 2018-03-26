@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.furongsoft.base.file.entities.Attachment;
 import com.furongsoft.base.misc.StringUtils;
+import com.furongsoft.ems.entities.cms.News;
 import com.furongsoft.ems.entities.cms.Product;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Mapper;
@@ -40,6 +41,9 @@ public interface ProductDao extends BaseMapper<Product> {
                 SELECT("t1.*, t2.name AS iconPath");
                 FROM(productTableName + " t1");
                 LEFT_OUTER_JOIN(attachmentTableName + " t2 ON t1.icon = t2.id");
+                if (!StringUtils.isNullOrEmpty(param.get("categoryId"))) {
+                    WHERE("t1.category_id = #{categoryId}");
+                }
                 if (!StringUtils.isNullOrEmpty(param.get("name"))) {
                     WHERE("t1.name LIKE CONCAT('%', #{name},'%')");
                 }
@@ -91,14 +95,27 @@ public interface ProductDao extends BaseMapper<Product> {
     /**
      * 获取所有产品
      *
-     * @param page      分页对象
-     * @param name      资源名称
-     * @param sortField 排序字段
-     * @param sortType  排序类型
+     * @param page       分页对象
+     * @param categoryId 分类索引
+     * @param name       资源名称
+     * @param sortField  排序字段
+     * @param sortType   排序类型
      * @return 产品列表
      */
     @SelectProvider(type = DaoProvider.class, method = "selectProductListWithParams")
-    List<Product> selectProductList(Pagination page, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+    List<Product> selectProductListWithParams(Pagination page, @Param("categoryId") Serializable categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+
+    /**
+     * 获取所有产品
+     *
+     * @param categoryId 分类索引
+     * @param name       资源名称
+     * @param sortField  排序字段
+     * @param sortType   排序类型
+     * @return 产品列表
+     */
+    @SelectProvider(type = NewsDao.DaoProvider.class, method = "selectNewsListWithParams")
+    List<News> selectProductList(@Param("categoryId") Serializable categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**
      * 根据索引获取产品

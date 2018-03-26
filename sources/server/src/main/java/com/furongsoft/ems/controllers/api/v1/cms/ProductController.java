@@ -42,6 +42,7 @@ public class ProductController {
      * 获取全部产品
      *
      * @param pageRequest 页面
+     * @param categoryId  分类索引
      * @param name        名称
      * @param sortField   排序字段
      * @param sortType    排序方式
@@ -50,11 +51,23 @@ public class ProductController {
     @GetMapping("/products")
     public PageResponse getProducts(
             PageRequest pageRequest,
+            @RequestParam(required = false) String categoryId,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String sortField,
             @RequestParam(required = false) String sortType) {
-        Page<Product> page = productService.getProducts(pageRequest.getPage(), name, sortField, sortType);
+        Page<Product> page = productService.getProducts(pageRequest.getPage(), categoryId, name, sortField, sortType);
         return new PageResponse<>(HttpStatus.OK, page);
+    }
+
+    /**
+     * 获取产品
+     *
+     * @param id 产品索引
+     * @return 响应内容
+     */
+    @GetMapping("/news/{id}")
+    public RestResponse getNews(@NonNull @PathVariable String id) {
+        return new RestResponse(HttpStatus.OK, null, productService.get(id));
     }
 
     /**

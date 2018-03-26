@@ -28,7 +28,7 @@ public class News extends BaseEntity implements Serializable {
     /**
      * 新闻分类索引
      */
-    @Column(nullable = false, columnDefinition = "VARCHAR(32) default null COMMENT '新闻分类索引'")
+    @Column(nullable = false, columnDefinition = "VARCHAR(32) COMMENT '新闻分类索引'")
     private String categoryId;
 
     /**
