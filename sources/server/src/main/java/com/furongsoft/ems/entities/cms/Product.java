@@ -28,7 +28,7 @@ public class Product extends BaseEntity implements Serializable {
     /**
      * 产品分类索引
      */
-    @Column(columnDefinition = "VARCHAR(32) default null COMMENT '产品分类索引'")
+    @Column(nullable = false, columnDefinition = "VARCHAR(32) COMMENT '产品分类索引'")
     private String categoryId;
 
     /**
@@ -42,6 +42,12 @@ public class Product extends BaseEntity implements Serializable {
      */
     @Column(nullable = false, columnDefinition = "INT(1) default 0 COMMENT '状态:0 启用, 1 禁用'")
     private Integer state;
+
+    /**
+     * 优先级
+     */
+    @Column(columnDefinition = "INT(4) default 0 COMMENT '优先级'")
+    private Integer priority;
 
     /**
      * 简述
@@ -87,6 +93,12 @@ public class Product extends BaseEntity implements Serializable {
     @Column(columnDefinition = "VARCHAR(255) COMMENT '备注'")
     private String remark;
 
+    /**
+     * 推荐产品
+     */
+    @Column(nullable = false, columnDefinition = "INT(1) default 0 COMMENT '推荐产品:0 不推荐, 1 推荐'")
+    private Integer recommend;
+
     public String getId() {
         return id;
     }
@@ -117,6 +129,14 @@ public class Product extends BaseEntity implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 
     public String getDescription() {
@@ -173,5 +193,13 @@ public class Product extends BaseEntity implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Integer recommend) {
+        this.recommend = recommend;
     }
 }

@@ -102,7 +102,7 @@ public interface NewsDao extends BaseMapper<News> {
      * @return 新闻列表
      */
     @SelectProvider(type = DaoProvider.class, method = "selectNewsListWithParams")
-    List<News> selectNewsListWithParams(Pagination page, @Param("categoryId") String categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+    List<News> selectNewsListWithParams(Pagination page, @Param("categoryId") Serializable categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**
      * 获取所有新闻
@@ -114,7 +114,7 @@ public interface NewsDao extends BaseMapper<News> {
      * @return 新闻列表
      */
     @SelectProvider(type = DaoProvider.class, method = "selectNewsListWithParams")
-    List<News> selectNewsList(@Param("categoryId") String categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
+    List<News> selectNewsList(@Param("categoryId") Serializable categoryId, @Param("name") String name, @Param("sortField") String sortField, @Param("sortType") String sortType);
 
     /**
      * 根据索引获取新闻

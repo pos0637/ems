@@ -87,7 +87,7 @@ public class HomeController {
 
         Permission pTest7 = new Permission();
         pTest7.setParentId(pTest1.getId());
-        pTest7.setName("新闻");
+        pTest7.setName("新闻管理");
         pTest7.setPath("dist/admin/cms/news/index.html");
         pTest7.setType(0);
         pTest7.setState(0);
@@ -100,6 +100,22 @@ public class HomeController {
         pTest8.setType(0);
         pTest8.setState(0);
         permissionDao.insert(pTest8);
+
+        Permission pTest9 = new Permission();
+        pTest9.setParentId(pTest1.getId());
+        pTest9.setName("产品分类");
+        pTest9.setPath("dist/admin/cms/product/category/index.html");
+        pTest9.setType(0);
+        pTest9.setState(0);
+        permissionDao.insert(pTest9);
+
+        Permission pTest10 = new Permission();
+        pTest10.setParentId(pTest1.getId());
+        pTest10.setName("产品管理");
+        pTest10.setPath("dist/admin/cms/product/index.html");
+        pTest10.setType(0);
+        pTest10.setState(0);
+        permissionDao.insert(pTest10);
 
         Permission pTest2 = new Permission();
         pTest2.setName("系统管理");
