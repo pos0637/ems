@@ -1,11 +1,9 @@
 package com.furongsoft.ems.controllers;
 
 import com.alibaba.fastjson.JSON;
-import com.furongsoft.base.file.mappers.AttachmentDao;
 import com.furongsoft.base.rbac.entities.Permission;
 import com.furongsoft.base.rbac.entities.User;
 import com.furongsoft.base.rbac.mappers.PermissionDao;
-import com.furongsoft.base.rbac.mappers.ResourceDao;
 import com.furongsoft.base.rbac.mappers.UserDao;
 import com.furongsoft.ems.entities.cms.Company;
 import com.furongsoft.ems.mappers.cms.CompanyDao;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+
+import static com.furongsoft.base.rbac.security.PasswordHelper.encryptPassword;
 
 /**
  * 首页控制器
@@ -45,14 +45,12 @@ public class HomeController {
 
     @RequestMapping("/init")
     public String initialize() {
-        /*
         User user = new User();
-        user.setUserName("a");
-        user.setPassword("b");
+        user.setUserName("admin");
+        user.setPassword("123456");
         user.setName("");
         user.setSalt("");
-        userDao.insert(user);
-        */
+        userDao.insert(encryptPassword(user));
 
         Company company = new Company();
         company.setName("福州XXXX有限公司");

@@ -3,6 +3,7 @@ package com.furongsoft.base.rbac.mappers;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.furongsoft.base.rbac.entities.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.jdbc.SQL;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public interface UserDao extends BaseMapper<User> {
                 {
                     SELECT("*");
                     FROM(userTableName);
-                    WHERE("username=#{username}");
+                    WHERE("user_name=#{username}");
                 }
             }.toString();
         }
@@ -45,5 +46,5 @@ public interface UserDao extends BaseMapper<User> {
      * @return 用户
      */
     @SelectProvider(type = DaoProvider.class, method = "findByUserName")
-    User findByUserName(String username);
+    User findByUserName(@Param("username") String username);
 }

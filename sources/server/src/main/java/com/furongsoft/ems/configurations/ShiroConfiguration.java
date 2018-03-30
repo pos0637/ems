@@ -56,7 +56,9 @@ public class ShiroConfiguration {
         // 附件资源 src/main/resources/static/attachment/**
         filterChainDefinitionMap.put("/attachment/**", "anon");
 
-        filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
+        // filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
+        filterChainDefinitionMap.put("/api/v1/system/login", "cors, anon");
+        filterChainDefinitionMap.put("/api/**", "cors");
         filterChainDefinitionMap.put("/**", "authc");
         filterChainDefinitionMap.put("/security/logout", "logout");
 

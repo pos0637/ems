@@ -203,6 +203,7 @@ public class SystemController {
      *
      * @return 菜单列表
      */
+    @RequiresAuthentication
     @GetMapping("/menus")
     public RestResponse getMenus() {
         List<Permission> list = permissionService.getPermissions();
