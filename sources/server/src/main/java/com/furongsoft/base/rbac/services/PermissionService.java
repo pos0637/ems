@@ -80,7 +80,7 @@ public class PermissionService extends BaseService<Permission> {
         }
 
         TreeNode<Permission> root = new TreeNode<>();
-        HashMap<Serializable, TreeNode<Permission>> map = new HashMap<>();
+        HashMap<Serializable, TreeNode<Permission>> map = new HashMap<>(permissions.size());
         for (Permission permission : permissions) {
             map.put(permission.getId(), new TreeNode<>(permission));
         }

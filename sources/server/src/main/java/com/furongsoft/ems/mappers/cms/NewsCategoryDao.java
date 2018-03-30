@@ -60,6 +60,11 @@ public interface NewsCategoryDao extends BaseMapper<NewsCategory> {
     @SelectProvider(type = DaoProvider.class, method = "selectNewsCategoryList")
     List<NewsCategory> selectNewsCategoryList();
 
+    /**
+     * 删除新闻分类
+     *
+     * @param id 新闻分类索引
+     */
     @DeleteProvider(type = DaoProvider.class, method = "deleteNewsCategory")
     void deleteNewsCategory(@Param("id") Serializable id);
 }

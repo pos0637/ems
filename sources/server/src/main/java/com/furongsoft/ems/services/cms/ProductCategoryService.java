@@ -2,6 +2,7 @@ package com.furongsoft.ems.services.cms;
 
 import com.furongsoft.base.entities.TreeNode;
 import com.furongsoft.base.exceptions.BaseException;
+import com.furongsoft.base.file.StorageService;
 import com.furongsoft.base.services.BaseService;
 import com.furongsoft.ems.entities.cms.ProductCategory;
 import com.furongsoft.ems.mappers.cms.ProductCategoryDao;
@@ -24,12 +25,14 @@ import java.util.List;
 public class ProductCategoryService extends BaseService<ProductCategory> {
     private final ProductCategoryDao productCategoryDao;
     private final ProductDao productDao;
+    private final StorageService storageService;
 
     @Autowired
-    public ProductCategoryService(ProductCategoryDao productCategoryDao, ProductDao productDao) {
+    public ProductCategoryService(ProductCategoryDao productCategoryDao, ProductDao productDao, StorageService storageService) {
         super(productCategoryDao);
         this.productCategoryDao = productCategoryDao;
         this.productDao = productDao;
+        this.storageService = storageService;
     }
 
     /**
@@ -39,6 +42,27 @@ public class ProductCategoryService extends BaseService<ProductCategory> {
      */
     public List<ProductCategory> getProductCategories() {
         return productCategoryDao.selectProductCategoryList();
+    }
+
+    @Override
+    public ProductCategory get(Serializable id) throws BaseException {
+        return productCategoryDao.selectProductCategory(id);
+    }
+
+    @Override
+    public void add(ProductCategory productCategory) throws BaseException {
+        Serializable id = storageService.getFileId(productCategory.getIconPath());
+        if (id != null) {
+            productCategory.setIcon((String) id);
+        }
+
+        productCategoryDao.insert(productCategory);
+    }
+
+    @Override
+    public void edit(ProductCategory productCategory) throws BaseException {
+        productCategory.setIcon((String) storageService.getFileId(productCategory.getIconPath()));
+        productCategoryDao.updateById(productCategory);
     }
 
     @Override
@@ -59,7 +83,7 @@ public class ProductCategoryService extends BaseService<ProductCategory> {
         }
 
         TreeNode<ProductCategory> root = new TreeNode<>();
-        HashMap<Serializable, TreeNode<ProductCategory>> map = new HashMap<>();
+        HashMap<Serializable, TreeNode<ProductCategory>> map = new HashMap<>(productCategories.size());
         for (ProductCategory productCategory : productCategories) {
             map.put(productCategory.getId(), new TreeNode<>(productCategory));
         }

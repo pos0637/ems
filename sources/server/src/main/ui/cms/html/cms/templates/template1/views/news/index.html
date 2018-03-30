@@ -103,7 +103,7 @@
                 </ul>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item" th:each="newsCategory, iterStat: ${newsCategories}" th:classappend="${iterStat.first? 'layui-show': null}">
-                        <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNews(newsCategory.getId())}">
+                        <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNewsById(newsCategory.getId())}">
                             <div class="layui-col-md3">
                                 <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
                                     <img th:src="${@storageService.getUrl(#request, news.getIconPath())}" width="140" height="130" />

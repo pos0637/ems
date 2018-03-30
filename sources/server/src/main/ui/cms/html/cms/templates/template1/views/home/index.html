@@ -85,11 +85,11 @@
     <div class="layui-row row-center chapter">
         <ul style="text-align: center">
             <li class="product" th:each="product, iterStat: ${productCategories.getChildren().subList(0, 4)}">
-                <a th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}">
-                    <div class="icon">
+                <div class="icon">
+                    <a th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}">
                         <img th:src="${@storageService.getUrl(#request, product.getObject().getIconPath())}" border="0">
-                    </div>
-                </a>
+                    </a>
+                </div>
                 <a style="font-size: 16px" th:text="${product.getObject().getName()}" th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}"></a>
             </li>
         </ul>
@@ -113,12 +113,12 @@
         <div class="layui-row">
             <ul>
                 <li class="product" th:each="product, iterStat: ${@productService.getRecommendProducts(15)}">
-                    <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
-                        <div class="icon">
+                    <div class="icon">
+                        <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
                             <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" width="100%" border="0">
-                        </div>
-                    </a>
-                    <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
+                        </a>
+                    </div>
+                    <a style="font-size: 16px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
                 </li>
             </ul>
         </div>

@@ -59,7 +59,7 @@ public class NewsCategoryService extends BaseService<NewsCategory> {
         }
 
         TreeNode<NewsCategory> root = new TreeNode<>();
-        HashMap<Serializable, TreeNode<NewsCategory>> map = new HashMap<>();
+        HashMap<Serializable, TreeNode<NewsCategory>> map = new HashMap<>(newsCategories.size());
         for (NewsCategory newsCategory : newsCategories) {
             map.put(newsCategory.getId(), new TreeNode<>(newsCategory));
         }

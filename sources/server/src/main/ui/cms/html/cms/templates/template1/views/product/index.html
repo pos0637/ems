@@ -146,12 +146,12 @@
                         <div class="layui-row" style="padding-top: 10px">
                             <ul style="text-align: left">
                                 <li class="product" th:each="product, iterStat: ${@productService.getProducts(productCategory1.getObject().getId())}">
-                                    <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
-                                        <div class="icon">
+                                    <div class="icon">
+                                        <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
                                             <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
-                                        </div>
-                                    </a>
-                                    <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
+                                        </a>
+                                    </div>
+                                    <a style="font-size: 16px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
                                 </li>
                             </ul>
                         </div>
