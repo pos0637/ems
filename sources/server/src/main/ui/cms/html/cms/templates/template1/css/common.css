@@ -247,6 +247,9 @@ body {
 }
 
 .product div.icon {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
     width: 150px;
     height: 200px;
     border: 1px #cccccc solid;
@@ -254,7 +257,6 @@ body {
 
 .product img {
     width: 150px;
-    height: 200px;
 }
 
 .product a {

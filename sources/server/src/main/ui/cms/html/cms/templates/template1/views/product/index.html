@@ -116,11 +116,11 @@
                                         <div class="layui-row" style="padding-top: 10px">
                                             <ul style="text-align: left">
                                                 <li class="product" th:each="product, iterStat: ${@productService.getProducts(productCategory2.getObject().getId())}">
-                                                    <div class="icon">
-                                                        <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
+                                                    <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
+                                                        <div class="icon">
                                                             <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
-                                                        </a>
-                                                    </div>
+                                                        </div>
+                                                    </a>
                                                     <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
                                                 </li>
                                             </ul>
@@ -146,11 +146,11 @@
                         <div class="layui-row" style="padding-top: 10px">
                             <ul style="text-align: left">
                                 <li class="product" th:each="product, iterStat: ${@productService.getProducts(productCategory1.getObject().getId())}">
-                                    <div class="icon">
-                                        <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
+                                    <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
+                                        <div class="icon">
                                             <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
-                                        </a>
-                                    </div>
+                                        </div>
+                                    </a>
                                     <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
                                 </li>
                             </ul>
