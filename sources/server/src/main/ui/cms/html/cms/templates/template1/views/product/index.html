@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <!-- 新闻中心 -->
+    <!-- 产品中心 -->
     <div class="layui-row row-center chapter">
         <div class="layui-row" style="height: 20px">
         </div>
@@ -94,6 +94,7 @@
                 </p>
             </div>
         </div>
+        <!--
         <div class="layui-row">
             <div class="layui-tab layui-tab-brief tabhost" lay-filter="tabhost1">
                 <ul class="layui-tab-title">
@@ -127,6 +128,32 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+        <div class="layui-row" style="padding-top: 20px">
+            <div class="layui-tab layui-tab-brief tabhost" lay-filter="tabhost1">
+                <ul class="layui-tab-title">
+                    <li th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:attr="class=${iterStat.first? 'layui-this': null}, lay-id=${productCategory1.getObject().getId()}, level=1">
+                        <span th:text="${productCategory1.getObject().getName()}"></span>
+                    </li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item" th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:classappend="${iterStat.first? 'layui-show': null}">
+                        <div class="layui-row" style="padding-top: 10px">
+                            <ul style="text-align: left">
+                                <li class="product" th:each="product, iterStat: ${@productService.getProducts(productCategory1.getObject().getId())}">
+                                    <div class="icon">
+                                        <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">
+                                            <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
+                                        </a>
+                                    </div>
+                                    <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}"></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
