@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +25,9 @@ import java.io.Serializable;
 @Transactional(rollbackFor = Throwable.class)
 public class StorageService {
     private final AttachmentDao attachmentDao;
+
+    @Value("${upload.url}")
+    private String uploadUrl;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -52,8 +54,8 @@ public class StorageService {
 
         // 文件名规则: 父路径 + UUID + 扩展名
         try {
-            File parent = new File(ResourceUtils.getURL("classpath:").getPath());
-            File target = new File(String.format("%s/static%s/%s", parent.getAbsolutePath(), uploadPath, newName));
+            File parent = new File(uploadPath);
+            File target = new File(String.format("%s/%s", parent.getAbsolutePath(), newName));
             if (!target.getParentFile().exists()) {
                 if (!target.getParentFile().mkdirs()) {
                     throw new BaseException.UploadFileFailException();
@@ -107,6 +109,6 @@ public class StorageService {
             return "";
         }
 
-        return String.format("%s://%s:%s%s/%s", request.getScheme(), request.getServerName(), request.getServerPort(), uploadPath, name);
+        return String.format("%s://%s:%s%s/%s", request.getScheme(), request.getServerName(), request.getServerPort(), uploadUrl, name);
     }
 }

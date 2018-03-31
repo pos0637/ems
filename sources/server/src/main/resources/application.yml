@@ -1,9 +1,12 @@
+server:
+  port: 8080
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ems?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://139.224.71.144:3306/ems?useUnicode=true&characterEncoding=utf8
     username: root
-    password: 123456
+    password: Furong2017!@#
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       # 初始化大小，最小，最大
@@ -87,7 +90,8 @@ mybatis-plus:
     jdbc-type-for-null: 'null'
 
 upload:
-  path: /attachment
+  url: /attachment
+  path: ./attachment
 
 logging:
   path: ./logs
