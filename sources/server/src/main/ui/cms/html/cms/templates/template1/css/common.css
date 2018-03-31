@@ -39,6 +39,7 @@ body {
     width: 100%;
     min-height: 10px;
     height: 200px;
+    position: relative;
 }
 
 .bottom-bar div {

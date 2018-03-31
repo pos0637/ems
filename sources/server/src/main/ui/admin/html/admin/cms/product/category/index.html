@@ -34,10 +34,13 @@
     </div>
     <div id="layout1" class="layui-custom-layout">
         <p name="分类名称" field="name" treeNodes="true" headerClass="value_col" />
-        <p name="图标" field="iconPath" headerClass="value_col" colClass="value_col" style="width: 7%" />
+        <p name="图片" field="iconPath" headerClass="value_col" colClass="value_col" style="width: 7%" templet="#icon1" />
         <p name="优先级" field="priority" headerClass="value_col" colClass="value_col" style="width: 7%" />
         <p name="操作" templet="#bar1" headerClass="value_col" colClass="value_col" style="width: 25%" />
     </div>
+    <script type="text/html" id="icon1">
+        <img src="{{$.imageUrl(d.iconPath)}}" alt="无图像" width="100%" border="0" />
+    </script>
     <script type="text/html" id="bar1">
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="create" url="<%=baseurl%>cms/product/category/add.html?parentId={{d.id}}" topWidth="800px" topHeight="500px" topTitle="添加子分类">添加子分类</a>
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open" url="<%=baseurl%>cms/product/category/edit.html?id={{d.id}}&readonly=true" topWidth="800px" topHeight="500px" topTitle="查看">查看</a>

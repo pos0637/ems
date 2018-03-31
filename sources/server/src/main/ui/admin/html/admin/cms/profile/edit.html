@@ -42,10 +42,13 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">图片：</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="picturePath" name="picturePath" autocomplete="off" disabled="disabled" class="layui-input" />
+                    <input type="hidden" id="picturePath" name="picturePath" autocomplete="off" disabled="disabled" class="layui-input" />
                 </div>
                 <div class="layui-input-inline">
-                    <button type="button" class="layui-btn" lay-event="upload" path="#picturePath" accept="file" exts="" size="1024">上传图片</button>
+                    <img id="pictureImage" name="picturePath" src="{{$.imageUrl(d.picturePath)}}" alt="无图像" width="100%" border="0" />
+                </div>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" lay-event="upload" path="#picturePath" img="#pictureImage" accept="file" exts="" size="1024">上传图片</button>
                 </div>
             </div>
             <hr/>

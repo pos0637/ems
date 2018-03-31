@@ -235,10 +235,11 @@ export default class Form extends BaseComponent {
      * @memberof Form
      */
     _onUploadButtonClick(sender) {
-        let params = $.assignAttr({}, sender, 'path', 'accept', 'exts', 'size');
+        let params = $.assignAttr({}, sender, 'path', 'img', 'accept', 'exts', 'size');
         Popup.show('上传附件', '400px', '280px', 'upload.html?params=' + escape(JSON.stringify(params)), false, () => {
             let path = $.getResult($.config.upload.result);
             $.isNotBlank(path) && !$.isEmpty(params.path) && $(params.path).val(path);
+            $.isNotBlank(path) && !$.isEmpty(params.img) && $(params.img).attr('src', $.imageUrl(path));
         });
     }
 }

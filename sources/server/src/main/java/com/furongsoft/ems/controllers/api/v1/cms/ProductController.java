@@ -65,17 +65,6 @@ public class ProductController {
      * @param id 产品索引
      * @return 响应内容
      */
-    @GetMapping("/news/{id}")
-    public RestResponse getNews(@NonNull @PathVariable String id) {
-        return new RestResponse(HttpStatus.OK, null, productService.get(id));
-    }
-
-    /**
-     * 获取产品
-     *
-     * @param id 产品索引
-     * @return 响应内容
-     */
     @GetMapping("/products/{id}")
     public RestResponse getProduct(@NonNull @PathVariable String id) {
         return new RestResponse(HttpStatus.OK, null, productService.get(id));

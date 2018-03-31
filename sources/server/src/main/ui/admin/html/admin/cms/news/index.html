@@ -76,9 +76,12 @@
                                 <p type="numbers" title="#" />
                                 <p checkbox="true" />
                                 <p field="name" title="名称" align="center" width="150" sort="true" />
-                                <p field="iconPath" title="图片" align="center" width="100" />
+                                <p field="iconPath" title="图片" align="center" width="100" templet="#icon1" />
                                 <p fixed="right" align="center" title="操作" width="220" toolbar="#bar1" />
                             </div>
+                            <script type="text/html" id="icon1">
+                                <img src="{{$.imageUrl(d.iconPath)}}" alt="无图像" width="100%" border="0" />
+                            </script>
                             <script type="text/html" id="bar1">
                                 <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open" url="<%=baseurl%>cms/news/edit.html?id={{d.id}}&readonly=true" topWidth="800px" topHeight="400px" topTitle="查看">查看</a>
                                 <a class="layui-btn layui-btn-xs" lay-event="edit" url="<%=baseurl%>cms/news/edit.html?id={{d.id}}" topWidth="800px" topHeight="400px" topTitle="编辑">编辑</a>

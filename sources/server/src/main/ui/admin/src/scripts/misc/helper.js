@@ -178,18 +178,36 @@ $.fn.fill = function (data) {
     if ($.isEmpty(data))
         return;
 
+    let fillElement = function (element, value) {
+        if (element.is('img')) {
+            let src = element.attr('src');
+            if ($.isNotBlank(value))
+                element.attr('src', layui.laytpl(src).render(data));
+        }
+        else {
+            if (element.attr('type') === 'checkbox')
+                element.val([value]);
+            else
+                element.val(value);
+        }
+    };
+
     let _this = this;
     this.each(function () {
         $.each(data, function (key, value) {
             let elements = _this.find('[name="' + key + '"]');
             if (elements.length === 1) {
-                elements.val(elements.attr('type') === 'checkbox' ? [value] : value);
+                fillElement(elements, value);
             }
             else {
-                if (elements.attr('type') === 'checkbox')
+                if (elements.attr('type') === 'checkbox') {
                     !$.isEmpty(value) && elements.val(value.split(','));
-                else
-                    elements.val([value]);
+                }
+                else {
+                    elements.each(function () {
+                        fillElement($(this), value);
+                    });
+                }
             }
         });
     });

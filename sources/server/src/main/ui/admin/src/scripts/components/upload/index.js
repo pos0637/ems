@@ -66,6 +66,8 @@ export default class Upload extends BaseComponent {
                 Hint.showErrorMsg('上传失败!');
             }
         });
+
+        this._bindEvents();
     }
 
     /**
@@ -77,6 +79,38 @@ export default class Upload extends BaseComponent {
      */
     checkResult(result) {
         return (result && (result[$.config.request.response.statusName] === $.config.request.response.successCode));
+    }
+
+    /**
+     * 绑定事件
+     * 
+     * @memberof Upload
+     */
+    _bindEvents() {
+        let _this = this;
+        let elements = this.element.find('.layui-btn');
+        $.each(elements, function () {
+            let botton = $(this);
+            let method = botton.attr('lay-event');
+            if ($.isEmpty(method))
+                return;
+
+            botton.off('click');
+            botton.on('click', function () {
+                if (method === 'close')
+                    _this._onCloseButtonClick(botton);
+            });
+        });
+    }
+
+    /**
+     * 关闭按钮点击事件
+     * 
+     * @param {any} sender 组件
+     * @memberof Upload
+     */
+    _onCloseButtonClick(sender) {
+        $.closeWindow();
     }
 }
 

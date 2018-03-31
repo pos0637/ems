@@ -84,29 +84,41 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">公司标识：</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="logoPath" name="logoPath" autocomplete="off" disabled="disabled" class="layui-input" />
+                    <input type="hidden" id="logoPath" name="logoPath" autocomplete="off" disabled="disabled" class="layui-input" />
                 </div>
                 <div class="layui-input-inline">
-                    <button type="button" class="layui-btn" lay-event="upload" path="#logoPath" accept="file" exts="" size="1024">上传图片</button>
+                    <img id="logoImage" name="logoPath" src="{{$.imageUrl(d.logoPath)}}" alt="无图像" width="100%" border="0" />
+                </div>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" lay-event="upload" path="#logoPath" img="#logoImage" accept="file" exts="" size="1024">上传图片</button>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">公司网站二维码：</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="barcodePath" name="barcodePath" autocomplete="off" disabled="disabled" class="layui-input" />
+                    <input type="hidden" id="barcodePath" name="barcodePath" autocomplete="off" disabled="disabled" class="layui-input" />
                 </div>
                 <div class="layui-input-inline">
-                    <button type="button" class="layui-btn" lay-event="upload" path="#barcodePath" accept="file" exts="" size="1024">上传图片</button>
+                    <img id="barcodeImage" name="barcodePath" src="{{$.imageUrl(d.barcodePath)}}" alt="无图像" width="100%" border="0" />
+                </div>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" lay-event="upload" path="#barcodePath" img="#barcodeImage" accept="file" exts=""
+                        size="1024">上传图片</button>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">欢迎图片：</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="welcomePicturePath" name="welcomePicturePath" autocomplete="off" disabled="disabled" class="layui-input"
+                    <input type="hidden" id="welcomePicturePath" name="welcomePicturePath" autocomplete="off" disabled="disabled" class="layui-input"
                     />
                 </div>
                 <div class="layui-input-inline">
-                    <button type="button" class="layui-btn" lay-event="upload" path="#welcomePicturePath" accept="file" exts="" size="1024">上传图片</button>
+                    <img id="welcomePictureImage" name="welcomePicturePath" src="{{$.imageUrl(d.welcomePicturePath)}}" alt="无图像" width="100%"
+                        border="0" />
+                </div>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" lay-event="upload" path="#welcomePicturePath" img="#welcomePictureImage" accept="file"
+                        exts="" size="1024">上传图片</button>
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
