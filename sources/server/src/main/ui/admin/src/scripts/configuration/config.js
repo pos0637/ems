@@ -45,5 +45,8 @@ $.config = {
         url: 'file/upload',
         result: 'uploadFilePath',
         dataName: 'data'
+    },
+    authentication: {
+        login: 'login.html'
     }
 };

@@ -67,6 +67,7 @@ export default class Form extends BaseComponent {
             });
         }
         else {
+            this.autoload = true;
             handler();
         }
     }

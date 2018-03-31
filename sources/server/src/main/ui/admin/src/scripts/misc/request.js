@@ -67,6 +67,10 @@ export default class Request {
                 (success) ? success(result) : this.onSuccess();
             },
             error: (XMLHttpRequest) => {
+                // 访问权限异常处理
+                if (XMLHttpRequest.status === 401)
+                    location.href = $.viewUrl($.config.authentication.login);
+
                 (error) ? error(XMLHttpRequest.responseText) : this.onError(XMLHttpRequest.responseText);
             },
             complete: () => {

@@ -212,10 +212,15 @@ public class SystemController {
         return new RestResponse(HttpStatus.OK, null, JSON.toJSONString(root.children));
     }
 
+    /**
+     * 用户登录
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 响应内容
+     */
     @PostMapping("/login")
-    public RestResponse login(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password) {
+    public RestResponse login(@RequestParam("username") String username, @RequestParam("password") String password) {
         Subject subject = SecurityUtils.getSubject();
         subject.login(new UsernamePasswordToken(username, password));
 
@@ -227,9 +232,17 @@ public class SystemController {
         return new RestResponse(HttpStatus.OK, null, null, JwtUtils.getToken(username, user.getPassword()));
     }
 
-
+    /**
+     * 用户注销
+     *
+     * @return 响应内容
+     */
     @RequiresAuthentication
+    @PostMapping("/logout")
     public RestResponse logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+
         return new RestResponse(HttpStatus.OK, null, null);
     }
 }

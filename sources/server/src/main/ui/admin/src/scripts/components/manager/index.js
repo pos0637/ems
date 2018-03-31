@@ -11,6 +11,7 @@ import TreeGrid from '../treeGrid';
 import Tree from '../tree';
 import Menu from '../menu';
 import TabHost from '../tabhost';
+import NavBar from '../navbar';
 
 /**
  * 组件管理器
@@ -27,7 +28,7 @@ export default class Manager {
      */
     static initialize() {
         // TODO: auto generated
-        let classes = [Popup, Hint, Request, Form, Upload, BaseGrid, DataGrid, TreeGrid, Tree, Menu, TabHost];
+        let classes = [Popup, Hint, Request, Form, Upload, BaseGrid, DataGrid, TreeGrid, Tree, Menu, TabHost, NavBar];
         let modules = [];
 
         // 获取所有依赖模块

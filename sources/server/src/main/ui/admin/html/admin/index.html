@@ -22,7 +22,7 @@
 
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
-        <div class="layui-header">
+        <div class="NavBar layui-header">
             <div class="layui-logo">CMS管理系统</div>
             <!-- 头部区域（可配合layui已有的水平导航） -->
 
@@ -41,7 +41,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="">注销</a>
+                    <a lay-event="logout" url="api/v1/system/logout">注销</a>
                 </li>
             </ul>
         </div>

@@ -143,7 +143,7 @@
                 <configuration>
                     <imageName>${project.artifactId}:${project.version}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
-                    <dockerHost>http://139.224.71.144:6000</dockerHost>
+                    <dockerHost>http://116.85.26.239:6000</dockerHost>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
