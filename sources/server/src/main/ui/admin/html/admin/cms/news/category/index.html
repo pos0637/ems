@@ -25,7 +25,7 @@
     <div class="layui-row">
         <div class="layui-form-query" id="actionbar1">
             <div class="layui-col-md12">
-                <button class="layui-btn" lay-event="create" url="<%=baseurl%>admin/cms/news/category/add.html" topWidth="800px" topHeight="250px"
+                <button class="layui-btn" lay-event="create" url="<%=baseurl%>cms/news/category/add.html" topWidth="800px" topHeight="250px"
                     topTitle="新增根分类">
                     <i class="layui-icon">&#xe654;</i>新增根分类
                 </button>
@@ -41,9 +41,9 @@
             <p name="操作" templet="#bar1" headerClass="value_col" colClass="value_col" style="width: 25%" />
         </div>
         <script type="text/html" id="bar1">
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="create" url="<%=baseurl%>admin/cms/news/category/add.html?parentId={{d.id}}" topWidth="800px" topHeight="250px" topTitle="添加子分类">添加子分类</a>
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open" url="<%=baseurl%>admin/cms/news/category/edit.html?id={{d.id}}&readonly=true" topWidth="800px" topHeight="250px" topTitle="查看">查看</a>
-            <a class="layui-btn layui-btn-xs" lay-event="edit" url="<%=baseurl%>admin/cms/news/category/edit.html?id={{d.id}}" topWidth="800px" topHeight="250px" topTitle="编辑">编辑</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="create" url="<%=baseurl%>cms/news/category/add.html?parentId={{d.id}}" topWidth="800px" topHeight="250px" topTitle="添加子分类">添加子分类</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open" url="<%=baseurl%>cms/news/category/edit.html?id={{d.id}}&readonly=true" topWidth="800px" topHeight="250px" topTitle="查看">查看</a>
+            <a class="layui-btn layui-btn-xs" lay-event="edit" url="<%=baseurl%>cms/news/category/edit.html?id={{d.id}}" topWidth="800px" topHeight="250px" topTitle="编辑">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" url="api/v1/cms/news/newsCategories/{{d.id}}" isConfirm="true" confirmMsg="是否确定删除当前记录？">删除</a>
         </script>
     </div>
