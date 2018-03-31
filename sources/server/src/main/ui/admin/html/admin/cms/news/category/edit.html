@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<%=baseurl%>vendors/layui-treetable/layui/css/layui.css?version=<%=version%>"
+        media="all" />
+    <link rel="stylesheet" type="text/css" href="<%=baseurl%>vendors/layui.css?version=<%=version%>" media="all" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <script type="text/javascript" src="<%=baseurl%>vendors/layui-treetable/layui/layui.js?version=<%=version%>"></script>
+    <script type="text/javascript" src="<%=baseurl%>vendors/jquery/jquery-1.9.1.min.js"></script>
+    <title></title>
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <form class="layui-form" id="edit_form" autoload="true" url="api/v1/cms/news/newsCategories/{{d.id}}">
+            <input type="hidden" name="id" />
+            <input type="hidden" name="parentId" />
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required="" lay-verType="tips" lay-verify="required" placeholder="请输入名称" autocomplete="off"
+                        class="layui-input" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">优先级：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="priority" lay-verType="tips" lay-verify="required" placeholder="请输入优先级0~255" autocomplete="off"
+                        class="layui-input" />
+                </div>
+            </div>
+            <hr/>
+            <div class="layui-form-item" style="text-align: center">
+                <button type="button" lay-filter="edit1" class="layui-btn" lay-submit lay-event="edit" url="api/v1/cms/news/newsCategories/{{d.id}}">
+                    <i class="layui-icon">&#xe642;</i>编辑</button>
+                <button type="button" class="layui-btn layui-btn-primary" lay-event="close">关闭</button>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="<%=baseurl%>js/main.bundle.js?version=<%=version%>"></script>
+</body>
+
+</html>

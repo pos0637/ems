@@ -74,7 +74,7 @@ public class HomeController {
         Permission pTest3 = new Permission();
         pTest3.setParentId(pTest1.getId());
         pTest3.setName("公司信息");
-        pTest3.setPath("dist/admin/cms/company/index.html");
+        pTest3.setPath("cms/company/index.html");
         pTest3.setType(0);
         pTest3.setState(0);
         permissionDao.insert(pTest3);
@@ -82,7 +82,7 @@ public class HomeController {
         Permission pTest4 = new Permission();
         pTest4.setParentId(pTest1.getId());
         pTest4.setName("公司描述");
-        pTest4.setPath("dist/admin/cms/profile/index.html");
+        pTest4.setPath("cms/profile/index.html");
         pTest4.setType(0);
         pTest4.setState(0);
         permissionDao.insert(pTest4);
@@ -90,7 +90,7 @@ public class HomeController {
         Permission pTest6 = new Permission();
         pTest6.setParentId(pTest1.getId());
         pTest6.setName("新闻分类");
-        pTest6.setPath("dist/admin/cms/news/category/index.html");
+        pTest6.setPath("cms/news/category/index.html");
         pTest6.setType(0);
         pTest6.setState(0);
         permissionDao.insert(pTest6);
@@ -98,7 +98,7 @@ public class HomeController {
         Permission pTest7 = new Permission();
         pTest7.setParentId(pTest1.getId());
         pTest7.setName("新闻管理");
-        pTest7.setPath("dist/admin/cms/news/index.html");
+        pTest7.setPath("cms/news/index.html");
         pTest7.setType(0);
         pTest7.setState(0);
         permissionDao.insert(pTest7);
@@ -106,7 +106,7 @@ public class HomeController {
         Permission pTest8 = new Permission();
         pTest8.setParentId(pTest1.getId());
         pTest8.setName("招聘信息");
-        pTest8.setPath("dist/admin/cms/job/index.html");
+        pTest8.setPath("cms/job/index.html");
         pTest8.setType(0);
         pTest8.setState(0);
         permissionDao.insert(pTest8);
@@ -114,7 +114,7 @@ public class HomeController {
         Permission pTest9 = new Permission();
         pTest9.setParentId(pTest1.getId());
         pTest9.setName("产品分类");
-        pTest9.setPath("dist/admin/cms/product/category/index.html");
+        pTest9.setPath("cms/product/category/index.html");
         pTest9.setType(0);
         pTest9.setState(0);
         permissionDao.insert(pTest9);
@@ -122,7 +122,7 @@ public class HomeController {
         Permission pTest10 = new Permission();
         pTest10.setParentId(pTest1.getId());
         pTest10.setName("产品管理");
-        pTest10.setPath("dist/admin/cms/product/index.html");
+        pTest10.setPath("cms/product/index.html");
         pTest10.setType(0);
         pTest10.setState(0);
         permissionDao.insert(pTest10);
@@ -137,7 +137,7 @@ public class HomeController {
         Permission pTest5 = new Permission();
         pTest5.setParentId(pTest2.getId());
         pTest5.setName("权限管理");
-        pTest5.setPath("dist/admin/system/permission/index.html");
+        pTest5.setPath("system/permission/index.html");
         pTest5.setType(0);
         pTest5.setState(0);
         permissionDao.insert(pTest5);

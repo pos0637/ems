@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="loginHtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<%=baseurl%>vendors/layui-treetable/layui/css/layui.css?version=<%=version%>"
+        media="all" />
+    <link rel="stylesheet" type="text/css" href="<%=baseurl%>vendors/layui.css?version=<%=version%>" media="all" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <script type="text/javascript" src="<%=baseurl%>vendors/layui-treetable/layui/layui.js?version=<%=version%>"></script>
+    <script type="text/javascript" src="<%=baseurl%>vendors/jquery/jquery-1.9.1.min.js"></script>
+    <title>登录</title>
+    <style rel="stylesheet" type="text/css" >
+        body {
+            overflow: hidden;
+        }
+
+        .loginHtml,
+        .loginBody {
+            height: 100%;
+        }
+
+        .loginBody {
+            background: url("../images/login_bg.jpg") no-repeat center center;
+        }
+
+        .imgCode {
+            position: relative;
+        }
+
+        #imgCode img {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            cursor: pointer;
+        }
+
+        .video-player {
+            background-color: transparent;
+            display: block;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+        }
+
+        .video_mask {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 90;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .login {
+            height: 300px;
+            width: 260px;
+            padding: 20px;
+            border-radius: 4px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -150px 0 0 -150px;
+            z-index: 99;
+        }
+
+        .login h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form_code {
+            position: relative;
+        }
+
+        .form_code .code {
+            position: absolute;
+            right: 0;
+            top: 1px;
+            cursor: pointer;
+        }
+
+        .login_btn {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bg-body"></div>
+    <div class="login">
+        <h1>后台管理系统</h1>
+        <form class="layui-form" id="form1">
+            <div class="layui-form-item">
+                <input class="layui-input" name="username" placeholder="用户名" lay-verify="required" type="text" autocomplete="off">
+            </div>
+            <div class="layui-form-item">
+                <input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password" autocomplete="off">
+            </div>
+            <!--
+            <div class="layui-form-item form_code">
+                <input class="layui-input" name="code" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">
+                <div class="code">
+                    <img src="${base}/genCaptcha" width="116" height="36" id="mycode">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <input type="checkbox" name="rememberMe" value="true" lay-skin="primary" checked title="记住帐号?">
+            </div>
+            -->
+            <button type="button" class="layui-btn login_btn" lay-filter="login" lay-submit lay-event="submit" url="api/v1/system/login" onSuccess="page.onLoginSuccess(result)"
+                onError="page.onLoginError(result)">登录</button>
+        </form>
+    </div>
+    <script type="text/javascript" src="<%=baseurl%>js/main.bundle.js?version=<%=version%>"></script>
+    <script type="text/javascript">
+        var page = {};
+        layui.use(['element', 'layer'], function () {
+            page.onLoginSuccess = function () {
+                location.replace('<%=baseurl%>index.html');
+            };
+
+            page.onLoginError = function () {
+                top.layer.msg('登录失败，请检查用户名和密码！', { icon: 2, time: 5000 });
+            };
+        });
+    </script>
+</body>
+
+</html>
