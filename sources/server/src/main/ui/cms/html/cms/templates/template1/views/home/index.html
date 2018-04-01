@@ -84,13 +84,13 @@
     <!-- 产品分类 -->
     <div class="layui-row row-center chapter">
         <ul style="text-align: center">
-            <li class="product" th:each="product, iterStat: ${productCategories}">
+            <li class="product" th:each="productCategory, iterStat: ${productCategories}">
                 <div class="icon">
-                    <a th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}">
+                    <a th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${productCategory.getObject().getId()} + '%22%7d%7d'}">
                         <div class="tile">
                             <div class="tile-primary-content">
                                 <div>
-                                    <img th:src="${@storageService.getUrl(#request, product.getObject().getIconPath())}" border="0">
+                                    <img th:src="${@storageService.getUrl(#request, productCategory.getObject().getIconPath())}" border="0">
                                 </div>
                             </div>
                             <div class="tile-secondary-content">
@@ -102,7 +102,7 @@
                         </div>
                     </a>
                 </div>
-                <a style="font-size: 16px" th:text="${product.getObject().getName()}" th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}"></a>
+                <a style="font-size: 16px" th:text="${productCategory.getObject().getName()}" th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${productCategory.getObject().getId()} + '%22%7d%7d'}"></a>
             </li>
         </ul>
     </div>
@@ -123,7 +123,7 @@
             <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709954.png" border="0" />
         </div>
         <div class="layui-row">
-            <ul>
+            <ul style="text-align: center">
                 <li class="product" th:each="product, iterStat: ${@productService.getRecommendProducts(15)}">
                     <div class="icon">
                         <a th:href="@{'/cms/home/product/detail?id=' + ${product.getId()}}">

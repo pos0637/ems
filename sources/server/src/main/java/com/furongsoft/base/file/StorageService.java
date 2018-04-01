@@ -48,7 +48,7 @@ public class StorageService {
         Attachment attachment = new Attachment("", "", "", 0, "", 0);
         attachmentDao.insert(attachment);
 
-        String fileName = file.getOriginalFilename();
+        String fileName = file.getOriginalFilename().toLowerCase();
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         String newName = attachment.getId() + suffixName;
 

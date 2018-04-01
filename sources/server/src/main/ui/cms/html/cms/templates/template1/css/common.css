@@ -281,6 +281,41 @@ body {
     margin-top: 20px;
 }
 
+.detail span.content {
+    font-size: 18px;
+}
+
+.detail .product {
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.detail .product div.icon {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 300px;
+    height: 400px;
+    border: 1px #cccccc solid;
+}
+
+.detail .product img {
+    width: 300px;
+}
+
+.detail .product a {
+    font-size: 14px;
+}
+
+/* 联系方式 */
+
+.contact {
+    font-size: 18px;
+    line-height: 36px;
+}
+
 /* 瓦片 */
 
 .tile {
