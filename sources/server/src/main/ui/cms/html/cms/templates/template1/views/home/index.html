@@ -84,7 +84,7 @@
     <!-- 产品分类 -->
     <div class="layui-row row-center chapter">
         <ul style="text-align: center">
-            <li class="product" th:each="product, iterStat: ${productCategories.getChildren().subList(0, 4)}">
+            <li class="product" th:each="product, iterStat: ${productCategories}">
                 <div class="icon">
                     <a th:href="@{'/cms/home/product#link=%7b%22level1%22:%7b%22filter%22:%22tabhost1%22,%22layid%22:%22' + ${product.getObject().getId()} + '%22%7d%7d'}">
                         <img th:src="${@storageService.getUrl(#request, product.getObject().getIconPath())}" border="0">

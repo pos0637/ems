@@ -1,14 +1,16 @@
 package com.furongsoft.ems.controllers.cms;
 
-import com.furongsoft.ems.entities.cms.Product;
+import com.furongsoft.base.entities.TreeNode;
+import com.furongsoft.ems.entities.cms.ProductCategory;
 import com.furongsoft.ems.services.cms.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * 首页控制器
@@ -47,7 +49,11 @@ public class CmsHomeController {
     public String index(Model model) {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("profiles", profileService.getProfiles());
-        model.addAttribute("productCategories", productCategoryService.getProductCategoriesTree(productCategoryService.getProductCategories()));
+
+        TreeNode<ProductCategory> tree = productCategoryService.getProductCategoriesTree(productCategoryService.getProductCategories());
+        List<TreeNode<ProductCategory>> productCategories = tree.getChildren().size() > 4 ? tree.getChildren().subList(0, 4) : tree.getChildren();
+        model.addAttribute("productCategories", productCategories);
+
         return "resources/cms/templates/template1/views/home/index.html";
     }
 
