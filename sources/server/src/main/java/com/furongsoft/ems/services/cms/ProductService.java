@@ -84,6 +84,23 @@ public class ProductService extends BaseService<Product> {
     }
 
     /**
+     * 获取产品，上一条与下一条产品
+     *
+     * @param id 产品索引
+     * @throws BaseException 异常
+     */
+    public Product[] getPrevAndNext(Serializable id) throws BaseException {
+        Product[] products = new Product[3];
+        Product product = productDao.selectProduct(id);
+        Long rank = productDao.selectProductRank(product.getCategoryId(), product.getId());
+        products[0] = productDao.selectProductByRank(product.getCategoryId(), rank - 1);
+        products[1] = product;
+        products[2] = productDao.selectProductByRank(product.getCategoryId(), rank + 1);
+
+        return products;
+    }
+
+    /**
      * 新增产品
      *
      * @param product 产品

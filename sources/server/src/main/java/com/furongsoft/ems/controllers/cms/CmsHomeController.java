@@ -81,6 +81,7 @@ public class CmsHomeController {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("product", productService.get(id));
         model.addAttribute("productCategories", productCategoryService.getProductCategoriesTree(productCategoryService.getProductCategories()));
+        model.addAttribute("products", productService.getPrevAndNext(id));
         return "resources/cms/templates/template1/views/product/detail.html";
     }
 

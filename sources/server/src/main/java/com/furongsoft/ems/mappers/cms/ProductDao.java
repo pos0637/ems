@@ -76,6 +76,56 @@ public interface ProductDao extends BaseMapper<Product> {
         }
 
         /**
+         * 根据索引获取产品序号
+         *
+         * @param param 参数列表
+         * @return SQL语句
+         */
+        public String selectProductRank(final Map<String, Object> param) {
+            String productTableName = Product.class.getAnnotation(Table.class).name();
+
+            return String.format("SELECT \n" +
+                            "    t2.rank\n" +
+                            "FROM\n" +
+                            "    (SELECT \n" +
+                            "        @rownum := @rownum + 1 AS rank, t1.id\n" +
+                            "    FROM\n" +
+                            "        %s t1, (SELECT @rownum := 0) r\n" +
+                            "    WHERE\n" +
+                            "        t1.category_id = '%s') t2\n" +
+                            "WHERE\n" +
+                            "    t2.id = '%s'",
+                    productTableName,
+                    param.get("categoryId").toString(),
+                    param.get("id").toString());
+        }
+
+        /**
+         * 根据序号获取产品
+         *
+         * @param param 参数列表
+         * @return SQL语句
+         */
+        public String selectProductByRank(final Map<String, Object> param) {
+            String productTableName = Product.class.getAnnotation(Table.class).name();
+
+            return String.format("SELECT \n" +
+                            "    t2.*\n" +
+                            "FROM\n" +
+                            "    (SELECT \n" +
+                            "        @rownum := @rownum + 1 AS rank, t1.*\n" +
+                            "    FROM\n" +
+                            "        %s t1, (SELECT @rownum := 0) r\n" +
+                            "    WHERE\n" +
+                            "        t1.category_id = '%s') t2\n" +
+                            "WHERE\n" +
+                            "    t2.rank = %d",
+                    productTableName,
+                    param.get("categoryId").toString(),
+                    param.get("rank"));
+        }
+
+        /**
          * 获取推荐产品列表
          *
          * @param param 参数列表
@@ -114,7 +164,7 @@ public interface ProductDao extends BaseMapper<Product> {
      *
      * @param page       分页对象
      * @param categoryId 分类索引
-     * @param name       资源名称
+     * @param name       产品名称
      * @param sortField  排序字段
      * @param sortType   排序类型
      * @return 产品列表
@@ -126,7 +176,7 @@ public interface ProductDao extends BaseMapper<Product> {
      * 获取所有产品
      *
      * @param categoryId 分类索引
-     * @param name       资源名称
+     * @param name       产品名称
      * @param sortField  排序字段
      * @param sortType   排序类型
      * @return 产品列表
@@ -151,6 +201,26 @@ public interface ProductDao extends BaseMapper<Product> {
      */
     @SelectProvider(type = DaoProvider.class, method = "selectProductById")
     Product selectProduct(@Param("id") Serializable id);
+
+    /**
+     * 根据索引获取产品序号
+     *
+     * @param categoryId 分类索引
+     * @param id         产品索引
+     * @return 产品序号
+     */
+    @SelectProvider(type = DaoProvider.class, method = "selectProductRank")
+    Long selectProductRank(@Param("categoryId") Serializable categoryId, @Param("id") Serializable id);
+
+    /**
+     * 根据序号获取产品
+     *
+     * @param categoryId 分类索引
+     * @param rank       序号
+     * @return 产品
+     */
+    @SelectProvider(type = DaoProvider.class, method = "selectProductByRank")
+    Product selectProductByRank(@Param("categoryId") Serializable categoryId, @Param("rank") Long rank);
 
     /**
      * 删除指定产品分类的产品
