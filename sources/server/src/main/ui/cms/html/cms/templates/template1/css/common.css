@@ -1,8 +1,15 @@
 html,
 body {
+    min-width: 900px;
     height: 100%;
+    margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+p, span, a {
+    font-family: 微软雅黑, Arial;
+    font-size: 15px;
 }
 
 .row-center {
@@ -32,39 +39,46 @@ body {
     margin-right: 40px;
 }
 
+/* 内容 */
+
+.content {
+    min-height: 100%;
+    margin: 0 auto -220px;
+}
+
+.content-push {
+    width: 100%;
+    height: 220px;
+}
+
 /* 底部栏 */
 
 .bottom-bar {
+    padding: 10px 0;
     background-color: #1c4587;
     width: 100%;
     min-height: 10px;
     height: 200px;
-    position: relative;
-}
-
-.bottom-bar div {
-    width: 100%;
     text-align: center;
 }
 
-.bottom-bar div span.company-name {
+.bottom-bar div.barcode {
+    display: inline-block;
+    width: 150px;
+    height: 100%;
+}
+
+.bottom-bar span.company-name {
     color: #ffffff;
     font-size: 22px;
     line-height: 30px;
 }
 
-.bottom-bar div span {
+.bottom-bar span {
     color: #cccccc;
     font-size: 13px;
     line-height: 18px;
     margin-right: 20px;
-}
-
-.bottom-bar div.barcode {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: table;
 }
 
 /* LOGO */
@@ -91,8 +105,11 @@ body {
     width: 130px;
     height: 40px;
     line-height: 40px;
-    font-size: 16px;
     display: table-cell;
+}
+
+.header-nav li > a {
+    font-size: 16px;
 }
 
 .header-nav li.active {
@@ -150,7 +167,7 @@ body {
 
 .welcome div button span {
     color: #ffffff;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 32px;
 }
 
@@ -171,7 +188,7 @@ body {
 }
 
 .chapter span.text {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 32px;
     color: #434343;
     background-color: #FFFFFF;
@@ -211,7 +228,7 @@ body {
 }
 
 .tabhost span {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 /* 招聘文本 */
@@ -260,7 +277,7 @@ body {
 }
 
 .product a {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 /* 详情 */
@@ -276,8 +293,11 @@ body {
 
 .detail div.title {
     text-align: center;
-    font-size: 24px;
     margin-top: 20px;
+}
+
+.detail div.title > span {
+    font-size: 24px;
 }
 
 .detail span.content {
@@ -295,8 +315,8 @@ body {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    width: 300px;
-    height: 400px;
+    width: 250px;
+    height: 300px;
     border: 1px #cccccc solid;
 }
 
@@ -323,7 +343,7 @@ body {
     height: 200px;
 }
 
-.tile:hover > .tile-secondary-content {
+.tile:hover>.tile-secondary-content {
     opacity: 0.5;
 }
 

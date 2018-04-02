@@ -1,5 +1,9 @@
 server:
   port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css,image/webp,image/apng,image/png,image/jpeg
+    min-response-size: 2048
 
 spring:
   datasource:
