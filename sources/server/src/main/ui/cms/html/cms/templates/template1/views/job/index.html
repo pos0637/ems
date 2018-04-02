@@ -129,7 +129,9 @@
 <!-- 底部栏 -->
 <div class="layui-row bottom-bar">
     <div class="barcode">
-        <img th:src="${@storageService.getUrl(#request, company.getBarcodePath())}" border="0" width="100%"/>
+        <div style="display: table-cell; vertical-align: middle">
+            <img th:src="${@storageService.getUrl(#request, company.getBarcodePath())}" style="margin-left: -900px" border="0" width="130" height="130" />
+        </div>
     </div>
     <div style="position: relative; padding-top: 60px">
         <span class="company-name" th:utext="${company.getName()}">XXXX有限公司</span>
