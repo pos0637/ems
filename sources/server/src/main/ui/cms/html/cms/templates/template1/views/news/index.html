@@ -120,14 +120,14 @@
                                 </div>
                                 <div class="layui-col-md9" style="text-align: left">
                                     <div class="layui-row">
-                                        <a style="font-size: 20px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
+                                        <a style="font-size: 16px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
                                     </div>
                                     <div class="layui-row" style="padding-top: 10px">
                                         <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM-dd HH:mm')}"></span>
                                     </div>
                                     <div class="layui-row" style="padding-top: 10px">
                                         <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
-                                            <span th:text="${news.getDescription()}"></span>
+                                            <span th:utext="${news.getDescription()}"></span>
                                         </a>
                                     </div>
                                 </div>
