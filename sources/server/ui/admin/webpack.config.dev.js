@@ -1,7 +1,7 @@
 var path = require('path');
 var params = require('./package.json');
 var copyWebpackPlugin = require('copy-webpack-plugin');
-var outputPath = '../../resources/static/resources/cms/';
+var outputPath = '../../resources/admin/';
 
 module.exports = {
     entry: {
@@ -23,7 +23,7 @@ module.exports = {
     },
     plugins: [
         new copyWebpackPlugin([{
-            from: path.resolve(__dirname, 'html/cms'),
+            from: path.resolve(__dirname, 'html/admin'),
             to: path.resolve(__dirname, outputPath),
             type: 'dir',
             transform(content) {

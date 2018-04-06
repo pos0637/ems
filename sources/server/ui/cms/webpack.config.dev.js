@@ -1,7 +1,7 @@
 var path = require('path');
 var params = require('./package.json');
 var copyWebpackPlugin = require('copy-webpack-plugin');
-var outputPath = '../../resources/static/resources/admin/';
+var outputPath = '../../resources/cms/';
 
 module.exports = {
     entry: {
@@ -18,17 +18,12 @@ module.exports = {
                 loader: 'babel-loader',
                 include: path.resolve(__dirname, 'src'),
                 exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'html')]
-            },
-            {
-                test: /\.js$/,
-                loaders: ['es3ify-loader'],
-                enforce: 'post'
             }
         ]
     },
     plugins: [
         new copyWebpackPlugin([{
-            from: path.resolve(__dirname, 'html/admin'),
+            from: path.resolve(__dirname, 'html/cms'),
             to: path.resolve(__dirname, outputPath),
             type: 'dir',
             transform(content) {

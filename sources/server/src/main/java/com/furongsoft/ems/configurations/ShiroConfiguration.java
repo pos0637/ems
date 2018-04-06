@@ -8,6 +8,7 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,12 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfiguration {
+    @Value("${resources.url}")
+    private String resourcesUrl;
+
+    @Value("${upload.url}")
+    private String uploadUrl;
+
     @Bean
     public SecurityManager securityManager(MyRealm myRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -45,23 +52,32 @@ public class ShiroConfiguration {
 
         // 过滤器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        // 静态资源 src/main/resources/static/resources/**
-        filterChainDefinitionMap.put("/resources/**", "anon");
+
+        // 静态资源
+        filterChainDefinitionMap.put(resourcesUrl + "/**", "anon");
+        // 附件资源
+        filterChainDefinitionMap.put(uploadUrl + "/**", "anon");
+        // 数据库连接池监控
         filterChainDefinitionMap.put("/druid/**", "anon");
+        // 首页
         filterChainDefinitionMap.put("/home/**", "anon");
+        // CMS
         filterChainDefinitionMap.put("/cms/**", "anon");
+        // 后台管理系统
         filterChainDefinitionMap.put("/admin/**", "anon");
 
-        // TODO: change to authc
-        filterChainDefinitionMap.put("/file/**", "cors, anon");
-        // 附件资源 src/main/resources/static/attachment/**
-        filterChainDefinitionMap.put("/attachment/**", "anon");
-
+        // 文件上传
+        filterChainDefinitionMap.put("/file/**", "cors, authc");
+        // RESTful API
         // filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
-        filterChainDefinitionMap.put("/api/v1/system/login", "cors, anon");
         filterChainDefinitionMap.put("/api/**", "cors");
-        filterChainDefinitionMap.put("/**", "authc");
+
+        // 登录
+        filterChainDefinitionMap.put("/api/v1/system/login", "cors, anon");
+        // 注销
         filterChainDefinitionMap.put("/security/logout", "logout");
+        // 默认
+        filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setLoginUrl("/ui/build/index.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");

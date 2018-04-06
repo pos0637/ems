@@ -17,7 +17,7 @@ $.config = {
             port: '8080',
             application: '',
             path: '',
-            uploadPath: 'attachment/'
+            uploadPath: 'attachments/'
         },
         response: {
             statusName: 'code',

@@ -12,6 +12,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
+    @Value("${resources.url}")
+    private String resourcesUrl;
+
+    @Value("${resources.path}")
+    private String resouresPath;
+
     @Value("${upload.url}")
     private String uploadUrl;
 
@@ -20,6 +26,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(resourcesUrl + "/**").addResourceLocations("file:" + resouresPath + "/");
         registry.addResourceHandler(uploadUrl + "/**").addResourceLocations("file:" + uploadPath + "/");
     }
 }

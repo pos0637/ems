@@ -65,7 +65,7 @@ spring:
     check-template-location: true
     enabled: true
     encoding: utf-8
-    prefix: classpath:/static/
+    prefix: file:./
     suffix: .html
     servlet:
       content-type: text/html
@@ -95,9 +95,17 @@ mybatis-plus:
     # 配置JdbcTypeForNull
     jdbc-type-for-null: 'null'
 
+resources:
+  # 资源访问URL
+  url: /resources
+  # 资源路径
+  path: ./resources
+
 upload:
-  url: /attachment
-  path: ./attachment
+  # 附件访问URL
+  url: /attachments
+  # 附件路径
+  path: ./attachments
 
 logging:
   path: ./logs
