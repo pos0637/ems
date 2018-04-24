@@ -72,6 +72,8 @@ public class ShiroConfiguration {
         // filterChainDefinitionMap.put("/api/**", "noSessionCreation, jwt");
         filterChainDefinitionMap.put("/api/**", "cors");
 
+        // 首页
+        filterChainDefinitionMap.put("/", "anon");
         // 登录
         filterChainDefinitionMap.put("/api/v1/system/login", "cors, anon");
         // 注销

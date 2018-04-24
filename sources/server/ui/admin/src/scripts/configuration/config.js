@@ -7,14 +7,14 @@ $.config = {
         view: {
             scheme: 'http',
             host: 'localhost',
-            port: '8080',
+            port: '80',
             application: '',
             path: 'resources/admin/'
         },
         server: {
             scheme: 'http',
             host: 'localhost',
-            port: '8080',
+            port: '80',
             application: '',
             path: '',
             uploadPath: 'attachments/'

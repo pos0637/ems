@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "baseurl": "http://localhost:8080/resources/admin/",
+  "baseurl": "http://localhost:80/resources/admin/",
   "scripts": {
     "start": "webpack-dev-server --inline --host localhost --port 8000 --hot --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js --progress --display-reasons --colors",

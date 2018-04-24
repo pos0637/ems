@@ -1,6 +1,5 @@
 package com.furongsoft.ems.controllers;
 
-import com.alibaba.fastjson.JSON;
 import com.furongsoft.base.rbac.entities.Permission;
 import com.furongsoft.base.rbac.entities.User;
 import com.furongsoft.base.rbac.mappers.PermissionDao;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-
 import static com.furongsoft.base.rbac.security.PasswordHelper.encryptPassword;
 
 /**
@@ -22,8 +19,6 @@ import static com.furongsoft.base.rbac.security.PasswordHelper.encryptPassword;
  * @author Alex
  */
 @Controller
-@ResponseBody
-@RequestMapping("/home")
 public class HomeController {
     private final UserDao userDao;
     private final PermissionDao permissionDao;
@@ -36,14 +31,13 @@ public class HomeController {
         this.companyDao = companyDao;
     }
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public String index() {
-        List<User> list = userDao.selectList(null);
-
-        return "Hello, world! " + JSON.toJSONString(list);
+        return "forward:/cms/home/index";
     }
 
-    @RequestMapping("/init")
+    @RequestMapping("/home/init")
+    @ResponseBody
     public String initialize() {
         User user = new User();
         user.setUserName("admin");
