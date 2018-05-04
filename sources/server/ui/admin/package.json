@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "baseurl": "http://localhost:80/resources/admin/",
+  "basepath": "/resources/cms/",
   "scripts": {
     "start": "webpack-dev-server --inline --host localhost --port 8000 --hot --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js --progress --display-reasons --colors",

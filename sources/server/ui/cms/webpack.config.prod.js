@@ -34,6 +34,7 @@ module.exports = {
             transform(content) {
                 content = content.toString();
                 content = content.replace(/<%=\s*baseurl\s*%>/g, params.baseurl);
+                content = content.replace(/<%=\s*basepath\s*%>/g, params.basepath);
                 content = content.replace(/<%=\s*version\s*%>/g, params.version);
                 return new Buffer(content, 'UTF-8');
             }
