@@ -7,7 +7,9 @@ body {
     overflow-y: auto;
 }
 
-p, span, a {
+p,
+span,
+a {
     font-family: 微软雅黑, Arial;
     font-size: 15px;
 }
@@ -108,7 +110,7 @@ p, span, a {
     display: table-cell;
 }
 
-.header-nav li > a {
+.header-nav li>a {
     font-size: 16px;
 }
 
@@ -145,6 +147,7 @@ p, span, a {
     height: 400px;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position-x: 50%;
     position: relative;
 }
 
@@ -296,7 +299,7 @@ p, span, a {
     margin-top: 20px;
 }
 
-.detail div.title > span {
+.detail div.title>span {
     font-size: 24px;
 }
 
@@ -345,6 +348,7 @@ p, span, a {
 
 .tile:hover>.tile-secondary-content {
     opacity: 0.5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 
 .tile-primary-content {
@@ -352,6 +356,7 @@ p, span, a {
     width: 100%;
     height: 100%;
     opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     display: table;
 }
 
@@ -368,6 +373,7 @@ p, span, a {
     color: white;
     background: black;
     opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     display: table;
 }
 
