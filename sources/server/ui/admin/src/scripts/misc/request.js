@@ -55,6 +55,7 @@ export default class Request {
             async: true,
             data: this.params,
             dataType: 'json',
+            cache: false,
             xhrFields: {
                 withCredentials: true
             },
