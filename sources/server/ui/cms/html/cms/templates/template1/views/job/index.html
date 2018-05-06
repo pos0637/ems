@@ -69,7 +69,7 @@
 
         <!-- 欢迎栏 -->
         <div class="layui-row">
-            <div class="welcome" style="background-image:url(http://y.hy755.cn/7344/diy/pics/20170722/1500708981.jpg)">
+            <div class="welcome" style="background-image:url(<%=basepath%>templates/template1/resources/welcome_default.jpg)">
                 <div style="position: relative; padding-top: 80px">
                     <span class="big" th:utext="${company.getSlogan1()}"></span>
                 </div>
@@ -102,7 +102,7 @@
                             <strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>
                             <strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong>
                         </strong>
-                        <span style="line-height:1.5;"></span>
+                        <span style="line-height:1.5"></span>
                     </p>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                         <p th:utext="${jobs.get(i - 1).getInformation()}"></p>
                     </div>
                     <div class="layui-col-md1">
-                        <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500711764.png" border="0" width="34px">
+                        <img src="<%=basepath%>templates/template1/resources/vertical-line.png" border="0" width="34px">
                     </div>
                     <div class="layui-col-md4 job">
                         <span class="title">

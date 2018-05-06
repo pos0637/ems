@@ -70,7 +70,7 @@
 
         <!-- 欢迎栏 -->
         <div class="layui-row">
-            <div class="welcome" style="background-image:url(http://y.hy755.cn/7344/diy/pics/20170722/1500708981.jpg)">
+            <div class="welcome" style="background-image:url(<%=basepath%>templates/template1/resources/welcome_default.jpg)">
                 <div style="position: relative; padding-top: 80px">
                     <span class="big" th:utext="${company.getSlogan1()}"></span>
                 </div>
@@ -114,7 +114,7 @@
         <!-- 公司简介 -->
         <div class="layui-row row-center chapter">
             <div class="layui-row logo">
-                <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709774.png" border="0" />
+                <img src="<%=basepath%>templates/template1/resources/company_introduction.png" border="0" />
             </div>
             <div class="layui-row">
                 <span th:utext="${company.getInformation()}"></span>
@@ -124,7 +124,7 @@
         <!-- 产品中心 -->
         <div class="layui-row row-center chapter chapter-dark">
             <div class="layui-row logo">
-                <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500709954.png" border="0" />
+                <img src="<%=basepath%>templates/template1/resources/product_center.png" border="0" />
             </div>
             <div class="layui-row">
                 <ul style="text-align: center">
@@ -141,32 +141,37 @@
         </div>
 
         <!-- 新闻中心 -->
-        <!--
         <div class="layui-row row-center chapter">
+            <div class="layui-row logo">
+                <img src="<%=basepath%>templates/template1/resources/company_news.png" border="0" />
+            </div>
             <div class="layui-row">
                 <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNews(6)}">
-                    <div class="layui-col-md3">
-                        <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM-dd HH:mm')}"></span>
-                    </div>
-                    <div class="layui-col-md9" style="text-align: left">
-                        <div class="layui-row">
-                            <a style="font-size: 20px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
-                        </div>                    
-                        <div class="layui-row" style="padding-top: 10px">
-                            <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
-                                <span th:text="${news.getDescription()}"></span>
-                            </a>
+                    <div class="layui-row">
+                        <div class="news-datetime" style="float: left">
+                            <span class="day" th:text="${#dates.format(news.getLastModifyTime(), 'dd')}"></span>
+                            <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM')}"></span>
+                        </div>
+                        <div style="text-align: left; float: left; margin-left: 10px">
+                            <div class="layui-row">
+                                <a style="font-size: 16px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
+                            </div>
+                            <div class="layui-row" style="padding-top: 20px">
+                                <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
+                                    <span th:utext="${news.getDescription()}"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    <hr/>
                 </div>
             </div>
         </div>
-        -->
 
         <!-- 荣誉资质 -->
         <div class="layui-row row-center chapter">
             <div class="layui-row logo">
-                <img src="http://y.hy755.cn/7344/diy/pics/20170722/1500710434.png" border="0">
+                <img src="<%=basepath%>templates/template1/resources/company_profile.png" border="0">
             </div>
             <div class="layui-row">
                 <div id="marquee1" class="marquee" style="height: 230px">

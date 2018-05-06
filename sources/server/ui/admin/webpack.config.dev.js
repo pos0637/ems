@@ -26,7 +26,10 @@ module.exports = {
             from: path.resolve(__dirname, 'html/admin'),
             to: path.resolve(__dirname, outputPath),
             type: 'dir',
-            transform(content) {
+            transform(content, path) {
+                if (!path.endsWith('.html'))
+                    return content;
+
                 content = content.toString();
                 content = content.replace(/<%=\s*baseurl\s*%>/g, params.baseurl);
                 content = content.replace(/<%=\s*basepath\s*%>/g, params.basepath);
