@@ -146,29 +146,37 @@
                 <img src="<%=basepath%>templates/template1/resources/company_news.png" border="0" />
             </div>
             <div class="layui-row">
-                <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNews(6)}">
-                    <div class="layui-row">
-                        <div class="news-datetime" style="float: left">
-                            <span class="day" th:text="${#dates.format(news.getLastModifyTime(), 'dd')}"></span>
-                            <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM')}"></span>
-                        </div>
-                        <div style="text-align: left; float: left; margin-left: 10px">
-                            <div class="layui-row">
-                                <a style="font-size: 16px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
-                            </div>
-                            <div class="layui-row" style="padding-top: 20px">
-                                <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
-                                    <span th:utext="${news.getDescription()}"></span>
-                                </a>
-                            </div>
-                        </div>
+                <div class="layui-col-md3" style="overflow: hidden">
+                    <div>
+                        <img src="<%=basepath%>templates/template1/resources/company_news_logo.png" border="0" width="100%" />
                     </div>
-                    <hr/>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row" style="padding-top: 10px" th:each="news, iterStat: ${@newsService.getNews(6)}">
+                        <div class="layui-row">
+                            <div class="news-datetime" style="float: left; margin-left: 20px">
+                                <span class="day" th:text="${#dates.format(news.getLastModifyTime(), 'dd')}"></span>
+                                <span th:text="${#dates.format(news.getLastModifyTime(), 'yyyy-MM')}"></span>
+                            </div>
+                            <div style="text-align: left; float: left; margin-left: 10px">
+                                <div class="layui-row">
+                                    <a style="font-size: 16px" th:text="${news.getName()}" th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}"></a>
+                                </div>
+                                <div class="layui-row" style="padding-top: 20px">
+                                    <a th:href="@{'/cms/home/news/detail?id=' + ${news.getId()}}">
+                                        <span th:utext="${news.getDescription()}"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- 荣誉资质 -->
+        <!--
         <div class="layui-row row-center chapter">
             <div class="layui-row logo">
                 <img src="<%=basepath%>templates/template1/resources/company_profile.png" border="0">
@@ -183,6 +191,7 @@
                 </div>
             </div>
         </div>
+        -->
 
         <div class="content-push"></div>
     </div>
