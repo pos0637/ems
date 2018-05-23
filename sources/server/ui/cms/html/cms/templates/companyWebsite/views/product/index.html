@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="<%=basepath%>vendors/layui-treetable/layui/css/layui.css?version=<%=version%>"
+        media="all" />
+    <link rel="stylesheet" type="text/css" href="<%=basepath%>templates/companyWebsite/css/common.css?version=<%=version%>" media="all"
+    />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="<%=basepath%>vendors/css3-mediaqueries/css3-mediaqueries.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="<%=basepath%>vendors/layui-treetable/layui/layui.js?version=<%=version%>"></script>
+    <script type="text/javascript" src="<%=basepath%>vendors/jquery/jquery-1.9.1.min.js"></script>
+    <title>产品中心</title>
+</head>
+
+<body>
+    <div class="content">
+        <!-- 头部栏 -->
+        <div class="layui-row top-bar">
+            <div>
+                <span th:utext="'服务热线：' + ${company.getPhone()}"></span>
+                <span th:utext="'Email：' + ${company.getEmail()}"></span>
+            </div>
+        </div>
+
+        <!-- 导航条 -->
+        <div class="layui-row row-center">
+            <div class="layui-col-md4" style="overflow: hidden">
+                <!-- LOGO -->
+                <div class="logo">
+                    <img th:src="${@storageService.getUrl(#request, company.getLogoPath())}" border="0" width="100%" />
+                </div>
+            </div>
+            <div class="layui-col-md8">
+                <div style="height: 60px">
+                    <!-- 选项卡 -->
+                    <ul class="header-nav">
+                        <li>
+                            <a href="/cms/companyWebsite/index" class="list" title="网站首页">网站首页</a>
+                        </li>
+                        <li>
+                            <a href="/cms/companyWebsite/about" class="list" title="关于我们">关于我们</a>
+                        </li>
+                        <li>
+                            <a href="/cms/companyWebsite/news" class="list" title="新闻动态">新闻动态</a>
+                        </li>
+                        <li class="active">
+                            <a href="/cms/companyWebsite/product" class="list" title="产品中心">产品中心</a>
+                        </li>
+                        <li>
+                            <a href="/cms/companyWebsite/job" class="list" title="招贤纳士">招贤纳士</a>
+                        </li>
+                        <li>
+                            <a href="/cms/companyWebsite/contact" class="list" title="联系我们">联系我们</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 欢迎栏 -->
+        <div class="layui-row">
+            <div class="welcome" style="background-image:url(<%=basepath%>templates/companyWebsite/resources/welcome_default.jpg)">
+                <div style="position: relative; padding-top: 80px">
+                    <span class="big" th:utext="${company.getSlogan1()}"></span>
+                </div>
+                <div style="position: relative; padding-top: 10px">
+                    <span th:utext="${company.getSlogan2()}"></span>
+                </div>
+                <div style="position: relative; padding-top: 100px">
+                    <button class="layui-btn layui-btn-lg layui-btn-radius" onclick="window.location.href='/cms/companyWebsite/product'">
+                        <span>产品中心</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品中心 -->
+        <div class="layui-row row-center chapter">
+            <div class="layui-row" style="height: 20px">
+            </div>
+            <div class="layui-row">
+                <div>
+                    <p style="text-align:center;">
+                        <span style="color:#073763;">
+                            <span style="font-size:24px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">
+                                <strong>产品中心</strong>
+                            </span>
+                        </span>
+                    </p>
+                    <p style="text-align:center;">
+                        <strong style="color:#073763; font-size:16px; letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">—————— &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Products center
+                            <strong style="text-align:center;white-space:normal;color:#073763;font-family:Arial, Helvetica, sans-serif;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>
+                            <strong style="text-align:center;white-space:normal;color:#073763;font-size:16px;letter-spacing:-1px;line-height:22.4px;background-color:#FFFFFF;">——————</strong>
+                        </strong>
+                        <span style="line-height:1.5;"></span>
+                    </p>
+                </div>
+            </div>
+            <!--
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief tabhost" lay-filter="tabhost1">
+                <ul class="layui-tab-title">
+                    <li th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:attr="class=${iterStat.first? 'layui-this': null}, lay-id=${productCategory1.getObject().getId()}, level=1">
+                        <span th:text="${productCategory1.getObject().getName()}"></span>
+                    </li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item" th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:classappend="${iterStat.first? 'layui-show': null}">
+                        <div class="layui-row" style="padding-top: 10px">
+                            <div class="layui-tab layui-tab-brief tabhost" th:attr="lay-filter='tabhost2' + ${iterStat.index}">
+                                <ul class="layui-tab-title">
+                                    <li th:each="productCategory2, iterStat: ${productCategory1.getChildren()}" th:attr="class=${iterStat.first? 'layui-this': null}, lay-id=${productCategory2.getObject().getId()}, level=2">
+                                        <span th:text="${productCategory2.getObject().getName()}"></span>
+                                    </li>
+                                </ul>
+                                <div class="layui-tab-content">
+                                    <div class="layui-tab-item" th:each="productCategory2, iterStat: ${productCategory1.getChildren()}" th:classappend="${iterStat.first? 'layui-show': null}">
+                                        <div class="layui-row" style="padding-top: 10px">
+                                            <ul style="text-align: left">
+                                                <li class="product" th:each="product, iterStat: ${@productService.getProducts(productCategory2.getObject().getId())}">
+                                                    <a th:href="@{'/cms/companyWebsite/product/detail?id=' + ${product.getId()}}">
+                                                        <div class="icon">
+                                                            <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
+                                                        </div>
+                                                    </a>
+                                                    <a style="font-size: 20px" th:text="${product.getName()}" th:href="@{'/cms/companyWebsite/product/detail?id=' + ${product.getId()}}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+            <div class="layui-row" style="padding-top: 20px">
+                <div class="layui-tab layui-tab-brief tabhost" lay-filter="tabhost1">
+                    <ul class="layui-tab-title">
+                        <li th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:attr="class=${iterStat.first? 'layui-this': null}, lay-id=${productCategory1.getObject().getId()}, level=1">
+                            <span th:text="${productCategory1.getObject().getName()}"></span>
+                        </li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item" th:each="productCategory1, iterStat: ${productCategories.getChildren()}" th:classappend="${iterStat.first? 'layui-show': null}">
+                            <div class="layui-row" style="padding-top: 10px">
+                                <ul style="text-align: left">
+                                    <li class="product" th:each="product, iterStat: ${@productService.getProducts(productCategory1.getObject().getId())}">
+                                        <div class="icon">
+                                            <a th:href="@{'/cms/companyWebsite/product/detail?id=' + ${product.getId()}}">
+                                                <img th:src="${@storageService.getUrl(#request, product.getIconPath())}" border="0">
+                                            </a>
+                                        </div>
+                                        <a th:text="${product.getName()}" th:href="@{'/cms/companyWebsite/product/detail?id=' + ${product.getId()}}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-push"></div>
+    </div>
+
+    <!-- 底部栏 -->
+    <div class="layui-row bottom-bar">
+        <div class="barcode">
+            <div style="display: table; height: 100%">
+                <div style="display: table-cell; vertical-align: middle">
+                    <img th:src="${@storageService.getUrl(#request, company.getBarcodePath())}" border="0" width="130" height="130" />
+                </div>
+            </div>
+        </div>
+        <div style="display: inline-block; height: 100%">
+            <div style="display: table; height: 100%">
+                <div style="display: table-cell; vertical-align: middle">
+                    <div style="position: relative">
+                        <span class="company-name" th:utext="${company.getName()}"></span>
+                    </div>
+                    <div style="position: relative; padding-top: 20px">
+                        <span th:utext="'服务热线：' + ${company.getPhone()}"></span>
+                        <span th:utext="'Email：' + ${company.getEmail()}"></span>
+                        <span th:utext="'地址：' + ${company.getAddress()}"></span>
+                    </div>
+                    <div style="position: relative">
+                        <span th:utext="'copyright ' + ${company.getCopyright()}"></span>
+                        <span th:utext="${company.getCredential()}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="barcode">
+        </div>
+    </div>
+
+    <!-- 脚本 -->
+    <script type="text/javascript">
+        var hash = {};
+        try { hash = JSON.parse(decodeURI(location.hash.replace(/^#link=/, ''))); } catch (e) { }
+
+        layui.use(['element'], function () {
+            $('.layui-tab').each(function () {
+                var filter = $(this).attr('lay-filter');
+                layui.element.on('tab(' + filter + ')', function () {
+                    var level = this.getAttribute('level');
+                    if (level === "1")
+                        hash.level1 = { filter: filter, layid: this.getAttribute('lay-id') };
+                    else
+                        hash.level2 = { filter: filter, layid: this.getAttribute('lay-id') };
+
+                    location.hash = 'link=' + JSON.stringify(hash);
+                });
+            });
+
+            if (hash.level1)
+                layui.element.tabChange(hash.level1.filter, hash.level1.layid);
+            if (hash.level2)
+                layui.element.tabChange(hash.level2.filter, hash.level2.layid);
+        });
+    </script>
+</body>
+
+</html>

@@ -12,11 +12,11 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<%=baseurl%>vendors/layui-treetable/layui/css/layui.css?version=<%=version%>"
+    <link rel="stylesheet" type="text/css" href="<%=basepath%>vendors/layui-treetable/layui/css/layui.css?version=<%=version%>"
         media="all" />
-    <link rel="stylesheet" type="text/css" href="<%=baseurl%>vendors/layui.css?version=<%=version%>" media="all" />
+    <link rel="stylesheet" type="text/css" href="<%=basepath%>vendors/layui.css?version=<%=version%>" media="all" />
     <script type="text/javascript" src="https://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <script type="text/javascript" src="<%=baseurl%>vendors/layui-treetable/layui/layui.js?version=<%=version%>"></script>
+    <script type="text/javascript" src="<%=basepath%>vendors/layui-treetable/layui/layui.js?version=<%=version%>"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <title></title>
 </head>
@@ -24,7 +24,7 @@
 <body>
     <div class="layui-form-query" id="actionbar1">
         <div class="layui-col-md12">
-            <button class="layui-btn" lay-event="create" url="<%=baseurl%>system/permission/add.html" topWidth="800px" topHeight="500px"
+            <button class="layui-btn" lay-event="create" url="<%=basepath%>system/permission/add.html" topWidth="800px" topHeight="500px"
                 topTitle="新增根菜单">
                 <i class="layui-icon">&#xe654;</i>新增根菜单
             </button>
@@ -44,12 +44,12 @@
         {{ d.type === 0 ? '模块' : '数据' }}
     </script>
     <script type="text/html" id="bar1">
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="create" url="<%=baseurl%>system/permission/add.html?parentId={{d.id}}" topWidth="800px" topHeight="500px" topTitle="添加子菜单">添加子菜单</a>
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open" url="<%=baseurl%>system/permission/edit.html?id={{d.id}}&readonly=true" topWidth="800px" topHeight="500px" topTitle="查看">查看</a>
-            <a class="layui-btn layui-btn-xs" lay-event="edit" url="<%=baseurl%>system/permission/edit.html?id={{d.id}}" topWidth="800px" topHeight="500px" topTitle="编辑">编辑</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="create" url="<%=basepath%>system/permission/add.html?parentId={{d.id}}" topWidth="800px" topHeight="500px" topTitle="添加子菜单">添加子菜单</a>
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="open" url="<%=basepath%>system/permission/edit.html?id={{d.id}}&readonly=true" topWidth="800px" topHeight="500px" topTitle="查看">查看</a>
+            <a class="layui-btn layui-btn-xs" lay-event="edit" url="<%=basepath%>system/permission/edit.html?id={{d.id}}" topWidth="800px" topHeight="500px" topTitle="编辑">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" url="api/v1/system/permissions/{{d.id}}" isConfirm="true" confirmMsg="是否确定删除当前记录？">删除</a>
         </script>
-    <script type="text/javascript" src="<%=baseurl%>js/main.bundle.js?version=<%=version%>"></script>
+    <script type="text/javascript" src="<%=basepath%>js/main.bundle.js?version=<%=version%>"></script>
 </body>
 
 </html>
