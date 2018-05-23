@@ -33,7 +33,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index() {
-        return "forward:/companyWebsite/home/index";
+        return "forward:/cms/companyWebsite/index";
     }
 
     @RequestMapping("/home/init")

@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Alex
  */
-@Controller
+@Controller("CompanyWebsiteHomeController")
 @RequestMapping("/cms/companyWebsite")
 public class HomeController {
     private final CompanyService companyService;
@@ -54,7 +54,7 @@ public class HomeController {
         List<TreeNode<ProductCategory>> productCategories = tree.getChildren().size() > 4 ? tree.getChildren().subList(0, 4) : tree.getChildren();
         model.addAttribute("productCategories", productCategories);
 
-        return "resources/cms/templates/template1/views/home/index.html";
+        return "resources/cms/templates/companyWebsite/views/home/index.html";
     }
 
     /**
@@ -67,7 +67,7 @@ public class HomeController {
     public String product(Model model) {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("productCategories", productCategoryService.getProductCategoriesTree(productCategoryService.getProductCategories()));
-        return "resources/cms/templates/template1/views/product/index.html";
+        return "resources/cms/templates/companyWebsite/views/product/index.html";
     }
 
     /**
@@ -82,7 +82,7 @@ public class HomeController {
         model.addAttribute("product", productService.get(id));
         model.addAttribute("productCategories", productCategoryService.getProductCategoriesTree(productCategoryService.getProductCategories()));
         model.addAttribute("products", productService.getPrevAndNext(id));
-        return "resources/cms/templates/template1/views/product/detail.html";
+        return "resources/cms/templates/companyWebsite/views/product/detail.html";
     }
 
     /**
@@ -95,7 +95,7 @@ public class HomeController {
     public String news(Model model) {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("newsCategories", newsCategoryService.getNewsCategories());
-        return "resources/cms/templates/template1/views/news/index.html";
+        return "resources/cms/templates/companyWebsite/views/news/index.html";
     }
 
     /**
@@ -108,7 +108,7 @@ public class HomeController {
     public String newsDetail(@NonNull @RequestParam String id, Model model) {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("news", newsService.get(id));
-        return "resources/cms/templates/template1/views/news/detail.html";
+        return "resources/cms/templates/companyWebsite/views/news/detail.html";
     }
 
     /**
@@ -121,7 +121,7 @@ public class HomeController {
     public String job(Model model) {
         model.addAttribute("company", companyService.get(null));
         model.addAttribute("jobs", jobService.getJobs());
-        return "resources/cms/templates/template1/views/job/index.html";
+        return "resources/cms/templates/companyWebsite/views/job/index.html";
     }
 
     /**
@@ -133,7 +133,7 @@ public class HomeController {
     @RequestMapping("/contact")
     public String contact(Model model) {
         model.addAttribute("company", companyService.get(null));
-        return "resources/cms/templates/template1/views/contact/index.html";
+        return "resources/cms/templates/companyWebsite/views/contact/index.html";
     }
 
     /**
@@ -145,6 +145,6 @@ public class HomeController {
     @RequestMapping("/about")
     public String about(Model model) {
         model.addAttribute("company", companyService.get(null));
-        return "resources/cms/templates/template1/views/about/index.html";
+        return "resources/cms/templates/companyWebsite/views/about/index.html";
     }
 }
