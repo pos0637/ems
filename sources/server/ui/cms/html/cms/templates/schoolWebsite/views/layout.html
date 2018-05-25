@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <!-- 导航条 -->
+    <div th:fragment="header">
+        <div class="layui-row row-center">
+            <!-- LOGO -->
+            <img th:src="${@storageService.getUrl(#request, school.getLogoPath())}" border="0" width="100%" />
+        </div>
+        <div class="layui-row row-center">
+            <!-- 选项卡 -->
+            <ul class="layui-nav layui-bg-blue" lay-filter="" style="border-radius: 0px">
+                <li class="layui-nav-item layui-this">
+                    <a href="javascript:;">中心概况</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/cms/schoolWebsite/index">中心概况</a>
+                        </dd>
+                        <dd>
+                            <a href="/cms/schoolWebsite/structure">机构设置</a>
+                        </dd>
+                        <dd>
+                            <a href="/cms/schoolWebsite/index2">中心规划</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">师资队伍</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">中心人员</a>
+                        </dd>
+                        <dd>
+                            <a href="">队伍建设</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">实验教学</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">教学建设</a>
+                        </dd>
+                        <dd>
+                            <a href="">实验课程</a>
+                        </dd>
+                        <dd>
+                            <a href="">实训系统</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">实验管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">管理体制</a>
+                        </dd>
+                        <dd>
+                            <a href="">运行机制</a>
+                        </dd>
+                        <dd>
+                            <a href="">信息平台</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">中心公告</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 底部栏 -->
+    <div th:fragment="footer">
+        <div class="layui-row bottom-bar row-center">
+            <div style="display: table; height: 100%; margin: 0 auto">
+                <div style="display: table-cell; vertical-align: middle">
+                    <div style="position: relative; padding-top: 20px">
+                        <span th:utext="'地址：' + ${school.getAddress()}"></span>
+                        <span th:utext="'招生电话：' + ${school.getPhone()}"></span>
+                    </div>
+                    <div style="position: relative">
+                        <span th:utext="'copyright ' + ${school.getCopyright()}"></span>
+                        <span th:utext="${school.getCredential()}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
